@@ -1,0 +1,51 @@
+{
+  "name": "celebrityoutfits",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "lint": "eslint",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "seed": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed.ts",
+    "import:feed": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/import-feed.ts",
+    "identify": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/identify.ts",
+    "seed:celebrities": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-celebrities.ts",
+    "seed:portraits": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-portraits.ts",
+    "seed:articles": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-articles.ts",
+    "seed:all": "pnpm seed && pnpm seed:celebrities && pnpm seed:portraits && pnpm seed:articles"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
+    "@payloadcms/db-postgres": "3.86.0",
+    "@payloadcms/next": "3.86.0",
+    "@payloadcms/plugin-redirects": "3.86.0",
+    "@payloadcms/plugin-seo": "3.86.0",
+    "@payloadcms/richtext-lexical": "3.86.0",
+    "@payloadcms/storage-vercel-blob": "3.86.0",
+    "@payloadcms/ui": "3.86.0",
+    "graphql": "^16.14.2",
+    "next": "16.2.12",
+    "payload": "3.86.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "^0.34.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22.19.9",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.12",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.1",
+    "typescript": "^5"
+  }
+}

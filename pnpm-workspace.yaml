@@ -1,0 +1,7 @@
+allowBuilds:
+  # Payload uses sharp to generate the image sizes defined on the media
+  # collection — its native binary must be built or uploads fail at runtime.
+  # esbuild ships prebuilt binaries; its install script fetches the right one.
+  esbuild: true
+  sharp: true
+  unrs-resolver: true

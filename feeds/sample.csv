@@ -1,0 +1,4 @@
+sku,name,description,price,currency,link,image_link,brand,availability
+RB3025-001,"Aviator Classic, gold / G-15 green","Gold frame, G-15 green lens, 58mm",171.00,USD,https://www.ray-ban.com/aviator,https://example.com/img/aviator.jpg,Ray-Ban,in stock
+LV501-RINSE,"501 Original, rinsed indigo","Straight leg, button fly",98.00,USD,https://www.levi.com/501,https://example.com/img/501.jpg,Levi's,in stock
+CJ-DALTON-BLK,"Dalton derby, black calf","Black calf leather, leather sole",690.00,USD,https://www.crockettandjones.com/dalton,https://example.com/img/dalton.jpg,Crockett & Jones,out of stock

@@ -1,0 +1,191 @@
+[
+ {
+  "slug": "tom-cruise",
+  "name": "Tom Cruise",
+  "file": "seed-assets/portraits/tom-cruise.jpg",
+  "credit": "U.S. Navy photo by Mass Communication Specialist 2nd Class Keenan Daniels",
+  "licence": "Public domain",
+  "source": "Tom Cruise May 2022 (cropped).jpg",
+  "date": "2022"
+ },
+ {
+  "slug": "tom-holland",
+  "name": "Tom Holland",
+  "file": "seed-assets/portraits/tom-holland.jpg",
+  "credit": "PhilipRomano",
+  "licence": "CC BY-SA 4.0",
+  "source": "TomHolland-byPhilipRomano.jpg",
+  "date": "2026"
+ },
+ {
+  "slug": "zendaya",
+  "name": "Zendaya",
+  "file": "seed-assets/portraits/zendaya.jpg",
+  "credit": "Toglenn",
+  "licence": "CC BY-SA 4.0",
+  "source": "Zendaya - 2019 by Glenn Francis.jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "robert-downey-jr",
+  "name": "Robert Downey Jr.",
+  "file": "seed-assets/portraits/robert-downey-jr.jpg",
+  "credit": "PhilipRomano",
+  "licence": "CC BY-SA 4.0",
+  "source": "RobertDowneyJr-byPhilipRomano4.jpg",
+  "date": "2026"
+ },
+ {
+  "slug": "chris-hemsworth",
+  "name": "Chris Hemsworth",
+  "file": "seed-assets/portraits/chris-hemsworth.jpg",
+  "credit": "Gage Skidmore",
+  "licence": "CC BY-SA 3.0",
+  "source": "Chris Hemsworth by Gage Skidmore 2 (cropped).jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "chris-evans",
+  "name": "Chris Evans",
+  "file": "seed-assets/portraits/chris-evans.jpg",
+  "credit": "United States House of Representatives - Office of Don Young",
+  "licence": "Public domain",
+  "source": "Chris Evans in 2019.jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "david-corenswet",
+  "name": "David Corenswet",
+  "file": "seed-assets/portraits/david-corenswet.jpg",
+  "credit": "Erik Drost",
+  "licence": "CC BY 2.0",
+  "source": "David Corenswet as Clark Kent (53817593908) (cropped).jpg",
+  "date": "2024"
+ },
+ {
+  "slug": "timothee-chalamet",
+  "name": "Timoth\u00e9e Chalamet",
+  "file": "seed-assets/portraits/timothee-chalamet.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Timoth\u00e9e Chalamet-63541 (cropped).jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "ryan-gosling",
+  "name": "Ryan Gosling",
+  "file": "seed-assets/portraits/ryan-gosling.jpg",
+  "credit": "Raph_PH",
+  "licence": "CC BY 2.0",
+  "source": "GoslingBFI081223 (22 of 30) (53388157347) (cropped).jpg",
+  "date": "2023"
+ },
+ {
+  "slug": "margot-robbie",
+  "name": "Margot Robbie",
+  "file": "seed-assets/portraits/margot-robbie.jpg",
+  "credit": "Toglenn",
+  "licence": "CC BY-SA 4.0",
+  "source": "Margot Robbie 2019 by Glenn Francis (cropped).jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "florence-pugh",
+  "name": "Florence Pugh",
+  "file": "seed-assets/portraits/florence-pugh.jpg",
+  "credit": "Frank Sun",
+  "licence": "CC BY-SA 4.0",
+  "source": "Florence Pugh at the 2024 Toronto International Film Festival 17 (cropped).jpg",
+  "date": "2024"
+ },
+ {
+  "slug": "austin-butler",
+  "name": "Austin Butler",
+  "file": "seed-assets/portraits/austin-butler.jpg",
+  "credit": "ManoSolo13241324",
+  "licence": "CC0",
+  "source": "Austin Butler 2024.jpg",
+  "date": "2024"
+ },
+ {
+  "slug": "jacob-elordi",
+  "name": "Jacob Elordi",
+  "file": "seed-assets/portraits/jacob-elordi.jpg",
+  "credit": "JoshPopov",
+  "licence": "CC BY 4.0",
+  "source": "JacobElordi-TIFF2025-01 (cropped).png",
+  "date": "2025"
+ },
+ {
+  "slug": "sydney-sweeney",
+  "name": "Sydney Sweeney",
+  "file": "seed-assets/portraits/sydney-sweeney.jpg",
+  "credit": "Elena Ternovaja",
+  "licence": "CC BY-SA 3.0",
+  "source": "Sydney Sweeney at Berlinale 2023.jpg",
+  "date": "2023"
+ },
+ {
+  "slug": "anya-taylor-joy",
+  "name": "Anya Taylor-Joy",
+  "file": "seed-assets/portraits/anya-taylor-joy.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Anya Taylor-Joy (29787630588) (cropped).jpg",
+  "date": "2018"
+ },
+ {
+  "slug": "michael-b-jordan",
+  "name": "Michael B. Jordan",
+  "file": "seed-assets/portraits/michael-b-jordan.jpg",
+  "credit": "Joan Hernandez Mir",
+  "licence": "CC BY 2.0",
+  "source": "2018-05-12- Cannes-L'acteur Michael B. Jordan-2721 (42075892224).jpg",
+  "date": "2018"
+ },
+ {
+  "slug": "pedro-pascal",
+  "name": "Pedro Pascal",
+  "file": "seed-assets/portraits/pedro-pascal.jpg",
+  "credit": "Gabriel Hutchinson",
+  "licence": "CC BY-SA 4.0",
+  "source": "Pedro Pascal at the 2025 Cannes Film Festival 06 (cropped).jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "paul-mescal",
+  "name": "Paul Mescal",
+  "file": "seed-assets/portraits/paul-mescal.jpg",
+  "credit": "Jay Dixit",
+  "licence": "CC BY-SA 4.0",
+  "source": "Paul Mescal at the Toronto International Film Festival in 2025 2 (cropped 2).jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "andrew-garfield",
+  "name": "Andrew Garfield",
+  "file": "seed-assets/portraits/andrew-garfield.jpg",
+  "credit": "https://www.flickr.com/photos/drlovell/",
+  "licence": "CC BY-SA 2.0",
+  "source": "Andrew Garfield in 2023 (cropped).jpg",
+  "date": "2023"
+ },
+ {
+  "slug": "anne-hathaway",
+  "name": "Anne Hathaway",
+  "file": "seed-assets/portraits/anne-hathaway.jpg",
+  "credit": "PhilipRomano",
+  "licence": "CC BY-SA 4.0",
+  "source": "AnneHathaway-byPhilipRomano.jpg",
+  "date": "2026"
+ },
+ {
+  "slug": "ryan-reynolds",
+  "name": "Ryan Reynolds",
+  "file": "seed-assets/portraits/ryan-reynolds.jpg",
+  "credit": "Dick Thomas Johnson from Tokyo, Japan",
+  "licence": "CC BY 2.0",
+  "source": "Deadpool 2 Japan Premiere Red Carpet Ryan Reynolds (40649016430).jpg",
+  "date": "2018"
+ }
+]

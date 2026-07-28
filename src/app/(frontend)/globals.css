@@ -1,0 +1,145 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — ported from the approved prototype.
+
+   Semantic names, not literal ones: `paper` and `ink`, never `white`/`black`,
+   so the dark theme is a token swap rather than a rewrite.
+--------------------------------------------------------------------------- */
+
+:root {
+  --paper: #fcfcfa;
+  --raised: #f4f3ef;
+  --ink: #1a1a18;
+  --ink-2: #4a4a45;
+  --muted: #87867e;
+  --faint: #b0afa7;
+  --rule: #e4e3dd;
+  --rule-2: #efeee9;
+  --accent: #8a2b3b;
+}
+
+:root[data-theme='dark'] {
+  --paper: #131312;
+  --raised: #1c1c1a;
+  --ink: #eeede7;
+  --ink-2: #bab9b1;
+  --muted: #8b8a82;
+  --faint: #5f5e58;
+  --rule: #2c2c29;
+  --rule-2: #232322;
+  --accent: #d2828f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #131312;
+    --raised: #1c1c1a;
+    --ink: #eeede7;
+    --ink-2: #bab9b1;
+    --muted: #8b8a82;
+    --faint: #5f5e58;
+    --rule: #2c2c29;
+    --rule-2: #232322;
+    --accent: #d2828f;
+  }
+}
+
+/* Expose the tokens to Tailwind so `bg-paper`, `text-ink-2`, `border-rule`
+   and `font-display` all work as utilities. */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-rule: var(--rule);
+  --color-rule-2: var(--rule-2);
+  --color-accent: var(--accent);
+
+  --font-display: var(--font-display), Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --text-step--1: 0.8125rem;
+  --text-step-0: 1.0625rem;
+  --text-step-1: 1.1875rem;
+  --text-step-2: 1.5rem;
+  --text-step-3: clamp(1.75rem, 2.6vw, 2.5rem);
+  --text-step-4: clamp(2.25rem, 4vw, 3.75rem);
+
+  --container-wide: 1780px;
+  --container-measure: 40rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--text-step-0);
+    line-height: 1.65;
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--accent);
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  /* Tracked uppercase label used above headings throughout the site. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Article typography. Scoped so it never leaks into admin or component UI. */
+.prose-article {
+  max-width: var(--container-measure);
+  margin-inline: auto;
+}
+.prose-article p {
+  margin: 0 0 1.5rem;
+}
+.prose-article h2,
+.prose-article h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 2.75rem 0 1rem;
+}
+.prose-article h2 {
+  font-size: var(--text-step-3);
+}
+.prose-article h3 {
+  font-size: var(--text-step-2);
+}
+.prose-article a {
+  color: var(--accent);
+}
+.prose-article ul,
+.prose-article ol {
+  margin: 0 0 1.5rem 1.25rem;
+}
+.prose-article li {
+  margin-bottom: 0.5rem;
+}
