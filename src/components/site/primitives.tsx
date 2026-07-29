@@ -86,8 +86,21 @@ export const Frame = ({
             } transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
           />
         ) : (
-          <span className="absolute inset-0 grid place-items-center text-[0.625rem] tracking-[0.16em] text-faint uppercase">
-            No image
+          /**
+           * An item we have not identified yet legitimately has no photograph,
+           * and that is a normal state for this archive rather than an error.
+           * Shouting NO IMAGE at the reader makes a working page look broken,
+           * so this is a quiet ruled panel instead.
+           */
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 grid place-items-center"
+            style={{
+              backgroundImage:
+                'repeating-linear-gradient(-45deg, var(--rule-2) 0 1px, transparent 1px 9px)',
+            }}
+          >
+            <span className="h-px w-7 bg-faint/50" />
           </span>
         )}
       </div>

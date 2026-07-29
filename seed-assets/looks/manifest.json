@@ -1,0 +1,173 @@
+[
+ {
+  "slug": "tom-cruise",
+  "name": "Tom Cruise",
+  "file": "seed-assets/looks/tom-cruise-look.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Tom Cruise-2428.jpg",
+  "date": "2025-05-14"
+ },
+ {
+  "slug": "tom-holland",
+  "name": "Tom Holland",
+  "file": "seed-assets/looks/tom-holland-look.jpg",
+  "credit": "Flickr user NoHoDamon",
+  "licence": "CC BY 2.0",
+  "source": "Tom Holland director.jpg",
+  "date": "2008-10-28"
+ },
+ {
+  "slug": "zendaya",
+  "name": "Zendaya",
+  "file": "seed-assets/looks/zendaya-look.jpg",
+  "credit": "PhilipRomano",
+  "licence": "CC BY-SA 4.0",
+  "source": "Zendaya-byPhilipRomano.jpg",
+  "date": "2026-07-14"
+ },
+ {
+  "slug": "robert-downey-jr",
+  "name": "Robert Downey Jr.",
+  "file": "seed-assets/looks/robert-downey-jr-look.jpg",
+  "credit": "Alan Light",
+  "licence": "CC BY 2.0",
+  "source": "Robert Downey Jr. (211162245).jpg",
+  "date": "1990-08-01"
+ },
+ {
+  "slug": "chris-hemsworth",
+  "name": "Chris Hemsworth",
+  "file": "seed-assets/looks/chris-hemsworth-look.jpg",
+  "credit": "Chris_Hemsworth_2010_Comic-Con.jpg: rwoan\nderivative work: TriiipleThreat (talk)",
+  "licence": "CC BY-SA 2.0",
+  "source": "Chris Hemsworth 2010 Comic-Con Cropped.jpg",
+  "date": "2010-08-09"
+ },
+ {
+  "slug": "chris-evans",
+  "name": "Chris Evans",
+  "file": "seed-assets/looks/chris-evans-look.jpg",
+  "credit": "Gage Skidmore",
+  "licence": "CC BY-SA 2.0",
+  "source": "Chris Evans SDCC 2014 01.jpg",
+  "date": "2014-07-26"
+ },
+ {
+  "slug": "timothee-chalamet",
+  "name": "Timoth\u00e9e Chalamet",
+  "file": "seed-assets/looks/timothee-chalamet-look.jpg",
+  "credit": "GabboT",
+  "licence": "CC BY-SA 2.0",
+  "source": "Timoth\u00e9e Chalamet TIFF 2018.jpg",
+  "date": "2018-09-07"
+ },
+ {
+  "slug": "ryan-gosling",
+  "name": "Ryan Gosling",
+  "file": "seed-assets/looks/ryan-gosling-look.jpg",
+  "credit": "Aubrey Gemignani",
+  "licence": "Public domain",
+  "source": "Ryan Gosling in 2018.jpg",
+  "date": "Taken on\u00a04"
+ },
+ {
+  "slug": "margot-robbie",
+  "name": "Margot Robbie",
+  "file": "seed-assets/looks/margot-robbie-look.jpg",
+  "credit": "Eva Rinaldi",
+  "licence": "CC BY-SA 2.0",
+  "source": "Margot Robbie.jpg",
+  "date": "2011-05-01"
+ },
+ {
+  "slug": "florence-pugh",
+  "name": "Florence Pugh",
+  "file": "seed-assets/looks/florence-pugh-look.jpg",
+  "credit": "https://flickr.com/photos/drlovell/",
+  "licence": "CC BY-SA 2.0",
+  "source": "Florence Pugh in 2020 (1).jpg",
+  "date": "2020-02-03"
+ },
+ {
+  "slug": "austin-butler",
+  "name": "Austin Butler",
+  "file": "seed-assets/looks/austin-butler-look.jpg",
+  "credit": "Eva Rinaldi from Abbotsford, Australia",
+  "licence": "CC BY-SA 2.0",
+  "source": "Austin Butler (52123912556).jpg",
+  "date": "2022-06-05"
+ },
+ {
+  "slug": "jacob-elordi",
+  "name": "Jacob Elordi",
+  "file": "seed-assets/looks/jacob-elordi-look.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Jacob Elordi-66121.jpg",
+  "date": "2025-02-15"
+ },
+ {
+  "slug": "sydney-sweeney",
+  "name": "Sydney Sweeney",
+  "file": "seed-assets/looks/sydney-sweeney-look.jpg",
+  "credit": "Elena Ternovaja",
+  "licence": "CC BY-SA 3.0",
+  "source": "Sydney Sweeney at Berlinale 2023 (cropped).jpg",
+  "date": "2023-01-23"
+ },
+ {
+  "slug": "michael-b-jordan",
+  "name": "Michael B. Jordan",
+  "file": "seed-assets/looks/michael-b-jordan-look.jpg",
+  "credit": "Greg Hernandez",
+  "licence": "CC BY 2.0",
+  "source": "Michael B. Jordan 2011 (cropped).jpg",
+  "date": "2008-02-05"
+ },
+ {
+  "slug": "pedro-pascal",
+  "name": "Pedro Pascal",
+  "file": "seed-assets/looks/pedro-pascal-look.jpg",
+  "credit": "Gabriel Hutchinson",
+  "licence": "CC BY-SA 4.0",
+  "source": "Pedro Pascal at the 2025 Cannes Film Festival 04.jpg",
+  "date": "2025-05-17"
+ },
+ {
+  "slug": "paul-mescal",
+  "name": "Paul Mescal",
+  "file": "seed-assets/looks/paul-mescal-look.jpg",
+  "credit": "Kevin Kunze",
+  "licence": "CC BY 3.0",
+  "source": "Paul Mescal 44.MVFF.jpg",
+  "date": "2021-10-16"
+ },
+ {
+  "slug": "andrew-garfield",
+  "name": "Andrew Garfield",
+  "file": "seed-assets/looks/andrew-garfield-look.jpg",
+  "credit": "Colleen Sturtevant",
+  "licence": "CC BY-SA 4.0",
+  "source": "Andrew Garfield 82nd Venice Film Festival.jpg",
+  "date": "2025-08-29"
+ },
+ {
+  "slug": "anne-hathaway",
+  "name": "Anne Hathaway",
+  "file": "seed-assets/looks/anne-hathaway-look.jpg",
+  "credit": "Initial phtograph\u00a0: ONU Brasil (United Nations Brasil), AI image processing\u00a0: Madelgarius",
+  "licence": "CC BY-SA 4.0",
+  "source": "Anne Hathaway in 2017 (restauration).jpg",
+  "date": "2022-06-07"
+ },
+ {
+  "slug": "ryan-reynolds",
+  "name": "Ryan Reynolds",
+  "file": "seed-assets/looks/ryan-reynolds-look.jpg",
+  "credit": "Cpl. Alexandra Vazquez",
+  "licence": "Public domain",
+  "source": "Ryan Reynolds 2011.jpg",
+  "date": "2011-06-16"
+ }
+]

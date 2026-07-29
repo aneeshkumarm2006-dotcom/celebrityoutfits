@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { themeScript } from '@/components/site/ThemeToggle'
 import { DisclosureBar, SiteFooter, SiteHeader } from '@/components/site/chrome'
 
 import { bodoni, hanken } from './fonts'
@@ -31,7 +32,16 @@ export default function FrontendLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${bodoni.variable} ${hanken.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${bodoni.variable} ${hanken.variable} h-full`}
+      // themeScript sets data-theme before React hydrates, so the attribute is
+      // legitimately different from what the server rendered.
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <DisclosureBar />
         <SiteHeader />

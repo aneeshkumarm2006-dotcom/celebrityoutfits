@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { ThemeToggle } from '@/components/site/ThemeToggle'
 import { Container } from '@/components/site/primitives'
 import { getFooter, getNavigation, getSiteSettings } from '@/lib/payload'
 
@@ -13,19 +14,22 @@ export const SiteHeader = async () => {
         <Link href="/" className="font-display text-2xl leading-none font-bold tracking-[0.02em]">
           {settings?.siteName || 'Celebrity Spotted Outfits'}
         </Link>
-        {items.length > 0 ? (
-          <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-9 gap-y-2">
-            {items.map((item, i) => (
-              <Link
-                key={`${item.href}-${i}`}
-                href={item.href}
-                className="border-b border-transparent py-1 text-[0.8125rem] tracking-[0.04em] text-ink-2 transition-colors hover:border-ink hover:text-ink"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        ) : null}
+        <div className="flex items-center gap-x-6 sm:gap-x-9">
+          {items.length > 0 ? (
+            <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-9 gap-y-2">
+              {items.map((item, i) => (
+                <Link
+                  key={`${item.href}-${i}`}
+                  href={item.href}
+                  className="border-b border-transparent py-1 text-[0.8125rem] tracking-[0.04em] text-ink-2 transition-colors hover:border-ink hover:text-ink"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          ) : null}
+          <ThemeToggle />
+        </div>
       </Container>
     </header>
   )
