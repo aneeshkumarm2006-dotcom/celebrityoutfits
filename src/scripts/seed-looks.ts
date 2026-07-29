@@ -63,6 +63,20 @@ const LOOKS: LookSeed[] = [
     ],
   },
   {
+    celebrity: 'tom-holland',
+    title: 'Olive overshirt, open over a tee',
+    occasion: 'press',
+    location: 'San Diego',
+    description:
+      'A dark olive overshirt worn open over a patterned V-neck tee, with a fine chain at the throat and a dark-dialled watch. Panel dressing rather than carpet dressing.',
+    items: [
+      { label: 'Olive overshirt', category: 'outerwear', confidence: 'open' },
+      { label: 'Patterned V-neck tee', category: 'knitwear', confidence: 'open' },
+      { label: 'Dark-dialled watch', category: 'watch', confidence: 'get_the_look',
+        product: 'Submariner Date, yellow gold' },
+    ],
+  },
+  {
     celebrity: 'zendaya',
     title: 'The structured strapless gown',
     occasion: 'event',
