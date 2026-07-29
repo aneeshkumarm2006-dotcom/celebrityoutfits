@@ -4,6 +4,33 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 type PathsFor = (args: { doc: Record<string, unknown> }) => string[]
 
 /**
+ * `revalidatePath` needs Next's per-request store, which only exists inside a
+ * request. Seed and maintenance scripts write through the same hooks with no
+ * request around them, so it throws — expected, and not worth a stack trace per
+ * document. There is nothing to purge in a script: no server is serving a cache.
+ */
+const isOutsideRequest = (error: unknown): boolean =>
+  error instanceof Error && error.message.includes('static generation store missing')
+
+const purge = (
+  paths: Set<string>,
+  logger: { error: (obj: unknown, msg: string) => void; debug: (msg: string) => void },
+  label: string,
+): void => {
+  try {
+    paths.forEach((path) => revalidatePath(path))
+  } catch (error) {
+    if (isOutsideRequest(error)) {
+      logger.debug(`${label}: no request context, skipping cache purge`)
+      return
+    }
+    // Never let a cache purge failure block a save — the content is already
+    // committed at this point, and the page will refresh on its own timer.
+    logger.error({ err: error }, `${label} failed`)
+  }
+}
+
+/**
  * This is what makes publishing instant.
  *
  * Public pages are statically rendered for speed and SEO. Without this hook a
@@ -14,25 +41,21 @@ type PathsFor = (args: { doc: Record<string, unknown> }) => string[]
 export const revalidate =
   (pathsFor: PathsFor): CollectionAfterChangeHook =>
   ({ doc, req }) => {
-    try {
-      const paths = new Set(['/', ...pathsFor({ doc: doc as Record<string, unknown> })])
-      paths.forEach((path) => revalidatePath(path))
-    } catch (error) {
-      // Never let a cache purge failure block a save — the content is already
-      // committed at this point, and the page will refresh on its own timer.
-      req.payload.logger.error({ err: error }, 'revalidate hook failed')
-    }
+    purge(
+      new Set(['/', ...pathsFor({ doc: doc as Record<string, unknown> })]),
+      req.payload.logger,
+      'revalidate hook',
+    )
     return doc
   }
 
 export const revalidateOnDelete =
   (pathsFor: PathsFor): CollectionAfterDeleteHook =>
   ({ doc, req }) => {
-    try {
-      const paths = new Set(['/', ...pathsFor({ doc: doc as Record<string, unknown> })])
-      paths.forEach((path) => revalidatePath(path))
-    } catch (error) {
-      req.payload.logger.error({ err: error }, 'revalidate-on-delete hook failed')
-    }
+    purge(
+      new Set(['/', ...pathsFor({ doc: doc as Record<string, unknown> })]),
+      req.payload.logger,
+      'revalidate-on-delete hook',
+    )
     return doc
   }
