@@ -8,7 +8,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Journal',
-  description: 'Style analysis, buying guides and brand files from the Celebrity Outfits desk.',
+  description: 'Style analysis, buying guides and brand files from the Celebrity Spotted Outfits desk.',
 }
 
 export default async function JournalPage() {

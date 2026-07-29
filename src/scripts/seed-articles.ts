@@ -254,7 +254,7 @@ const run = async () => {
       slug,
       template: draft.template,
       excerpt: draft.excerpt,
-      author: 'The Celebrity Outfits desk',
+      author: 'The Celebrity Spotted Outfits desk',
       publishedAt: new Date().toISOString(),
       featured: draft.featured ?? false,
       ...(celebrityId ? { relatedCelebrity: celebrityId } : {}),

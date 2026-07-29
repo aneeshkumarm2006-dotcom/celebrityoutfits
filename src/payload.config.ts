@@ -33,7 +33,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
-    meta: { titleSuffix: ' · Celebrity Outfits' },
+    meta: { titleSuffix: ' · Celebrity Spotted Outfits' },
     components: {
       views: {
         dashboard: {
@@ -60,7 +60,25 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URI || '' },
+    /**
+     * `next build` prerenders pages in one worker per CPU, and each worker
+     * builds its own pool — so the ceiling that matters is workers × max, not
+     * max. node-postgres defaults to 10, which on an 8-core build container
+     * asks Supabase for 80 connections and gets `EMAXCONNSESSION` instead.
+     *
+     * Keep this low and let queries queue. The pages are small and the pool
+     * turns them over faster than the extra sockets would have.
+     */
+    pool: {
+      connectionString: process.env.DATABASE_URI || '',
+      max: Number(process.env.DATABASE_POOL_MAX ?? 4),
+    },
+    /**
+     * Push diffs the schema on boot and rewrites it to match the config. That
+     * is what we want while iterating locally and emphatically not what we
+     * want a serverless function doing to the production database.
+     */
+    push: process.env.NODE_ENV !== 'production',
   }),
 
   secret: process.env.PAYLOAD_SECRET || '',
@@ -79,8 +97,8 @@ export default buildConfig({
       tabbedUI: true,
       generateTitle: ({ doc }) =>
         doc?.title || doc?.name
-          ? `${doc.title || doc.name} · Celebrity Outfits`
-          : 'Celebrity Outfits',
+          ? `${doc.title || doc.name} · Celebrity Spotted Outfits`
+          : 'Celebrity Spotted Outfits',
       generateDescription: ({ doc }) => doc?.excerpt || doc?.standfirst || doc?.description || '',
     }),
 

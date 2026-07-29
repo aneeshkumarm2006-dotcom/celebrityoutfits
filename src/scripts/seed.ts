@@ -25,14 +25,14 @@ const run = async () => {
   await payload.updateGlobal({
     slug: 'siteSettings',
     data: {
-      siteName: 'Celebrity Outfits',
+      siteName: 'Celebrity Spotted Outfits',
       tagline: 'What celebrities actually wear',
       defaultDescription:
         'A shoppable archive of what celebrities actually wear, identified item by item and updated as new photographs are published.',
       affiliateDisclosure:
-        'Celebrity Outfits participates in affiliate programmes and earns a commission on qualifying purchases made through links on this page. This never affects the price you pay, and it never determines which items we identify or how we label them.',
+        'Celebrity Spotted Outfits participates in affiliate programmes and earns a commission on qualifying purchases made through links on this page. This never affects the price you pay, and it never determines which items we identify or how we label them.',
       nonAffiliationNotice:
-        'Celebrity Outfits is not affiliated with, endorsed by, or sponsored by any celebrity or brand featured. All photographs are licensed; credits appear beside each image.',
+        'Celebrity Spotted Outfits is not affiliated with, endorsed by, or sponsored by any celebrity or brand featured. All photographs are licensed; credits appear beside each image.',
     },
   })
 
@@ -211,7 +211,7 @@ const run = async () => {
         template: 'generic',
         excerpt:
           'Pull any three appearances from the last four decades and the same handful of garments are doing the same handful of jobs. A look at why the uniform never changed.',
-        author: 'The Celebrity Outfits desk',
+        author: 'The Celebrity Spotted Outfits desk',
         relatedCelebrity: celebrity.id,
         publishedAt: new Date().toISOString(),
         featured: true,

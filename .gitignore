@@ -52,3 +52,7 @@ next-env.d.ts
 
 # Payload uploads — regenerate with `pnpm seed:portraits`, or use Vercel Blob in prod
 /media
+
+# local run artifacts
+dev.log
+build.log

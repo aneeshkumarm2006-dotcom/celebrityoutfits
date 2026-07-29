@@ -11,13 +11,22 @@ type SizeName = 'thumb' | 'square' | 'portrait' | 'landscape' | 'wide' | 'og'
 /**
  * Payload returns absolute URLs because `serverURL` is configured, which makes
  * `next/image` treat our own uploads as a remote host and refuse them. Strip
- * our origin back off so they stay same-origin and match the `localPatterns`
- * rule in next.config. Genuinely remote URLs (Vercel Blob) pass through.
+ * the origin so they stay same-origin and match the `localPatterns` rule in
+ * next.config. Genuinely remote URLs (Vercel Blob) pass through untouched.
+ *
+ * We key off the *path* rather than comparing against NEXT_PUBLIC_SITE_URL,
+ * because the origin Payload stamps on is whatever `serverURL` happened to be
+ * at render time — and that is wrong on every preview deployment, and was
+ * baking `http://localhost:3000` into production until we noticed. Anything
+ * served by our own upload route is same-origin by definition, whatever
+ * hostname is glued to the front of it.
  */
+const UPLOAD_PATH = '/api/media/file/'
+
 const toSameOrigin = (url: string): string => {
-  const site = process.env.NEXT_PUBLIC_SITE_URL
-  if (site && url.startsWith(site)) return url.slice(site.length) || '/'
-  return url
+  if (url.startsWith('/')) return url
+  const at = url.indexOf(UPLOAD_PATH)
+  return at === -1 ? url : url.slice(at)
 }
 
 /**

@@ -11,7 +11,7 @@ export const SiteHeader = async () => {
     <header className="sticky top-0 z-50 border-b border-rule bg-paper">
       <Container className="flex h-[70px] items-center justify-between gap-8">
         <Link href="/" className="font-display text-2xl leading-none font-bold tracking-[0.02em]">
-          {settings?.siteName || 'Celebrity Outfits'}
+          {settings?.siteName || 'Celebrity Spotted Outfits'}
         </Link>
         {items.length > 0 ? (
           <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-9 gap-y-2">
@@ -59,7 +59,7 @@ export const SiteFooter = async () => {
       <Container>
         <div className="grid gap-10 sm:grid-cols-[minmax(0,1.4fr)_repeat(auto-fit,minmax(9rem,1fr))]">
           <div>
-            <p className="eyebrow">{settings?.siteName || 'Celebrity Outfits'}</p>
+            <p className="eyebrow">{settings?.siteName || 'Celebrity Spotted Outfits'}</p>
             {footer?.blurb ? (
               <p className="mt-3 max-w-[26rem] text-[0.9375rem] text-ink-2">{footer.blurb}</p>
             ) : null}

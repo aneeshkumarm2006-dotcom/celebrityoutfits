@@ -11,7 +11,7 @@ export const SiteSettings: GlobalConfig = {
   access: { read: anyone, update: admins },
   hooks: { afterChange: [revalidateGlobal] },
   fields: [
-    { name: 'siteName', type: 'text', required: true, defaultValue: 'Celebrity Outfits' },
+    { name: 'siteName', type: 'text', required: true, defaultValue: 'Celebrity Spotted Outfits' },
     {
       name: 'tagline',
       type: 'text',
@@ -41,7 +41,7 @@ export const SiteSettings: GlobalConfig = {
           type: 'textarea',
           required: true,
           defaultValue:
-            'Celebrity Outfits participates in affiliate programmes and earns a commission on qualifying purchases made through links on this page. This never affects the price you pay, and it never determines which items we identify or how we label them.',
+            'Celebrity Spotted Outfits participates in affiliate programmes and earns a commission on qualifying purchases made through links on this page. This never affects the price you pay, and it never determines which items we identify or how we label them.',
           admin: {
             description:
               'Required by the FTC and shown near the links, not only in the footer. Keep it plain.',
@@ -52,7 +52,7 @@ export const SiteSettings: GlobalConfig = {
           type: 'textarea',
           required: true,
           defaultValue:
-            'Celebrity Outfits is not affiliated with, endorsed by, or sponsored by any celebrity or brand featured. All photographs are licensed; credits appear beside each image.',
+            'Celebrity Spotted Outfits is not affiliated with, endorsed by, or sponsored by any celebrity or brand featured. All photographs are licensed; credits appear beside each image.',
         },
       ],
     },

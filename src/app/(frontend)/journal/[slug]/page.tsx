@@ -48,8 +48,8 @@ export default async function ArticlePage({ params }: Props) {
             image: mediaUrl(article.heroImage as Media, 'og') ?? undefined,
             datePublished: article.publishedAt,
             dateModified: article.updatedAt,
-            author: { '@type': 'Person', name: article.author || settings?.siteName || 'Celebrity Outfits' },
-            publisher: { '@type': 'Organization', name: settings?.siteName || 'Celebrity Outfits' },
+            author: { '@type': 'Person', name: article.author || settings?.siteName || 'Celebrity Spotted Outfits' },
+            publisher: { '@type': 'Organization', name: settings?.siteName || 'Celebrity Spotted Outfits' },
           }),
         }}
       />

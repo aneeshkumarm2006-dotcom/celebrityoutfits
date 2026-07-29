@@ -61,7 +61,7 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
   return (
     <div style={{ padding: '2rem', display: 'grid', gap: '1.5rem' }}>
       <div>
-        <h1 style={{ margin: 0 }}>Celebrity Outfits</h1>
+        <h1 style={{ margin: 0 }}>Celebrity Spotted Outfits</h1>
         <p style={{ margin: '0.25rem 0 0', opacity: 0.65 }}>
           What needs a decision today.
         </p>
