@@ -18,7 +18,7 @@
     "seed:celebrities": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-celebrities.ts",
     "seed:portraits": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-portraits.ts",
     "seed:articles": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-articles.ts",
-    "reset:media": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/reset-media.ts",
+    "tidy:journal": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/tidy-journal.ts",    "seed:celebrity-articles": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-celebrity-articles.ts",    "seed:brands": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-brands.ts",    "reset:media": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/reset-media.ts",
     "rename:brand": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/rename-brand.ts",
     "seed:all": "pnpm seed && pnpm seed:celebrities && pnpm seed:portraits && pnpm seed:articles"
   },

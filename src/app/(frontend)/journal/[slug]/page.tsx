@@ -93,6 +93,7 @@ export default async function ArticlePage({ params }: Props) {
                 media={article.heroImage as Media}
                 ratio="2x1"
                 size="wide"
+                position="top"
                 priority
                 showCredit
                 sizes="100vw"

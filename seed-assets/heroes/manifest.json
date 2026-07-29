@@ -1,0 +1,191 @@
+[
+ {
+  "slug": "tom-cruise",
+  "name": "Tom Cruise",
+  "file": "seed-assets/heroes/tom-cruise-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Tom Cruise (48364139756).jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "tom-holland",
+  "name": "Tom Holland",
+  "file": "seed-assets/heroes/tom-holland-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Tom Holland (28036487013).jpg",
+  "date": "2016"
+ },
+ {
+  "slug": "zendaya",
+  "name": "Zendaya",
+  "file": "seed-assets/heroes/zendaya-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Zendaya (28652839185).jpg",
+  "date": "2016"
+ },
+ {
+  "slug": "robert-downey-jr",
+  "name": "Robert Downey Jr.",
+  "file": "seed-assets/heroes/robert-downey-jr-hero.jpg",
+  "credit": "nagi usano",
+  "licence": "CC BY-SA 2.0",
+  "source": "Robert Downey Jr. - 2019 Disney Legends Awards Ceremony - D23 EXPO 2019 - 51441459910.jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "chris-hemsworth",
+  "name": "Chris Hemsworth",
+  "file": "seed-assets/heroes/chris-hemsworth-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Chris Hemsworth (48470840671).jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "chris-evans",
+  "name": "Chris Evans",
+  "file": "seed-assets/heroes/chris-evans-hero.jpg",
+  "credit": "Elen Nivrae",
+  "licence": "CC BY 2.0",
+  "source": "Chris Evans - Captain America 2 press conference.jpg",
+  "date": "2014"
+ },
+ {
+  "slug": "david-corenswet",
+  "name": "David Corenswet",
+  "file": "seed-assets/heroes/david-corenswet-hero.jpg",
+  "credit": "Erik Drost",
+  "licence": "CC BY 2.0",
+  "source": "David Corenswet as Clark Kent (53817593908).jpg",
+  "date": "2024"
+ },
+ {
+  "slug": "timothee-chalamet",
+  "name": "Timoth\u00e9e Chalamet",
+  "file": "seed-assets/heroes/timothee-chalamet-hero.jpg",
+  "credit": "Martin Kraft",
+  "licence": "CC BY-SA 4.0",
+  "source": "MJK33718 Timoth\u00e9e Chalamet (Call Me by Your Name, Berlinale 2017).jpg",
+  "date": "2017"
+ },
+ {
+  "slug": "ryan-gosling",
+  "name": "Ryan Gosling",
+  "file": "seed-assets/heroes/ryan-gosling-hero.jpg",
+  "credit": "Elen Nivrae from Paris, France",
+  "licence": "CC BY 2.0",
+  "source": "Ryan Gosling (16437257783).jpg",
+  "date": "2015"
+ },
+ {
+  "slug": "margot-robbie",
+  "name": "Margot Robbie",
+  "file": "seed-assets/heroes/margot-robbie-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Margot Robbie (28316659170).jpg",
+  "date": "2016"
+ },
+ {
+  "slug": "florence-pugh",
+  "name": "Florence Pugh",
+  "file": "seed-assets/heroes/florence-pugh-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Florence Pugh (48471761376).jpg",
+  "date": "2019"
+ },
+ {
+  "slug": "austin-butler",
+  "name": "Austin Butler",
+  "file": "seed-assets/heroes/austin-butler-hero.jpg",
+  "credit": "Gabriel Hutchinson",
+  "licence": "CC BY-SA 4.0",
+  "source": "Austin Butler at the 2025 Cannes Film Festival 01.jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "jacob-elordi",
+  "name": "Jacob Elordi",
+  "file": "seed-assets/heroes/jacob-elordi-hero.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Jacob Elordi-65961.jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "sydney-sweeney",
+  "name": "Sydney Sweeney",
+  "file": "seed-assets/heroes/sydney-sweeney-hero.jpg",
+  "credit": "Elena Ternovaja",
+  "licence": "CC BY-SA 3.0",
+  "source": "Sydney Sweeney at Berlinale 2023 (portrait).jpg",
+  "date": "2023"
+ },
+ {
+  "slug": "anya-taylor-joy",
+  "name": "Anya Taylor-Joy",
+  "file": "seed-assets/heroes/anya-taylor-joy-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Anya Taylor-Joy (29787630588).jpg",
+  "date": "2018"
+ },
+ {
+  "slug": "michael-b-jordan",
+  "name": "Michael B. Jordan",
+  "file": "seed-assets/heroes/michael-b-jordan-hero.jpg",
+  "credit": "Joan Hernandez Mir",
+  "licence": "CC BY 2.0",
+  "source": "Michael B. Jordan Cannes 2018.jpg",
+  "date": "2018"
+ },
+ {
+  "slug": "pedro-pascal",
+  "name": "Pedro Pascal",
+  "file": "seed-assets/heroes/pedro-pascal-hero.jpg",
+  "credit": "Gabriel Hutchinson",
+  "licence": "CC BY-SA 4.0",
+  "source": "Pedro Pascal at the 2025 Cannes Film Festival 06.jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "paul-mescal",
+  "name": "Paul Mescal",
+  "file": "seed-assets/heroes/paul-mescal-hero.jpg",
+  "credit": "Raph_PH",
+  "licence": "CC BY 4.0",
+  "source": "Paul Mescal.jpg",
+  "date": "2025"
+ },
+ {
+  "slug": "andrew-garfield",
+  "name": "Andrew Garfield",
+  "file": "seed-assets/heroes/andrew-garfield-hero.jpg",
+  "credit": "Gerald Geronimo",
+  "licence": "CC BY-SA 2.0",
+  "source": "Andrew Garfield (5976747169).jpg",
+  "date": "2011"
+ },
+ {
+  "slug": "anne-hathaway",
+  "name": "Anne Hathaway",
+  "file": "seed-assets/heroes/anne-hathaway-hero.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 3.0",
+  "source": "Anne Hathaway-27.jpg",
+  "date": "2023"
+ },
+ {
+  "slug": "ryan-reynolds",
+  "name": "Ryan Reynolds",
+  "file": "seed-assets/heroes/ryan-reynolds-hero.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Ryan Reynolds (43076195354).jpg",
+  "date": "2018"
+ }
+]

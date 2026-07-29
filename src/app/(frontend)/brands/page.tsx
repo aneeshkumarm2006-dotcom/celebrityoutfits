@@ -29,7 +29,7 @@ export default async function BrandsPage() {
           <div className="grid gap-6 sm:grid-cols-3 lg:grid-cols-5 lg:gap-9">
             {brands.map((brand) => (
               <Link key={brand.id} href={`/brands/${brand.slug}`} className="group block no-underline">
-                <Frame media={brand.logo as Media} ratio="3x2" size="landscape" className="mb-3" />
+                <Frame media={brand.logo as Media} ratio="3x2" size="landscape" fit="contain" className="mb-3" />
                 <h3 className="m-0 font-display text-[var(--text-step-1)] font-normal">{brand.name}</h3>
               </Link>
             ))}

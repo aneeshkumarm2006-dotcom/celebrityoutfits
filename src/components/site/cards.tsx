@@ -57,6 +57,7 @@ export const ArticleCard = ({ article }: { article: Article }) => (
       media={article.heroImage as Media}
       ratio="3x2"
       size="landscape"
+      position="top"
       sizes="(min-width: 1024px) 30vw, 100vw"
       className="mb-3.5"
     />

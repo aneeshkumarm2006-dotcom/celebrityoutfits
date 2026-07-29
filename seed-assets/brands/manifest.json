@@ -1,0 +1,291 @@
+[
+ {
+  "slug": "ray-ban",
+  "name": "Ray-Ban",
+  "website": "https://www.ray-ban.com",
+  "founded": "1936",
+  "description": "American eyewear house, now Luxottica-owned, whose Aviator and Wayfarer outlast every trend that borrows them.",
+  "file": "seed-assets/brands/ray-ban.png",
+  "credit": "Uploaded to Commons by Xeworlebi, self created",
+  "licence": "Public domain",
+  "source": "Ray-Ban logo.svg"
+ },
+ {
+  "slug": "rolex",
+  "name": "Rolex",
+  "website": "https://www.rolex.com",
+  "founded": "1905",
+  "description": "The default answer to what watch a famous person is wearing, and often the correct one.",
+  "file": "seed-assets/brands/rolex.png",
+  "credit": "Rolex SA",
+  "licence": "Public domain",
+  "source": "Rolex wordmark logo.svg"
+ },
+ {
+  "slug": "omega",
+  "name": "Omega",
+  "website": "https://www.omegawatches.com",
+  "founded": "1848",
+  "description": "Swiss watchmaker with a long screen presence and a quieter profile than its main rival.",
+  "file": "seed-assets/brands/omega.png",
+  "credit": "Omega",
+  "licence": "Public domain",
+  "source": "Omega Logo.svg"
+ },
+ {
+  "slug": "cartier",
+  "name": "Cartier",
+  "website": "https://www.cartier.com",
+  "founded": "1847",
+  "description": "Jeweller whose Tank and Santos read as taste rather than expenditure.",
+  "file": "seed-assets/brands/cartier.png",
+  "credit": "Unknown authorUnknown author",
+  "licence": "Public domain",
+  "source": "Cartier logo.svg"
+ },
+ {
+  "slug": "prada",
+  "name": "Prada",
+  "website": "https://www.prada.com",
+  "founded": "1913",
+  "description": "Milanese house that made intellectual awkwardness look expensive, and kept it that way.",
+  "file": "seed-assets/brands/prada.png",
+  "credit": "Prada S.p.A.",
+  "licence": "Public domain",
+  "source": "Prada-Logo.svg"
+ },
+ {
+  "slug": "gucci",
+  "name": "Gucci",
+  "website": "https://www.gucci.com",
+  "founded": "1921",
+  "description": "Florentine house that swings between maximalism and restraint roughly once a decade.",
+  "file": "seed-assets/brands/gucci.png",
+  "credit": "Gucci",
+  "licence": "Public domain",
+  "source": "Gucci Logo.svg"
+ },
+ {
+  "slug": "saint-laurent",
+  "name": "Saint Laurent",
+  "website": "https://www.ysl.com",
+  "founded": "1961",
+  "description": "Parisian house built on the skinny silhouette, black tailoring and very little compromise.",
+  "file": "seed-assets/brands/saint-laurent.png",
+  "credit": "Saint Laurent",
+  "licence": "Public domain",
+  "source": "Saint Laurent Paris SVG Logo.svg"
+ },
+ {
+  "slug": "loewe",
+  "name": "Loewe",
+  "website": "https://www.loewe.com",
+  "founded": "1846",
+  "description": "Spanish leather house turned the most quietly inventive label on the calendar.",
+  "file": "seed-assets/brands/loewe.png",
+  "credit": "Loewe.\n\nOriginal uploader was \u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u041c\u043e\u0442\u0438\u043d at ru.wikipedia",
+  "licence": "Public domain",
+  "source": "LOEWE-Logo.svg"
+ },
+ {
+  "slug": "valentino",
+  "name": "Valentino",
+  "website": "https://www.valentino.com",
+  "founded": "1960",
+  "description": "Roman couture house, and the reason a particular red has its own name.",
+  "file": "seed-assets/brands/valentino.png",
+  "credit": "Valentino S.p.A.",
+  "licence": "Public domain",
+  "source": "Valentino logo.svg"
+ },
+ {
+  "slug": "louis-vuitton",
+  "name": "Louis Vuitton",
+  "website": "https://www.louisvuitton.com",
+  "founded": "1854",
+  "description": "Trunk-maker turned the largest luxury brand on earth, with menswear that behaves like culture.",
+  "file": "seed-assets/brands/louis-vuitton.png",
+  "credit": "Louis Vuitton",
+  "licence": "Public domain",
+  "source": "Louis Vuitton logo and wordmark.svg"
+ },
+ {
+  "slug": "dior",
+  "name": "Dior",
+  "website": "https://www.dior.com",
+  "founded": "1946",
+  "description": "The house that reset postwar proportion, still trading on the silhouette.",
+  "file": "seed-assets/brands/dior.png",
+  "credit": "Christian Dior SE",
+  "licence": "Public domain",
+  "source": "Dior Logo 2022.svg"
+ },
+ {
+  "slug": "bottega-veneta",
+  "name": "Bottega Veneta",
+  "website": "https://www.bottegaveneta.com",
+  "founded": "1966",
+  "description": "Veneto leather house whose whole argument is that it does not need a logo.",
+  "file": "seed-assets/brands/bottega-veneta.png",
+  "credit": "Unknown authorUnknown author",
+  "licence": "Public domain",
+  "source": "Logo Bottega Veneta.svg"
+ },
+ {
+  "slug": "zegna",
+  "name": "Zegna",
+  "website": "https://www.zegna.com",
+  "founded": "1910",
+  "description": "Italian mill and tailor \u2014 the cloth under a great deal of red-carpet menswear.",
+  "file": "seed-assets/brands/zegna.png",
+  "credit": "Zegna",
+  "licence": "Public domain",
+  "source": "Ermenegildo Zegna group - logo (Italy).svg"
+ },
+ {
+  "slug": "tom-ford",
+  "name": "Tom Ford",
+  "website": "https://www.tomfordfashion.com",
+  "founded": "2005",
+  "description": "Sharp shoulders, wide lapels, and no interest whatsoever in understatement.",
+  "file": "seed-assets/brands/tom-ford.png",
+  "credit": "Tom Ford",
+  "licence": "Public domain",
+  "source": "Tom Ford Logo.svg"
+ },
+ {
+  "slug": "chanel",
+  "name": "Chanel",
+  "website": "https://www.chanel.com",
+  "founded": "1910",
+  "description": "The tweed jacket, the quilted bag, and a century of refusing to change either much.",
+  "file": "seed-assets/brands/chanel.png",
+  "credit": "Unknown authorUnknown author",
+  "licence": "Public domain",
+  "source": "Chanel logo.svg"
+ },
+ {
+  "slug": "versace",
+  "name": "Versace",
+  "website": "https://www.versace.com",
+  "founded": "1978",
+  "description": "Loud on purpose, and better at it than the houses that occasionally try.",
+  "file": "seed-assets/brands/versace.png",
+  "credit": "Gianni Versace S.p.A.",
+  "licence": "Public domain",
+  "source": "Versace old logo.svg"
+ },
+ {
+  "slug": "giorgio-armani",
+  "name": "Giorgio Armani",
+  "website": "https://www.armani.com",
+  "founded": "1975",
+  "description": "The unstructured jacket that taught Hollywood how to sit down in a suit.",
+  "file": "seed-assets/brands/giorgio-armani.png",
+  "credit": "Giorgio Armani",
+  "licence": "Public domain",
+  "source": "Giorgio Armani logo.jpg"
+ },
+ {
+  "slug": "burberry",
+  "name": "Burberry",
+  "website": "https://www.burberry.com",
+  "founded": "1856",
+  "description": "British outerwear house whose trench is the most copied coat in existence.",
+  "file": "seed-assets/brands/burberry.png",
+  "credit": "Burberry Group",
+  "licence": "Public domain",
+  "source": "Burberry Logo.svg"
+ },
+ {
+  "slug": "celine",
+  "name": "Celine",
+  "website": "https://www.celine.com",
+  "founded": "1945",
+  "description": "Parisian house currently trading in narrow tailoring and borrowed rock-and-roll.",
+  "file": "seed-assets/brands/celine.png",
+  "credit": "Celine",
+  "licence": "Public domain",
+  "source": "Celine logo.svg"
+ },
+ {
+  "slug": "balenciaga",
+  "name": "Balenciaga",
+  "website": "https://www.balenciaga.com",
+  "founded": "1919",
+  "description": "Couture rigour turned into deliberate provocation, depending on the decade.",
+  "file": "seed-assets/brands/balenciaga.png",
+  "credit": "Unknown authorUnknown author",
+  "licence": "Public domain",
+  "source": "Balenciaga Logo.svg"
+ },
+ {
+  "slug": "jacquemus",
+  "name": "Jacquemus",
+  "website": "https://www.jacquemus.com",
+  "founded": "2009",
+  "description": "Southern French label built on sunlight, tiny bags and oversized tailoring.",
+  "file": "seed-assets/brands/jacquemus.png",
+  "credit": "JACQUEMUS",
+  "licence": "Public domain",
+  "source": "Logo-Jacquemus.svg"
+ },
+ {
+  "slug": "loro-piana",
+  "name": "Loro Piana",
+  "website": "https://www.loropiana.com",
+  "founded": "1924",
+  "description": "Cashmere and vicu\u00f1a at the top of the market, with nothing on the outside to say so.",
+  "file": "seed-assets/brands/loro-piana.png",
+  "credit": "Nefedechev",
+  "licence": "CC BY-SA 4.0",
+  "source": "Loro Piana logo.png"
+ },
+ {
+  "slug": "brunello-cucinelli",
+  "name": "Brunello Cucinelli",
+  "website": "https://www.brunellocucinelli.com",
+  "founded": "1978",
+  "description": "Umbrian knitwear, and the reference point for expensive clothes that whisper.",
+  "file": "seed-assets/brands/brunello-cucinelli.png",
+  "credit": "Brunello Cucinelli S.p.A.",
+  "licence": "Public domain",
+  "source": "Brunello Cucinelli Logo.png"
+ },
+ {
+  "slug": "common-projects",
+  "name": "Common Projects",
+  "website": "https://www.commonprojects.com",
+  "founded": "2004",
+  "description": "One minimal leather sneaker, gold serial number on the heel, barely changed since."
+ },
+ {
+  "slug": "new-balance",
+  "name": "New Balance",
+  "website": "https://www.newbalance.com",
+  "founded": "1906",
+  "description": "Running brand adopted wholesale by people who dress well and walk a lot.",
+  "file": "seed-assets/brands/new-balance.png",
+  "credit": "New Balance",
+  "licence": "Public domain",
+  "source": "New Balance logo.svg"
+ },
+ {
+  "slug": "levis",
+  "name": "Levi's",
+  "website": "https://www.levi.com",
+  "founded": "1853",
+  "description": "The 501, and every pair of jeans that has since argued with it.",
+  "file": "seed-assets/brands/levis.png",
+  "credit": "Ronald Reagan",
+  "licence": "Public domain",
+  "source": "Levis-logo-quer.svg"
+ },
+ {
+  "slug": "carhartt-wip",
+  "name": "Carhartt WIP",
+  "website": "https://www.carhartt-wip.com",
+  "founded": "1889",
+  "description": "Workwear reissued for people who do not work in it, and better cut for the purpose."
+ }
+]

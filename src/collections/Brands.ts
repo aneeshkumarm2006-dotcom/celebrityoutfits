@@ -22,6 +22,27 @@ export const Brands: CollectionConfig = {
     slugField('name'),
     { name: 'logo', type: 'upload', relationTo: 'media' },
     {
+      name: 'website',
+      type: 'text',
+      admin: {
+        description:
+          'The brand’s own site. Rendered as a plain external link — never an affiliate one, so the page still says something useful for brands we have no programme with.',
+        placeholder: 'https://www.ray-ban.com',
+      },
+      validate: (value: unknown) =>
+        !value ||
+        (typeof value === 'string' && /^https?:\/\//.test(value)) ||
+        'Must start with http:// or https://',
+    },
+    {
+      name: 'founded',
+      type: 'text',
+      admin: {
+        width: '50%',
+        description: 'Year or era, shown under the brand name. Free text — “1937”, “1980s”.',
+      },
+    },
+    {
       name: 'description',
       type: 'richText',
       admin: { description: 'Shown on the brand page. Good place to rank for the brand name.' },

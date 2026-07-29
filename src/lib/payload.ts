@@ -146,3 +146,28 @@ export const getBrandBySlug = async (slug: string) => {
   })
   return docs[0] ?? null
 }
+
+/** Everything we have logged from one brand — the substance of a brand page. */
+export const getProductsByBrand = async (brandId: string | number, limit = 24) => {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({
+    collection: 'products',
+    limit,
+    depth: 1,
+    sort: 'priceCents',
+    where: { brand: { equals: brandId } },
+  })
+  return docs
+}
+
+export const getArticlesByBrand = async (brandId: string | number, limit = 12) => {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({
+    collection: 'articles',
+    limit,
+    depth: 1,
+    sort: '-publishedAt',
+    where: { relatedBrand: { equals: brandId }, _status: { equals: 'published' } },
+  })
+  return docs
+}

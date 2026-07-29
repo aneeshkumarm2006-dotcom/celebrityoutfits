@@ -460,6 +460,14 @@ export interface Brand {
   slug: string;
   logo?: (number | null) | Media;
   /**
+   * The brand’s own site. Rendered as a plain external link — never an affiliate one, so the page still says something useful for brands we have no programme with.
+   */
+  website?: string | null;
+  /**
+   * Year or era, shown under the brand name. Free text — “1937”, “1980s”.
+   */
+  founded?: string | null;
+  /**
    * Shown on the brand page. Good place to rank for the brand name.
    */
   description?: {
@@ -944,6 +952,8 @@ export interface BrandsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   logo?: T;
+  website?: T;
+  founded?: T;
   description?: T;
   affiliateNetwork?: T;
   commissionRate?: T;

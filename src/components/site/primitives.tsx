@@ -43,6 +43,16 @@ export const Frame = ({
   sizes = '(min-width: 1024px) 40vw, 100vw',
   priority = false,
   showCredit = false,
+  /**
+   * Photographs are cropped to fill the frame; logos must not be. A wordmark
+   * with its edges shaved off stops being the brand's mark.
+   */
+  fit = 'cover',
+  /**
+   * Photographs of people are cropped from the top, because faces sit near the
+   * top of a frame and a centred crop of a standing figure removes the head.
+   */
+  position = 'center',
   className = '',
 }: {
   media: MediaLike
@@ -51,6 +61,8 @@ export const Frame = ({
   sizes?: string
   priority?: boolean
   showCredit?: boolean
+  fit?: 'cover' | 'contain'
+  position?: 'center' | 'top'
   className?: string
 }) => {
   const url = mediaUrl(media, size)
@@ -69,7 +81,9 @@ export const Frame = ({
             fill
             sizes={sizes}
             priority={priority}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className={`${fit === 'contain' ? 'object-contain p-6' : 'object-cover'} ${
+              position === 'top' ? 'object-top' : ''
+            } transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
           />
         ) : (
           <span className="absolute inset-0 grid place-items-center text-[0.625rem] tracking-[0.16em] text-faint uppercase">
