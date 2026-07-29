@@ -115,7 +115,18 @@ export default buildConfig({
     // works before Vercel Blob is provisioned.
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
-      collections: { [Media.slug]: true },
+      collections: {
+        /**
+         * Serve straight off the Blob CDN instead of streaming every image
+         * through a serverless function. Without this Payload keeps its own
+         * access control in front of the file, which for a public archive buys
+         * nothing and costs an invocation per portrait per visitor.
+         *
+         * The URLs this produces are matched by the `remotePatterns` entry for
+         * *.public.blob.vercel-storage.com in next.config.
+         */
+        [Media.slug]: { disablePayloadAccessControl: true },
+      },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
