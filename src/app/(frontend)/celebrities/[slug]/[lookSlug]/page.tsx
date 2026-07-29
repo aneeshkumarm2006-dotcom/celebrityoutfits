@@ -113,8 +113,9 @@ export default async function LookPage({ params }: Props) {
 
           <Frame
             media={photo}
-            ratio="4x3"
+            ratio="3x2"
             size="landscape"
+            position="top"
             priority
             showCredit
             sizes="(min-width: 1024px) 70vw, 100vw"

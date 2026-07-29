@@ -93,8 +93,9 @@ export default async function CelebrityPage({ params }: Props) {
           <div className="w-screen ml-[calc(50%-50vw)]">
             <Frame
               media={celebrity.heroImage as Media}
-              ratio="21x9"
-              size="wide"
+              ratio="16x9"
+              size="hero"
+              position="top"
               priority
               sizes="100vw"
             />
@@ -125,8 +126,9 @@ export default async function CelebrityPage({ params }: Props) {
                     >
                       <Frame
                         media={photo}
-                        ratio="4x3"
+                        ratio="3x2"
                         size="landscape"
+                        position="top"
                         showCredit
                         sizes="(min-width: 1024px) 55vw, 100vw"
                       />

@@ -6,7 +6,7 @@ export type MediaLike = Media | number | string | null | undefined
 export const asMedia = (value: MediaLike): Media | null =>
   value && typeof value === 'object' ? (value as Media) : null
 
-type SizeName = 'thumb' | 'square' | 'portrait' | 'landscape' | 'wide' | 'og'
+type SizeName = 'thumb' | 'square' | 'portrait' | 'landscape' | 'hero' | 'og' | 'logo' | 'wide'
 
 /**
  * Payload returns absolute URLs because `serverURL` is configured, which makes

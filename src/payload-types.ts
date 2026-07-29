@@ -285,7 +285,7 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    wide?: {
+    hero?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -294,6 +294,22 @@ export interface Media {
       filename?: string | null;
     };
     og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    logo?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    wide?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -1073,7 +1089,7 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        wide?:
+        hero?:
           | T
           | {
               url?: T;
@@ -1084,6 +1100,26 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        logo?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        wide?:
           | T
           | {
               url?: T;

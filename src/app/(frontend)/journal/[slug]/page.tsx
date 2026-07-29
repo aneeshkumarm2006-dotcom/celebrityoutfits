@@ -91,8 +91,8 @@ export default async function ArticlePage({ params }: Props) {
             <div className="mb-10 sm:mb-14">
               <Frame
                 media={article.heroImage as Media}
-                ratio="2x1"
-                size="wide"
+                ratio="16x9"
+                size="hero"
                 position="top"
                 priority
                 showCredit

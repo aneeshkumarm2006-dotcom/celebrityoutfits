@@ -22,13 +22,16 @@ export const Eyebrow = ({ children }: { children: ReactNode }) => (
   <p className="eyebrow m-0">{children}</p>
 )
 
+/**
+ * Four ratios, and each one has a generated crop of exactly the same shape in
+ * the Media collection. Adding a fifth means adding a matching `imageSize`;
+ * without that the browser re-crops what the server already cropped.
+ */
 const ratioClass = {
-  '21x9': 'aspect-[21/9]',
-  '2x1': 'aspect-[2/1]',
-  '4x3': 'aspect-[4/3]',
-  '3x4': 'aspect-[3/4]',
-  '1x1': 'aspect-square',
-  '3x2': 'aspect-[3/2]',
+  '16x9': 'aspect-video', // heroes and banners  → size="hero"
+  '3x2': 'aspect-[3/2]', // card grids          → size="landscape"
+  '3x4': 'aspect-[3/4]', // portrait tiles      → size="portrait"
+  '1x1': 'aspect-square', // chips and inline    → size="square" | "thumb"
 } as const
 
 /**
@@ -38,7 +41,7 @@ const ratioClass = {
  */
 export const Frame = ({
   media,
-  ratio = '4x3',
+  ratio = '3x2',
   size,
   sizes = '(min-width: 1024px) 40vw, 100vw',
   priority = false,
@@ -57,7 +60,7 @@ export const Frame = ({
 }: {
   media: MediaLike
   ratio?: keyof typeof ratioClass
-  size?: 'thumb' | 'square' | 'portrait' | 'landscape' | 'wide' | 'og'
+  size?: 'thumb' | 'square' | 'portrait' | 'landscape' | 'hero' | 'og' | 'logo' | 'wide'
   sizes?: string
   priority?: boolean
   showCredit?: boolean

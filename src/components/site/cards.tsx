@@ -13,6 +13,7 @@ export const CelebrityCard = ({ celebrity }: { celebrity: Celebrity }) => (
       media={celebrity.portraitImage as Media}
       ratio="3x4"
       size="portrait"
+      position="top"
       sizes="(min-width: 1024px) 20vw, 50vw"
       className="mb-3.5"
     />
@@ -36,6 +37,7 @@ export const LookCard = ({ look }: { look: Look }) => {
         media={photo}
         ratio="3x4"
         size="portrait"
+        position="top"
         sizes="(min-width: 1024px) 25vw, 50vw"
         className="mb-3.5"
       />

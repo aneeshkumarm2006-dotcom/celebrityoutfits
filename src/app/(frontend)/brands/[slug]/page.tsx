@@ -50,7 +50,7 @@ export default async function BrandPage({ params }: Props) {
             <Frame
               media={brand.logo as Media}
               ratio="3x2"
-              size="landscape"
+              size="logo"
               fit="contain"
               sizes="(min-width: 1024px) 30vw, 100vw"
               priority
