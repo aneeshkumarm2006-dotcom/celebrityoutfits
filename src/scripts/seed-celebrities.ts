@@ -145,6 +145,22 @@ const roster: Seed[] = [
       'A late-career reinvention into some of the most decisive red-carpet dressing of the moment.',
   },
   {
+    name: 'Colman Domingo',
+    category: 'film',
+    standfirst:
+      'Colour, texture and volume used without hedging — the most consistently maximalist dresser working the current carpet, and the most disciplined about it.',
+    featured: true,
+    rank: 6,
+  },
+  {
+    name: 'Jenna Ortega',
+    category: 'film',
+    standfirst:
+      'A gothic register held with unusual precision: dark palettes, sharp silhouettes, and the occasional saturated red that lands harder for being rationed.',
+    featured: true,
+    rank: 7,
+  },
+  {
     name: 'Ryan Reynolds',
     category: 'film',
     standfirst:

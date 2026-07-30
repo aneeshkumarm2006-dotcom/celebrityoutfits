@@ -169,5 +169,23 @@
   "licence": "Public domain",
   "source": "Ryan Reynolds 2011.jpg",
   "date": "2011-06-16"
+ },
+ {
+  "slug": "colman-domingo",
+  "name": "Colman Domingo",
+  "file": "seed-assets/looks/colman-domingo-look.jpg",
+  "credit": "Gage Skidmore from Peoria, AZ, United States of America",
+  "licence": "CC BY-SA 2.0",
+  "source": "Colman Domingo (39300779370) (cropped).jpg",
+  "date": "2018-03-24"
+ },
+ {
+  "slug": "jenna-ortega",
+  "name": "Jenna Ortega",
+  "file": "seed-assets/looks/jenna-ortega-look.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Jenna Ortega-63800 (cropped).jpg",
+  "date": "2024-08-28"
  }
 ]

@@ -187,5 +187,23 @@
   "licence": "CC BY 2.0",
   "source": "Deadpool 2 Japan Premiere Red Carpet Ryan Reynolds (40649016430).jpg",
   "date": "2018"
+ },
+ {
+  "slug": "colman-domingo",
+  "name": "Colman Domingo",
+  "file": "seed-assets/portraits/colman-domingo.jpg",
+  "credit": "Danorton",
+  "licence": "CC BY-SA 4.0",
+  "source": "Colman Domingo at SXSW 2024.jpg",
+  "date": "2024-03-08"
+ },
+ {
+  "slug": "jenna-ortega",
+  "name": "Jenna Ortega",
+  "file": "seed-assets/portraits/jenna-ortega.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Jenna Ortega-63792 (cropped).jpg",
+  "date": "2024-08-28"
  }
 ]

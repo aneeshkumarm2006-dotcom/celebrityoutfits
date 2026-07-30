@@ -77,6 +77,31 @@ const LOOKS: LookSeed[] = [
     ],
   },
   {
+    celebrity: 'jenna-ortega',
+    title: 'Red tulle, on the Cannes carpet',
+    occasion: 'event',
+    location: 'Cannes',
+    description:
+      'A red tulle gown gathered in loose ruffles across the bust, held on the thinnest of straps, with a fine articulated diamond necklace at the throat. Red carried up into the eye makeup and the lip.',
+    items: [
+      { label: 'Red tulle gown', category: 'other', confidence: 'open',
+        note: 'No maker’s mark visible in the frame.' },
+      { label: 'Articulated diamond necklace', category: 'jewellery', confidence: 'open' },
+    ],
+  },
+  {
+    celebrity: 'colman-domingo',
+    title: 'Black on black, texture doing the work',
+    occasion: 'press',
+    description:
+      'A black textured shirt worn buttoned high at a press panel — no contrast anywhere, the entire interest carried by the surface of the cloth rather than by colour or cut.',
+    items: [
+      { label: 'Textured black shirt', category: 'shirting', confidence: 'open' },
+      { label: 'Black Chelsea boot', category: 'footwear', confidence: 'get_the_look',
+        product: 'Chelsea boot, black calf' },
+    ],
+  },
+  {
     celebrity: 'zendaya',
     title: 'The structured strapless gown',
     occasion: 'event',

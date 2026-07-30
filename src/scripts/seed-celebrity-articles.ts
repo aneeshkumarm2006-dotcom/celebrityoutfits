@@ -132,6 +132,58 @@ const pieces: Piece[] = [
     ],
   },
   {
+    celebrity: 'colman-domingo',
+    title: 'Maximalism is a discipline, not an absence of one',
+    template: 'generic',
+    excerpt:
+      'Colour, texture and volume worn without hedging. The loudest dresser on a carpet is usually the one following the strictest rules — here is what they are.',
+    links: ['valentino', 'versace'],
+    body: [
+      p(
+        'The assumption about maximalist dressing is that it is what happens when nobody edits. The opposite is nearer the truth: a look with four strong ideas in it needs more discipline than one with none, because there is no neutral ground to fall back on.',
+      ),
+      h2('One structural idea, then decorate'),
+      p(
+        'The looks that work have a single silhouette decision underneath — a defined waist, an exaggerated shoulder, a cape — and everything else is applied to that frame. The ones that fail have two structural ideas fighting, and no amount of colour rescues them.',
+      ),
+      quote('Four strong ideas need more editing than none, not less.'),
+      h2('Texture is the cheap version'),
+      p(
+        'Colour is the obvious lever and the riskiest. Texture does much of the same work quietly: a black outfit in three different surfaces reads as considered from across a room, and photographs far better than flat black, without asking anyone to be brave.',
+      ),
+      h2('Why it needs age'),
+      p(
+        'This register depends on the wearer looking like they are enjoying it rather than submitting to it. That confidence is hard to fake and tends to arrive later — which is why the best maximalist dressing is rarely done by the youngest people on the carpet.',
+      ),
+    ],
+  },
+  {
+    celebrity: 'jenna-ortega',
+    title: 'A dark palette, and the value of rationing red',
+    template: 'generic',
+    excerpt:
+      'Holding one register long enough that a single departure becomes an event. On gothic dressing as a system rather than a mood.',
+    links: ['dior', 'saint-laurent'],
+    body: [
+      p(
+        'A consistently dark wardrobe is usually read as a mood. It is more useful to read it as a system, because the interesting part is not the black — it is what the black makes possible.',
+      ),
+      h2('The mechanics'),
+      p(
+        'Hold a near-monochrome palette across enough appearances and the baseline stops being noticed. A single saturated colour then lands with a force it could never have in a varied wardrobe, where it would be one bright thing among many.',
+      ),
+      quote('The black is not the statement. It is what makes one possible.'),
+      h2('Sharp, not heavy'),
+      p(
+        'The failure mode of dark dressing is bulk: black absorbs detail, so a heavy silhouette in it reads as a mass rather than a shape. The correction is structural — defined waists, clean shoulders, and surfaces with enough sheen or texture to give the camera something to catch.',
+      ),
+      h2('What to take'),
+      p(
+        'Not the gothic register specifically. The transferable idea is rationing: pick the thing you want to be noticed for and then use it sparingly enough that it still is. Most wardrobes spend their whole budget of attention every day and wonder why nothing registers.',
+      ),
+    ],
+  },
+  {
     celebrity: 'zendaya',
     title: 'Method dressing is a discipline, not a gimmick',
     template: 'generic',

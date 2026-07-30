@@ -187,5 +187,23 @@
   "licence": "CC BY-SA 2.0",
   "source": "Ryan Reynolds (43076195354).jpg",
   "date": "2018"
+ },
+ {
+  "slug": "colman-domingo",
+  "name": "Colman Domingo",
+  "file": "seed-assets/heroes/colman-domingo-hero.jpg",
+  "credit": "Philip Romano",
+  "licence": "CC BY-SA 4.0",
+  "source": "Colman Domingo.jpg",
+  "date": "2022-06-12"
+ },
+ {
+  "slug": "jenna-ortega",
+  "name": "Jenna Ortega",
+  "file": "seed-assets/heroes/jenna-ortega-hero.jpg",
+  "credit": "Harald Krichel",
+  "licence": "CC BY-SA 4.0",
+  "source": "Jenna Ortega-63799 (cropped).jpg",
+  "date": "2024-08-28"
  }
 ]
