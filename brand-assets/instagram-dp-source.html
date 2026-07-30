@@ -1,0 +1,88 @@
+<!doctype html>
+<meta charset="utf-8" />
+<style>
+  /* Instagram renders a profile picture as a circle and shows it as small as
+     32px in feed, so the mark has to survive both the crop and the scale.
+     Everything sits inside a safe circle at 84% of the square. */
+  html, body { margin: 0; background: #555; }
+  .sheet { display: flex; flex-direction: column; gap: 40px; padding: 40px; }
+  .dp {
+    width: 1080px; height: 1080px;
+    display: grid; place-items: center;
+    position: relative;
+    font-family: 'Bodoni 72', 'Bodoni Moda', Didot, serif;
+  }
+  .stack { display: grid; place-items: center; gap: 0; }
+
+  /* Optical centring: a didone monogram sits slightly high in its own box. */
+  .mark {
+    font-weight: 700;
+    font-size: 430px;
+    line-height: 0.82;
+    letter-spacing: 0.045em;
+    text-indent: 0.045em; /* cancels the trailing letterspace so it centres true */
+  }
+  .rule { width: 268px; height: 3px; margin-top: 34px; }
+  .tag {
+    margin-top: 26px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 40px; font-weight: 500;
+    letter-spacing: 0.42em; text-indent: 0.42em;
+  }
+  .dot {
+    position: absolute; border-radius: 50%;
+    width: 30px; height: 30px;
+  }
+
+  /* A — wine ground. Stands out in a feed of white circles. */
+  #a { background: #8a2b3b; }
+  #a .mark, #a .tag { color: #fcfcfa; }
+  #a .rule { background: rgba(252,252,250,0.55); }
+
+  /* B — ink ground, wine locator dot. */
+  #b { background: #16161a; }
+  #b .mark, #b .tag { color: #f4f2ec; }
+  #b .rule { background: rgba(244,242,236,0.45); }
+  #b .dot { background: #c8455a; top: 150px; left: 50%; transform: translateX(-50%); }
+
+  /* C — paper ground, matches the site chrome. */
+  #c { background: #fcfcfa; }
+  #c .mark, #c .tag { color: #1a1a18; }
+  #c .rule { background: rgba(26,26,24,0.35); }
+  #c .dot { background: #8a2b3b; top: 150px; left: 50%; transform: translateX(-50%); }
+
+  /* How each one actually reads once Instagram crops and shrinks it. */
+  .previews { display: flex; gap: 28px; align-items: center; padding: 0 40px 40px; }
+  .previews .wrap { text-align: center; color: #eee;
+    font: 12px/2 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mini { border-radius: 50%; overflow: hidden; display: grid; place-items: center; }
+  .mini .mark { letter-spacing: 0.045em; text-indent: 0.045em; font-weight: 700; }
+</style>
+
+<div class="sheet">
+  <div class="dp" id="a">
+    <div class="stack">
+      <div class="mark">CSO</div>
+      <div class="rule"></div>
+      <div class="tag">SPOTTED</div>
+    </div>
+  </div>
+
+  <div class="dp" id="b">
+    <span class="dot"></span>
+    <div class="stack">
+      <div class="mark">CSO</div>
+      <div class="rule"></div>
+      <div class="tag">SPOTTED</div>
+    </div>
+  </div>
+
+  <div class="dp" id="c">
+    <span class="dot"></span>
+    <div class="stack">
+      <div class="mark">CSO</div>
+      <div class="rule"></div>
+      <div class="tag">SPOTTED</div>
+    </div>
+  </div>
+</div>
