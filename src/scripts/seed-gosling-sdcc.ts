@@ -83,6 +83,14 @@ const PRODUCTS = [
     merchant: 'Ralph Lauren',
     affiliateUrl:
       'https://www.ralphlauren.com/men-clothing-jackets-coats-vests/denim-corduroy-collar-trucker-jacket/0080542517.html',
+    /**
+     * Ralph Lauren's own Scene7 asset. Their storefront geo-redirects and
+     * refuses non-browser agents, so this URL came out of a real page load
+     * rather than a guess at their CDN pattern — worth knowing if it ever needs
+     * replacing.
+     */
+    imageUrl:
+      'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI710P08157001_alternate10?$rl_4x5_zoom$',
     inStock: true,
   },
   {
