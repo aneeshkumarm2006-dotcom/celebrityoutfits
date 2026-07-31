@@ -48,6 +48,7 @@
 /* Expose the tokens to Tailwind so `bg-paper`, `text-ink-2`, `border-rule`
    and `font-display` all work as utilities. */
 @theme inline {
+
   --color-paper: var(--paper);
   --color-raised: var(--raised);
   --color-ink: var(--ink);

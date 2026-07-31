@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useRef, useState } from 'react'
+import { useActionState, useEffect, useRef, useState } from 'react'
 import { useFormStatus } from 'react-dom'
 
 import { type RequestState, submitRequest } from './actions'
@@ -26,9 +26,19 @@ const Submit = () => {
 export const RequestForm = () => {
   const [state, action] = useActionState<RequestState, FormData>(submitRequest, { status: 'idle' })
   const [filename, setFilename] = useState<string | null>(null)
-  // Stamped on mount so the action can measure how long the form was open.
-  // A script that posts the moment it loads takes well under a second.
-  const startedAt = useRef(Date.now())
+  /**
+   * Stamped on mount so the action can measure how long the form was open — a
+   * script that posts the moment it loads takes well under a second.
+   *
+   * Written to the DOM after mount rather than read during render: `Date.now()`
+   * is impure, and reading a ref while rendering is not allowed. Mount time is
+   * also the more honest number, since it is when the form reached a person.
+   */
+  const startedAtRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (startedAtRef.current) startedAtRef.current.value = String(Date.now())
+  }, [])
 
   if (state.status === 'ok') {
     return (
@@ -48,7 +58,7 @@ export const RequestForm = () => {
 
   return (
     <form action={action} className="grid max-w-[42rem] gap-6">
-      <input type="hidden" name="startedAt" value={startedAt.current} />
+      <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
 
       {/* Honeypot. Hidden from sight and from screen readers; bots fill it in. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">

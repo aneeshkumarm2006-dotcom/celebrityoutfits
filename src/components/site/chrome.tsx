@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { MobileNav } from '@/components/site/MobileNav'
 import { ThemeToggle } from '@/components/site/ThemeToggle'
 import { Container } from '@/components/site/primitives'
 import { getFooter, getNavigation, getSiteSettings } from '@/lib/payload'
@@ -10,15 +11,16 @@ export const SiteHeader = async () => {
   const items = nav?.items ?? []
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-paper">
-      <Container className="flex h-[70px] items-center justify-between gap-8">
-        <Link href="/" className="flex items-center gap-3 no-underline">
+    // `relative` so the mobile panel can anchor to the header's full width.
+    <header className="sticky top-0 z-50 border-b border-rule bg-paper relative">
+      <Container className="flex h-16 items-center justify-between gap-4 sm:h-[70px] sm:gap-8">
+        <Link href="/" className="flex min-w-0 items-center gap-2.5 no-underline sm:gap-3">
           {/**
            * Both marks ship; CSS shows one. The alt text sits on the wordmark
            * beside it rather than here, so a screen reader announces the site
            * name once instead of twice.
            */}
-          <span className="relative size-9 shrink-0 overflow-hidden rounded-[3px]">
+          <span className="relative size-8 shrink-0 overflow-hidden rounded-[3px] sm:size-9">
             <Image
               src="/brand/mark-paper.png"
               alt=""
@@ -36,13 +38,21 @@ export const SiteHeader = async () => {
               className="mark-dark object-cover"
             />
           </span>
-          <span className="font-display text-2xl leading-none font-bold tracking-[0.02em]">
+          {/**
+           * Truncates rather than wraps. Three words at display size will not
+           * fit beside a nav on a phone, and wrapping them pushed the header
+           * to three lines with the links laid over the top.
+           */}
+          <span className="truncate font-display text-[0.875rem] leading-none font-bold tracking-[0.01em] sm:text-2xl sm:tracking-[0.02em]">
             {settings?.siteName || 'Celebrity Spotted Outfits'}
           </span>
         </Link>
-        <div className="flex items-center gap-x-6 sm:gap-x-9">
+        <div className="flex shrink-0 items-center gap-x-3 sm:gap-x-6 md:gap-x-9">
           {items.length > 0 ? (
-            <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-9 gap-y-2">
+            <nav
+              aria-label="Primary"
+              className="hidden flex-wrap items-center gap-x-6 gap-y-2 md:flex lg:gap-x-9"
+            >
               {items.map((item, i) => (
                 <Link
                   key={`${item.href}-${i}`}
@@ -55,6 +65,7 @@ export const SiteHeader = async () => {
             </nav>
           ) : null}
           <ThemeToggle />
+          <MobileNav items={items} />
         </div>
       </Container>
     </header>
