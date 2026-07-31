@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { clearStaleDerivatives } from '@/hooks/clearStaleDerivatives'
+
 /**
  * Every image on the site lives here.
  *
@@ -72,20 +74,35 @@ export const Media: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    beforeChange: [clearStaleDerivatives],
+  },
+
   upload: {
     mimeTypes: ['image/*'],
+    /**
+     * `focalPoint` overrides the `position` set on each size below — when it is
+     * enabled, every derivative is cropped around the focal point and defaults
+     * to dead centre, which is why a portrait of a standing figure loses its
+     * head in a 16:9 banner. `position` only applies to images whose focal
+     * point has never been moved, so treat it as the fallback, not the rule.
+     *
+     * `crop` adds a source rectangle on top for the cases where no single point
+     * gives the right answer. Both are per-image and non-destructive: the
+     * original is untouched and clearing them restores the automatic behaviour.
+     */
     focalPoint: true,
+    crop: true,
     /**
      * One crop per display ratio, and the names match the ratios the site
      * actually renders. That correspondence is the whole point: asking for a
      * 3:2 box and loading a 4:3 crop makes the browser crop a second time, so
      * the image loses height twice and nobody can see where it went.
      *
-     * People are anchored to the top. A centre crop of a standing figure
-     * removes the head, which is the one part of the frame that matters here.
-     * Squares and thumbs stay centred — they are small and usually already
-     * tight — and logos are never cropped at all, only bounded, because a
-     * wordmark with its edges shaved off has stopped being the brand's mark.
+     * The `position` values below only apply to images whose focal point has
+     * never been moved — see the note on `focalPoint` above. Logos are never
+     * cropped at all, only bounded, because a wordmark with its edges shaved
+     * off has stopped being the brand's mark.
      */
     /**
      * `withoutEnlargement: false` matters more than it looks. Sharp refuses to

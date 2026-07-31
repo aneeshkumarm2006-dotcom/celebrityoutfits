@@ -126,8 +126,8 @@ export default async function CelebrityPage({ params }: Props) {
                     >
                       <Frame
                         media={photo}
-                        ratio="3x2"
-                        size="landscape"
+                        ratio="3x4"
+                        size="portrait"
                         position="top"
                         showCredit
                         sizes="(min-width: 1024px) 55vw, 100vw"

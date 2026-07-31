@@ -87,13 +87,21 @@ export const ItemCard = ({ item }: { item: Item }) => {
   // the cheaper stand-in the editor already chose.
   const substituted = Boolean(primary && primary.inStock === false && alternative)
   const product = substituted ? alternative : (primary ?? alternative)
+  /**
+   * No product means nothing to photograph — the garment has not been matched
+   * to anything buyable yet. Reserving a square image slot for it just fills
+   * the grid with empty boxes and makes a working page look broken, so an
+   * unidentified item states itself in text instead.
+   */
   if (!product) {
     return (
-      <div className="flex flex-col gap-3">
-        <Frame media={null} ratio="1x1" />
+      <div className="flex flex-col justify-center gap-2 border border-rule-2 bg-raised/40 p-4">
         <span className="text-[0.6875rem] font-medium tracking-[0.15em] text-muted uppercase">
           {item.category}
         </span>
+        {item.description ? (
+          <p className="m-0 text-[0.9375rem] leading-snug text-ink-2">{item.description}</p>
+        ) : null}
         <ConfidenceTag confidence={item.confidence} />
       </div>
     )
@@ -106,6 +114,7 @@ export const ItemCard = ({ item }: { item: Item }) => {
     <div className="group flex flex-col gap-3">
       <Frame
         media={product.image as Media}
+        fallbackUrl={product.imageUrl}
         ratio="1x1"
         size="square"
         sizes="(min-width: 1024px) 22vw, 50vw"

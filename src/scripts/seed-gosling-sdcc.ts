@@ -36,6 +36,11 @@ const node = (children: LexicalNode[], type = 'paragraph', tag?: string) => ({
 
 const p = (value: string) => node([text(value)])
 const h2 = (value: string) => node([text(value)], 'heading', 'h2')
+const shoppable = (productId: number, eyebrow: string) => ({
+  type: 'block', format: '', version: 2,
+  fields: { blockType: 'shoppableProduct', blockName: '', product: productId, eyebrow },
+})
+
 const quote = (value: string) => ({
   type: 'block', format: '', version: 2,
   fields: { blockType: 'pullQuote', blockName: '', quote: value, attribution: '' },
@@ -88,6 +93,32 @@ const PRODUCTS = [
     priceCents: 12900,
     merchant: 'NY Jacket',
     affiliateUrl: 'https://www.nyjacket.com/product/ryan-gosling-2026-san-diego-comic-con-jacket/',
+    imageUrl:
+      'https://www.nyjacket.com/wp-content/uploads/2026/07/Ryan-Gosling-2026-San-Diego-Comic-Con-Jacket-600x750.webp',
+    inStock: true,
+  },
+  {
+    name: 'Ghost Rider red denim jacket — recreation',
+    brand: undefined,
+    description:
+      'The same idea from a second maker, cut a little longer through the body. Sold on the Comic-Con appearance rather than on the original label, which is the honest way round.',
+    priceCents: 13900,
+    merchant: 'Leatherhood Polo',
+    affiliateUrl: 'https://leatherhoodpolo.com/product/ryan-gosling-ghost-rider-jacket/',
+    imageUrl:
+      'https://leatherhoodpolo.com/wp-content/uploads/2026/07/Ryan-Gosling-Ghost-Rider-Jacket-Red.webp',
+    inStock: true,
+  },
+  {
+    name: 'Marvel SDCC red trucker — recreation',
+    brand: undefined,
+    description:
+      'The cheapest of the three recreations, viscose-lined and buttoned like the original. Same caveat: it echoes the jacket, it is not the jacket.',
+    priceCents: 11900,
+    merchant: 'The Street Jacket',
+    affiliateUrl: 'https://thestreetjacket.com/products/ryan-gosling-marvel-sdcc-2026-jacket',
+    imageUrl:
+      'https://thestreetjacket.com/cdn/shop/files/Ryan_Gosling_Marvel_SDCC_2026_Jacket.webp?v=1785218534',
     inStock: true,
   },
 ]
@@ -119,7 +150,7 @@ const ITEMS = [
 ]
 
 // ── The piece ──────────────────────────────────────────────────────────────
-const ARTICLE_BODY: LexicalNode[] = [
+const articleBody = (id: Record<string, number>): LexicalNode[] => [
   p(
     'Within about twelve hours of Ryan Gosling walking onto the Hall H stage, somebody had posted the photograph to Reddit with three words underneath it: ID on jacket? Nine replies, no answer. That is usually a sign the jacket is worth the trouble.',
   ),
@@ -145,12 +176,17 @@ const ARTICLE_BODY: LexicalNode[] = [
   p(
     'The real thing, second hand. Vintage RRL turns up on eBay, Grailed and Poshmark, usually between two and seven hundred dollars depending on how hard it has been worn. The corduroy collar is common in the line; red is the difficult part. Set a saved search and be patient.',
   ),
+  shoppable(id['Vintage trucker jacket, red — 1980s'], 'The original · resale only'),
   p(
     'The same house, in production. Ralph Lauren still makes a denim trucker with a corduroy point collar. It is indigo, not red — but the cut and the collar are the two things doing the work in the original photograph, and you can have both today without waiting for a listing.',
   ),
+  shoppable(id['Denim corduroy-collar trucker jacket'], 'Same house · in production'),
   p(
-    'A recreation, if you want the colour more than the label. Several shops have already cut a red denim version off the Comic-Con photographs, at around a hundred and thirty dollars. They are explicit that this is what they are: one of them writes, in as many words, that they recreated the jacket. That is a different product from an eighties RRL and should be judged as one — but if what you actually want is a red trucker with a popped collar, it is the cheapest route to it.',
+    'A recreation, if you want the colour more than the label. Three shops have already cut a red denim version off the Comic-Con photographs, between a hundred and twenty and a hundred and forty dollars. They are explicit about what they are: one writes, in as many words, that they recreated the jacket. That is a different product from an eighties RRL and should be judged as one — but if what you actually want is a red trucker with a popped collar, this is the cheapest route to it.',
   ),
+  shoppable(id['Marvel SDCC red trucker — recreation'], 'Recreation · $119'),
+  shoppable(id['Red denim trucker — Comic-Con recreation'], 'Recreation · $129'),
+  shoppable(id['Ghost Rider red denim jacket — recreation'], 'Recreation · $139'),
   h2('The part worth stealing'),
   p(
     'Strip the provenance away and this is four plain things: a red jacket, a white tee, navy trousers, a dark belt. No pattern. No logo. One colour doing all the work, against a neutral that refuses to compete with it.',
@@ -193,6 +229,7 @@ const run = async () => {
       currency: 'USD' as const,
       merchant: seed.merchant,
       affiliateUrl: seed.affiliateUrl,
+      ...(seed.imageUrl ? { imageUrl: seed.imageUrl } : {}),
       inStock: seed.inStock,
       priceCheckedAt: new Date().toISOString(),
       ...(seed.brand === 'rrl' ? { brand: brand.id as number } : {}),
@@ -236,6 +273,18 @@ const run = async () => {
           caption: 'Ryan Gosling · San Diego Comic-Con 2026',
         },
       }))
+
+    /**
+     * A full-length portrait cropped to a 16:9 banner around the default centre
+     * point keeps the jacket and loses the face. Pulling the focal point into
+     * the upper quarter keeps both. Applied on every run, because a row created
+     * before this existed still carries the old 50/50 default.
+     */
+    await payload.update({
+      collection: 'media',
+      id: image.id,
+      data: { focalX: 50, focalY: 24 },
+    })
     photoId = image.id as number
   } else {
     console.warn(`  no photo at ${LOOK_PHOTO} — look seeds without one`)
@@ -267,7 +316,7 @@ const run = async () => {
   // Items
   for (const [index, item] of ITEMS.entries()) {
     const data = {
-      label: item.label,
+      description: item.label,
       look: look.id as number,
       category: item.category,
       confidence: item.confidence,
@@ -278,7 +327,7 @@ const run = async () => {
     }
     const { docs } = await payload.find({
       collection: 'items', limit: 1,
-      where: { look: { equals: look.id }, label: { equals: item.label } },
+      where: { look: { equals: look.id }, description: { equals: item.label } },
     })
     if (docs[0]) await payload.update({ collection: 'items', id: docs[0].id, data })
     else await payload.create({ collection: 'items', data })
@@ -303,7 +352,7 @@ const run = async () => {
       { keyword: 'Ryan Gosling', url: '/celebrities/ryan-gosling', rel: 'auto' as const },
       { keyword: 'RRL', url: '/brands/rrl', rel: 'auto' as const },
     ],
-    body: doc(ARTICLE_BODY),
+    body: doc(articleBody(productIds)),
     _status: 'published' as const,
   }
   const { docs: existingArticle } = await payload.find({

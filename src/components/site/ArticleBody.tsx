@@ -40,7 +40,13 @@ const ShoppableProduct = ({ product, eyebrow }: { product: Product | null; eyebr
   return (
     <div className="my-11 flex flex-wrap items-center gap-6 border-y border-rule py-6">
       <div className="w-[92px] flex-none">
-        <Frame media={product.image as Media} ratio="1x1" size="thumb" sizes="92px" />
+        <Frame
+          media={product.image as Media}
+          fallbackUrl={product.imageUrl}
+          ratio="1x1"
+          size="thumb"
+          sizes="92px"
+        />
       </div>
       <div className="min-w-[12rem] flex-1">
         {eyebrow ? <p className="eyebrow m-0">{eyebrow}</p> : null}

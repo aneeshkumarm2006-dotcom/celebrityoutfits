@@ -384,7 +384,11 @@ export interface Look {
 export interface Item {
   id: number;
   /**
-   * Auto-generated summary for list views.
+   * The garment in plain words. Shown on the look page.
+   */
+  description?: string | null;
+  /**
+   * Auto-generated summary for admin list views only.
    */
   label?: string | null;
   look: number | Look;
@@ -1030,6 +1034,7 @@ export interface LooksSelect<T extends boolean = true> {
  * via the `definition` "items_select".
  */
 export interface ItemsSelect<T extends boolean = true> {
+  description?: T;
   label?: T;
   look?: T;
   category?: T;

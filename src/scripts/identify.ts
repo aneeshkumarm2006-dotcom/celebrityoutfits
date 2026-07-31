@@ -60,6 +60,14 @@ const run = async () => {
       collection: 'items',
       data: {
         look: look.id,
+        // The model already describes colour, material and silhouette; joining
+        // them is a better public description than the category alone, and an
+        // editor can rewrite it without touching the evidence note.
+        description:
+          [garment.colour, garment.material, garment.silhouette]
+            .filter(Boolean)
+            .join(' ')
+            .trim() || garment.category,
         category: garment.category as never,
         confidence: garment.confidence,
         evidenceNote:

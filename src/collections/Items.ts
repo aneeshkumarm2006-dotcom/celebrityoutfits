@@ -24,11 +24,32 @@ export const Items: CollectionConfig = {
   access: { read: anyone, create: admins, update: admins, delete: admins },
   fields: [
     {
+      /**
+       * What the garment actually is, in words a reader recognises: "plain
+       * white crew-neck tee", not "knitwear". This is the only thing an
+       * unidentified item can show — without it the page can say nothing more
+       * useful than its own category, which the reader can already see.
+       */
+      name: 'description',
+      type: 'text',
+      /**
+       * Not `required`, and that is a schema decision rather than an editorial
+       * one. Marking it required adds a NOT NULL column to a table that already
+       * holds rows without it, which makes Drizzle's push stop and ask about
+       * data loss — a prompt nothing can answer in CI or a script. Nullable
+       * column, filled in by the seeds and expected of editors.
+       */
+      admin: {
+        description: 'The garment in plain words. Shown on the look page.',
+        placeholder: 'Plain white crew-neck tee',
+      },
+    },
+    {
       name: 'label',
       type: 'text',
       admin: {
         readOnly: true,
-        description: 'Auto-generated summary for list views.',
+        description: 'Auto-generated summary for admin list views only.',
       },
       hooks: {
         beforeChange: [

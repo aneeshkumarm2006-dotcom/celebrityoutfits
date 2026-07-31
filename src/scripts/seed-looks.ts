@@ -376,11 +376,11 @@ const run = async () => {
       const { docs: existingItems } = await payload.find({
         collection: 'items',
         limit: 1,
-        where: { look: { equals: look.id }, label: { equals: item.label } },
+        where: { look: { equals: look.id }, description: { equals: item.label } },
       })
 
       const itemData = {
-        label: item.label,
+        description: item.label,
         look: look.id as number,
         category: item.category,
         confidence: item.confidence,

@@ -178,6 +178,7 @@ const run = async () => {
       collection: 'items',
       data: {
         look: look.id,
+        description: 'Gold-frame aviator sunglasses, green lens',
         category: 'eyewear',
         confidence: 'confirmed',
         evidenceNote: 'Logo visible on the temple in two frames.',
@@ -189,6 +190,7 @@ const run = async () => {
       collection: 'items',
       data: {
         look: look.id,
+        description: 'Single-breasted jacket in deep green',
         category: 'tailoring',
         confidence: 'closest_match',
         evidenceNote: 'No visible maker mark; matched on lapel width and welt pocket.',
@@ -197,7 +199,13 @@ const run = async () => {
     })
     await payload.create({
       collection: 'items',
-      data: { look: look.id, category: 'footwear', confidence: 'open', position: 2 },
+      data: {
+        look: look.id,
+        description: 'Black leather derby',
+        category: 'footwear',
+        confidence: 'open',
+        position: 2,
+      },
     })
   }
 

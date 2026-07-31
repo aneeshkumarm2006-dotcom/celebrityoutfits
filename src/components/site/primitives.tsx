@@ -56,6 +56,12 @@ export const Frame = ({
    * top of a frame and a centred crop of a standing figure removes the head.
    */
   position = 'center',
+  /**
+   * Merchant feeds ship a URL rather than a file, on hosts we cannot enumerate
+   * in advance — so these bypass next/image, which needs every remote host
+   * allow-listed up front. Used only when there is no uploaded image.
+   */
+  fallbackUrl,
   className = '',
 }: {
   media: MediaLike
@@ -66,10 +72,14 @@ export const Frame = ({
   showCredit?: boolean
   fit?: 'cover' | 'contain'
   position?: 'center' | 'top'
+  fallbackUrl?: string | null
   className?: string
 }) => {
   const url = mediaUrl(media, size)
   const credit = mediaCredit(media)
+  const objectFit = `${fit === 'contain' ? 'object-contain p-6' : 'object-cover'} ${
+    position === 'top' ? 'object-top' : ''
+  }`
 
   return (
     <figure className={`m-0 ${className}`}>
@@ -84,9 +94,15 @@ export const Frame = ({
             fill
             sizes={sizes}
             priority={priority}
-            className={`${fit === 'contain' ? 'object-contain p-6' : 'object-cover'} ${
-              position === 'top' ? 'object-top' : ''
-            } transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
+            className={`${objectFit} transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
+          />
+        ) : fallbackUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element -- host is unknown until the feed is connected
+          <img
+            src={fallbackUrl}
+            alt={mediaAlt(media)}
+            loading="lazy"
+            className={`absolute inset-0 h-full w-full ${objectFit} transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
           />
         ) : (
           /**
