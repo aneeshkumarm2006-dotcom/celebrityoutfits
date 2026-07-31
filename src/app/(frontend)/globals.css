@@ -143,3 +143,22 @@
 .prose-article li {
   margin-bottom: 0.5rem;
 }
+
+/* ---------------------------------------------------------------------------
+   Logo mark.
+
+   The mark carries its own background, so one file cannot serve both themes —
+   the paper version is a bright square on a dark header. Two files, swapped on
+   exactly the same signals as the colour tokens above: an explicit data-theme
+   first, the system preference otherwise.
+--------------------------------------------------------------------------- */
+
+.mark-dark { display: none; }
+
+:root[data-theme='dark'] .mark-light { display: none; }
+:root[data-theme='dark'] .mark-dark { display: block; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .mark-light { display: none; }
+  :root:not([data-theme='light']) .mark-dark { display: block; }
+}

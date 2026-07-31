@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { ThemeToggle } from '@/components/site/ThemeToggle'
@@ -11,8 +12,33 @@ export const SiteHeader = async () => {
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-paper">
       <Container className="flex h-[70px] items-center justify-between gap-8">
-        <Link href="/" className="font-display text-2xl leading-none font-bold tracking-[0.02em]">
-          {settings?.siteName || 'Celebrity Spotted Outfits'}
+        <Link href="/" className="flex items-center gap-3 no-underline">
+          {/**
+           * Both marks ship; CSS shows one. The alt text sits on the wordmark
+           * beside it rather than here, so a screen reader announces the site
+           * name once instead of twice.
+           */}
+          <span className="relative size-9 shrink-0 overflow-hidden rounded-[3px]">
+            <Image
+              src="/brand/mark-paper.png"
+              alt=""
+              fill
+              sizes="36px"
+              priority
+              className="mark-light object-cover"
+            />
+            <Image
+              src="/brand/mark-ink.png"
+              alt=""
+              fill
+              sizes="36px"
+              priority
+              className="mark-dark object-cover"
+            />
+          </span>
+          <span className="font-display text-2xl leading-none font-bold tracking-[0.02em]">
+            {settings?.siteName || 'Celebrity Spotted Outfits'}
+          </span>
         </Link>
         <div className="flex items-center gap-x-6 sm:gap-x-9">
           {items.length > 0 ? (

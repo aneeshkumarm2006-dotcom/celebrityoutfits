@@ -79,7 +79,6 @@ const PRODUCTS = [
      * is the wrong garment leading the page.
      */
     inStock: true,
-    useLookPhoto: true,
   },
   {
     name: 'Denim corduroy-collar trucker jacket',
@@ -143,10 +142,8 @@ const ITEMS = [
     label: 'Red denim trucker jacket, corduroy collar',
     category: 'outerwear' as const,
     confidence: 'closest_match' as const,
-    product: 'Vintage trucker jacket, red — 1980s',
-    alternative: 'Denim corduroy-collar trucker jacket',
+    product: 'Marvel SDCC red trucker — recreation',
     more: [
-      'Marvel SDCC red trucker — recreation',
       'Red denim trucker — Comic-Con recreation',
       'Ghost Rider red denim jacket — recreation',
     ],
@@ -196,11 +193,9 @@ const articleBody = (id: Record<string, number>): LexicalNode[] => [
   p(
     'The real thing, second hand. Vintage RRL turns up on eBay, Grailed and Poshmark, usually between two and seven hundred dollars depending on how hard it has been worn. The corduroy collar is common in the line; red is the difficult part. Set a saved search and be patient.',
   ),
-  shoppable(id['Vintage trucker jacket, red — 1980s'], 'The original · resale only'),
   p(
     'The same house, in production. Ralph Lauren still makes a denim trucker with a corduroy point collar. It is indigo, not red — but the cut and the collar are the two things doing the work in the original photograph, and you can have both today without waiting for a listing.',
   ),
-  shoppable(id['Denim corduroy-collar trucker jacket'], 'Same house · in production'),
   p(
     'A recreation, if you want the colour more than the label. Three shops have already cut a red denim version off the Comic-Con photographs, between a hundred and twenty and a hundred and forty dollars. They are explicit about what they are: one writes, in as many words, that they recreated the jacket. That is a different product from an eighties RRL and should be judged as one — but if what you actually want is a red trucker with a popped collar, this is the cheapest route to it.',
   ),
@@ -296,7 +291,6 @@ const run = async () => {
       merchant: seed.merchant,
       affiliateUrl: seed.affiliateUrl,
       ...(seed.imageUrl ? { imageUrl: seed.imageUrl } : {}),
-      ...(seed.useLookPhoto && photoId ? { image: photoId } : {}),
       inStock: seed.inStock,
       priceCheckedAt: new Date().toISOString(),
       ...(seed.brand === 'rrl' ? { brand: brand.id as number } : {}),
@@ -344,7 +338,6 @@ const run = async () => {
       position: index,
       ...(item.note ? { evidenceNote: item.note } : {}),
       ...(item.product ? { product: productIds[item.product] } : {}),
-      ...(item.alternative ? { alternativeProduct: productIds[item.alternative] } : {}),
       ...(item.more?.length
         ? { moreOptions: item.more.map((name) => productIds[name]).filter(Boolean) }
         : {}),
