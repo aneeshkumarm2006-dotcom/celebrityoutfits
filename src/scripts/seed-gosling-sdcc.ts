@@ -130,6 +130,11 @@ const ITEMS = [
     confidence: 'closest_match' as const,
     product: 'Vintage trucker jacket, red — 1980s',
     alternative: 'Denim corduroy-collar trucker jacket',
+    more: [
+      'Marvel SDCC red trucker — recreation',
+      'Red denim trucker — Comic-Con recreation',
+      'Ghost Rider red denim jacket — recreation',
+    ],
     note: 'Identified as an eighties RRL by Esquire Australia. No label is visible in the photograph, so this stays a closest match rather than confirmed.',
   },
   {
@@ -324,6 +329,9 @@ const run = async () => {
       ...(item.note ? { evidenceNote: item.note } : {}),
       ...(item.product ? { product: productIds[item.product] } : {}),
       ...(item.alternative ? { alternativeProduct: productIds[item.alternative] } : {}),
+      ...(item.more?.length
+        ? { moreOptions: item.more.map((name) => productIds[name]).filter(Boolean) }
+        : {}),
     }
     const { docs } = await payload.find({
       collection: 'items', limit: 1,

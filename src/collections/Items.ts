@@ -124,6 +124,23 @@ export const Items: CollectionConfig = {
       admin: { description: 'Cheaper stand-in, shown when the original is over $500 or out of stock.' },
     },
     {
+      /**
+       * One garment routinely has more than two buy routes — the original at
+       * resale, the label's current equivalent, and whatever the recreation
+       * market has cut off the same photograph. Two relationship fields forced
+       * a choice between them and silently dropped the rest, which is the one
+       * thing a shoppable archive must not do.
+       */
+      name: 'moreOptions',
+      type: 'relationship',
+      relationTo: 'products',
+      hasMany: true,
+      admin: {
+        description:
+          'Further ways to buy this garment, listed under the main product. Cheapest first.',
+      },
+    },
+    {
       name: 'position',
       type: 'number',
       defaultValue: 0,

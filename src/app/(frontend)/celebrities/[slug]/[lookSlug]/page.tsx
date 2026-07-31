@@ -111,15 +111,23 @@ export default async function LookPage({ params }: Props) {
             <p className="mb-10 max-w-[38rem] text-ink-2">{look.description}</p>
           ) : null}
 
-          <Frame
-            media={photo}
-            ratio="3x4"
-            size="portrait"
-            position="top"
-            priority
-            showCredit
-            sizes="(min-width: 1024px) 70vw, 100vw"
-          />
+          {/**
+           * Capped rather than full-bleed. A 3:4 photograph across the whole
+           * container is over a thousand pixels tall on a laptop — the reader
+           * has to scroll past the picture to reach the items, which are the
+           * point of the page.
+           */}
+          <div className="max-w-[34rem]">
+            <Frame
+              media={photo}
+              ratio="3x4"
+              size="portrait"
+              position="top"
+              priority
+              showCredit
+              sizes="(min-width: 640px) 34rem, 100vw"
+            />
+          </div>
         </section>
 
         <section className="border-t border-rule py-12 sm:py-16">

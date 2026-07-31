@@ -422,6 +422,10 @@ export interface Item {
    */
   alternativeProduct?: (number | null) | Product;
   /**
+   * Further ways to buy this garment, listed under the main product. Cheapest first.
+   */
+  moreOptions?: (number | Product)[] | null;
+  /**
    * Display order within the look.
    */
   position?: number | null;
@@ -1042,6 +1046,7 @@ export interface ItemsSelect<T extends boolean = true> {
   evidenceNote?: T;
   product?: T;
   alternativeProduct?: T;
+  moreOptions?: T;
   position?: T;
   updatedAt?: T;
   createdAt?: T;

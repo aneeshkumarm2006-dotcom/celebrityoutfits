@@ -109,6 +109,10 @@ export const ItemCard = ({ item }: { item: Item }) => {
 
   const brand = asDoc<{ name?: string }>(product.brand)?.name
   const price = formatPrice(product.priceCents, product.currency ?? 'USD')
+  const more = (Array.isArray(item.moreOptions) ? item.moreOptions : [])
+    .map((entry) => asDoc<Product>(entry))
+    .filter((entry): entry is Product => Boolean(entry) && entry!.id !== product.id)
+    .sort((a, b) => (a.priceCents ?? 0) - (b.priceCents ?? 0))
 
   return (
     <div className="group flex flex-col gap-3">
@@ -141,6 +145,28 @@ export const ItemCard = ({ item }: { item: Item }) => {
           Shop →
         </Link>
       </div>
+
+      {/* Every other way to buy the same garment, cheapest first. */}
+      {more.length > 0 ? (
+        <div className="grid gap-1.5">
+          <span className="text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase">
+            Also available
+          </span>
+          {more.map((option) => (
+            <Link
+              key={option.id}
+              href={`/go/${option.id}`}
+              rel="sponsored noopener"
+              className="flex items-baseline justify-between gap-3 border-t border-rule-2 pt-1.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:text-accent"
+            >
+              <span className="truncate">{option.merchant || option.name}</span>
+              <span className="tabular-nums whitespace-nowrap">
+                {formatPrice(option.priceCents, option.currency ?? 'USD') ?? '—'}
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : null}
     </div>
   )
 }
