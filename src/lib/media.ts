@@ -73,3 +73,31 @@ export const formatDate = (value?: string | null): string => {
     year: 'numeric',
   }).format(new Date(value))
 }
+
+/**
+ * First few lines of a Lexical document as plain text.
+ *
+ * Used where a teaser is wanted but the source of truth is rich text — the
+ * celebrity page listing, for instance. Walks the tree rather than assuming a
+ * shape, because a story may open with a heading, a quote or a block.
+ */
+export const richTextExcerpt = (value: unknown, limit = 180): string | null => {
+  if (!value || typeof value !== 'object') return null
+
+  const parts: string[] = []
+  const walk = (node: unknown): void => {
+    if (parts.join(' ').length > limit * 2) return
+    if (!node || typeof node !== 'object') return
+    const record = node as { type?: string; text?: string; children?: unknown[] }
+    if (typeof record.text === 'string') parts.push(record.text)
+    if (Array.isArray(record.children)) record.children.forEach(walk)
+  }
+  walk((value as { root?: unknown }).root)
+
+  const text = parts.join(' ').replace(/\s+/g, ' ').trim()
+  if (!text) return null
+  if (text.length <= limit) return text
+
+  // Cut on a word boundary so the ellipsis never lands mid-word.
+  return `${text.slice(0, text.lastIndexOf(' ', limit))}…`
+}

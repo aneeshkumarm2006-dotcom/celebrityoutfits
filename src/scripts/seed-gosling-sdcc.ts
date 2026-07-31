@@ -166,6 +166,41 @@ const ITEMS = [
   },
 ]
 
+
+// ── The look's own write-up ────────────────────────────────────────────────
+// Only the sourced facts: the panel, the film, the stylist. Everything else
+// is description of what is visible in the photograph.
+const LOOK_STORY: LexicalNode[] = [
+  p(
+    'Hall H is the largest room at San Diego Comic-Con and the least forgiving place to dress for. Six thousand seats, a stage lit from above, and every phone in the building pointed at you. Most people who walk onto it are wearing something a studio approved.',
+  ),
+  p(
+    'Gosling walked on in a forty-year-old jacket.',
+  ),
+  h2('The setting'),
+  p(
+    'It was the Project Hail Mary panel — the Andy Weir adaptation, first proper look at the film. He spent most of it explaining that his character is essentially a space caveman, which tells you the register of the afternoon: not a premiere, not a carpet, a room full of people who had queued since dawn.',
+  ),
+  p(
+    'That matters for the clothes. A premiere calls for tailoring. A Hall H panel is closer to a press conference held in a stadium, and the dress code sits somewhere between the two — which is exactly the gap this outfit is cut for.',
+  ),
+  h2('The outfit'),
+  p(
+    'A faded red denim trucker, worn open. A plain white crew-neck underneath. Navy pleated trousers, a dark leather belt with a plain buckle. That is the whole thing: four garments, no pattern, no logo, nothing on the wrist.',
+  ),
+  p(
+    'The collar is up, and under it there is a strip of camel corduroy — the detail that identifies the jacket as RRL rather than any of the hundred other brands that have made a red trucker. It also happens to be the only piece of styling in the outfit.',
+  ),
+  quote('One colour, three neutrals, and a single styling decision.'),
+  h2('Why it works'),
+  p(
+    'Red is difficult on camera. Under stage light it blooms, and against a busy backdrop it usually loses. This one holds because everything around it refuses to compete — white, navy, black, and nothing else asking for attention.',
+  ),
+  p(
+    'The wear helps too. A new red jacket in that cut would read as costume, particularly in a room where half the audience is in costume. Forty years of fading is what keeps it on the right side of the line.',
+  ),
+]
+
 // ── The piece ──────────────────────────────────────────────────────────────
 const articleBody = (id: Record<string, number>): LexicalNode[] => [
   p(
@@ -314,6 +349,8 @@ const run = async () => {
     date: new Date('2026-07-26').toISOString(),
     location: 'San Diego',
     occasion: 'press' as const,
+    event: 'San Diego Comic-Con · Project Hail Mary panel, Hall H',
+    story: doc(LOOK_STORY),
     description:
       'A faded red denim trucker worn open over a plain white tee, collar popped to show the camel corduroy underside, with navy pleated trousers and a dark leather belt. One colour, three neutrals, and a single styling decision.',
     ...(photoId ? { photos: [photoId] } : {}),

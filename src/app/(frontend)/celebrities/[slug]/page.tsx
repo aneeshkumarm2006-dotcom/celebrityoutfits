@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { ArticleCard, ItemCard } from '@/components/site/cards'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
 import { buildMetadata } from '@/lib/seo'
-import { formatDate } from '@/lib/media'
+import { richTextExcerpt, formatDate } from '@/lib/media'
 import {
   getArticles,
   getCelebrityBySlug,
@@ -117,6 +117,7 @@ export default async function CelebrityPage({ params }: Props) {
             looks.map((look, i) => {
               const items = itemsByLook[i]
               const photo = Array.isArray(look.photos) ? (look.photos[0] as Media) : null
+              const storyOpening = richTextExcerpt(look.story, 190)
               return (
                 <article key={look.id} className="border-t border-rule py-10 first:border-t-0 sm:py-16">
                   {/**
@@ -144,6 +145,7 @@ export default async function CelebrityPage({ params }: Props) {
                         {formatDate(look.date)}
                         {look.location ? ` · ${look.location}` : ''}
                         {look.occasion ? ` · ${look.occasion}` : ''}
+                        {look.event ? ` · ${look.event}` : ''}
                       </p>
                       <h3 className="mt-3.5 mb-4 font-display text-[var(--text-step-3)] leading-[1.15] font-normal tracking-[-0.01em]">
                         <Link
@@ -155,6 +157,25 @@ export default async function CelebrityPage({ params }: Props) {
                       </h3>
                       {look.description ? (
                         <p className="m-0 max-w-[36rem] text-ink-2">{look.description}</p>
+                      ) : null}
+
+                      {/**
+                       * The opening of the write-up, trailing into the look
+                       * page. Pulled from the rich text rather than duplicated
+                       * into a second field, so there is one place to edit it.
+                       */}
+                      {storyOpening ? (
+                        <>
+                          <p className="mt-4 mb-0 max-w-[36rem] text-[0.9375rem] leading-relaxed text-muted">
+                            {storyOpening}
+                          </p>
+                          <Link
+                            href={`/celebrities/${celebrity.slug}/${look.slug}`}
+                            className="mt-5 inline-block border-b border-rule pb-0.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:border-accent hover:text-accent"
+                          >
+                            Read the full look →
+                          </Link>
+                        </>
                       ) : null}
                     </div>
                   </div>

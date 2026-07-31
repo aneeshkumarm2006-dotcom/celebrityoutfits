@@ -342,9 +342,31 @@ export interface Look {
   location?: string | null;
   occasion?: ('airport' | 'premiere' | 'press' | 'on-set' | 'street' | 'event') | null;
   /**
-   * What is actually being worn, and what gives it away.
+   * The specific occasion, if it is known. Leave empty rather than guess.
+   */
+  event?: string | null;
+  /**
+   * One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short — the long version goes in Story below.
    */
   description?: string | null;
+  /**
+   * Where it was spotted, what the event was, and what the outfit is actually doing.
+   */
+  story?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * First image is the lead.
    */
@@ -1017,7 +1039,9 @@ export interface LooksSelect<T extends boolean = true> {
   date?: T;
   location?: T;
   occasion?: T;
+  event?: T;
   description?: T;
+  story?: T;
   photos?: T;
   items?: T;
   featured?: T;

@@ -1,6 +1,14 @@
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/access'
+import { articleBlocks } from '@/blocks'
 import { rankingFields, slugField, versionsConfig } from '@/fields/slug'
 import { revalidate } from '@/hooks/revalidate'
 
@@ -78,9 +86,51 @@ export const Looks: CollectionConfig = {
       ],
     },
     {
+      /**
+       * Structured rather than left to the prose, so it can be shown in a
+       * consistent line and filtered on later — "every look from Cannes" is a
+       * query worth being able to answer.
+       */
+      name: 'event',
+      type: 'text',
+      admin: {
+        description: 'The specific occasion, if it is known. Leave empty rather than guess.',
+        placeholder: 'San Diego Comic-Con · Hall H panel',
+      },
+    },
+    {
       name: 'description',
       type: 'textarea',
-      admin: { description: 'What is actually being worn, and what gives it away.' },
+      admin: {
+        description:
+          'One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short — the long version goes in Story below.',
+      },
+    },
+    {
+      /**
+       * The long form: where it was seen, what the occasion was, what the
+       * outfit is doing. This is what makes an individual look worth its own
+       * URL — a page carrying a title, a photograph and forty words gives
+       * search nothing to index, which defeats the point of the route.
+       *
+       * Same editor as a journal article, blocks included, so a buy module can
+       * sit inside the writing rather than only in the item grid below it.
+       */
+      name: 'story',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          FixedToolbarFeature(),
+          HorizontalRuleFeature(),
+          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
+          BlocksFeature({ blocks: articleBlocks }),
+        ],
+      }),
+      admin: {
+        description:
+          'Where it was spotted, what the event was, and what the outfit is actually doing.',
+      },
     },
     {
       name: 'photos',

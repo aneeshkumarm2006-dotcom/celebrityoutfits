@@ -1,7 +1,9 @@
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { ArticleBody } from '@/components/site/ArticleBody'
 import { ItemCard } from '@/components/site/cards'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
 import { formatDate, formatPrice, mediaUrl } from '@/lib/media'
@@ -103,6 +105,7 @@ export default async function LookPage({ params }: Props) {
             {formatDate(look.date)}
             {look.location ? ` · ${look.location}` : ''}
             {look.occasion ? ` · ${look.occasion}` : ''}
+            {look.event ? ` · ${look.event}` : ''}
           </p>
           <h1 className="mt-4 mb-6 max-w-[22ch] font-display text-[var(--text-step-4)] leading-[1.06] font-normal tracking-[-0.015em] text-balance">
             {look.title}
@@ -128,6 +131,12 @@ export default async function LookPage({ params }: Props) {
               sizes="(min-width: 640px) 34rem, 100vw"
             />
           </div>
+
+          {look.story ? (
+            <div className="mt-12 sm:mt-16">
+              <ArticleBody data={look.story as SerializedEditorState} />
+            </div>
+          ) : null}
         </section>
 
         <section className="border-t border-rule py-12 sm:py-16">
