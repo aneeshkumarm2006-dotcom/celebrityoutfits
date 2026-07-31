@@ -119,10 +119,16 @@ export default async function CelebrityPage({ params }: Props) {
               const photo = Array.isArray(look.photos) ? (look.photos[0] as Media) : null
               return (
                 <article key={look.id} className="border-t border-rule py-10 first:border-t-0 sm:py-16">
-                  <div className="grid items-center gap-7 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-14">
+                  {/**
+                   * The photograph used to take seven of twelve columns at 3:4,
+                   * which on a wide screen is a picture taller than the window.
+                   * A look entry is a summary — the photograph should invite the
+                   * click, not replace the page it links to.
+                   */}
+                  <div className="grid items-center gap-7 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-14">
                     <Link
                       href={`/celebrities/${celebrity.slug}/${look.slug}`}
-                      className="group block no-underline"
+                      className="group block max-w-[22rem] no-underline"
                     >
                       <Frame
                         media={photo}
@@ -130,7 +136,7 @@ export default async function CelebrityPage({ params }: Props) {
                         size="portrait"
                         position="top"
                         showCredit
-                        sizes="(min-width: 1024px) 55vw, 100vw"
+                        sizes="(min-width: 1024px) 22rem, 100vw"
                       />
                     </Link>
                     <div>
