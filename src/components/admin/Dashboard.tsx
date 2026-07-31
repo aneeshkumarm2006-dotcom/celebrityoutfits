@@ -31,7 +31,7 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
   const soon = new Date()
   soon.setDate(soon.getDate() + 30)
 
-  const [openItems, expiring, draftLooks, draftArticles, clicks] = await Promise.all([
+  const [openItems, expiring, draftLooks, draftArticles, clicks, newRequests] = await Promise.all([
     payload.find({
       collection: 'items',
       limit: 8,
@@ -48,9 +48,17 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
     payload.count({ collection: 'looks', where: { _status: { equals: 'draft' } } }),
     payload.count({ collection: 'articles', where: { _status: { equals: 'draft' } } }),
     payload.count({ collection: 'outboundClicks' }),
+    payload.find({
+      collection: 'requests',
+      limit: 8,
+      depth: 0,
+      where: { status: { in: ['new', 'researching'] } },
+      sort: 'createdAt',
+    }),
   ])
 
   const stats = [
+    { label: 'Open research requests', value: newRequests.totalDocs },
     { label: 'Items needing review', value: openItems.totalDocs },
     { label: 'Licences expiring in 30 days', value: expiring.totalDocs },
     { label: 'Draft looks', value: draftLooks.totalDocs },
@@ -93,6 +101,31 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(22rem, 1fr))',
         }}
       >
+        <section style={card}>
+          <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Research requests</h2>
+          <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
+            Someone is waiting on each of these — the only queue here where that is true. Answer it,
+            publish it, then mark it answered.
+          </p>
+          {newRequests.docs.length === 0 ? (
+            <p style={{ opacity: 0.6, margin: 0 }}>Nothing waiting.</p>
+          ) : (
+            newRequests.docs.map((request) => (
+              <Link
+                key={request.id}
+                href={`/admin/collections/requests/${request.id}`}
+                style={linkStyle}
+              >
+                <strong>{request.summary?.slice(0, 60)}</strong>
+                <span style={{ opacity: 0.6 }}> · {request.status}</span>
+                {request.personGuess ? (
+                  <span style={{ opacity: 0.6 }}> · {request.personGuess}</span>
+                ) : null}
+              </Link>
+            ))
+          )}
+        </section>
+
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Review queue</h2>
           <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>

@@ -22,12 +22,13 @@ export const buildMetadata = ({
   fallbackDescription,
   path,
 }: {
-  doc: { meta?: SeoGroup | null }
+  /** Absent on static pages that have no CMS document behind them. */
+  doc?: { meta?: SeoGroup | null }
   fallbackTitle?: string | null
   fallbackDescription?: string | null
   path: string
 }): Metadata => {
-  const meta = doc.meta ?? {}
+  const meta = doc?.meta ?? {}
   const title = meta.title || fallbackTitle || undefined
   const description = meta.description || fallbackDescription || undefined
   const image = mediaUrl(meta.image as never, 'og')

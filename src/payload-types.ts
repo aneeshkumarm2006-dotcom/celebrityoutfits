@@ -74,6 +74,8 @@ export interface Config {
     brands: Brand;
     articles: Article;
     media: Media;
+    requests: Request;
+    requestUploads: RequestUpload;
     outboundClicks: OutboundClick;
     users: User;
     redirects: Redirect;
@@ -96,6 +98,8 @@ export interface Config {
     brands: BrandsSelect<false> | BrandsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    requests: RequestsSelect<false> | RequestsSelect<true>;
+    requestUploads: RequestUploadsSelect<false> | RequestUploadsSelect<true>;
     outboundClicks: OutboundClicksSelect<false> | OutboundClicksSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -605,6 +609,96 @@ export interface Article {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * What people have asked us to identify.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "requests".
+ */
+export interface Request {
+  id: number;
+  /**
+   * What they want identified, in their own words. Shown as the title in the list.
+   */
+  summary: string;
+  /**
+   * Optional. Often wrong, occasionally the whole answer.
+   */
+  personGuess?: string | null;
+  /**
+   * Reference photo, if they attached one.
+   */
+  image?: (number | null) | RequestUpload;
+  /**
+   * Where they saw it. Often more useful than the photo.
+   */
+  sourceUrl?: string | null;
+  /**
+   * Where the answer goes. Never displayed publicly.
+   */
+  email: string;
+  status: 'new' | 'researching' | 'answered' | 'unidentified' | 'declined';
+  /**
+   * Working notes. Never sent to the requester.
+   */
+  internalNotes?: string | null;
+  /**
+   * The look this request produced.
+   */
+  resultingLook?: (number | null) | Look;
+  /**
+   * The piece this request produced.
+   */
+  resultingArticle?: (number | null) | Article;
+  /**
+   * Set automatically when the status becomes Answered.
+   */
+  answeredAt?: string | null;
+  /**
+   * When we emailed them the link.
+   */
+  notifiedAt?: string | null;
+  /**
+   * Rate-limit key.
+   */
+  submitterHash?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Reference images sent in with research requests. Never published.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "requestUploads".
+ */
+export interface RequestUpload {
+  id: number;
+  /**
+   * Optional internal note about this image.
+   */
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    preview?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "outboundClicks".
  */
@@ -816,6 +910,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'requests';
+        value: number | Request;
+      } | null)
+    | ({
+        relationTo: 'requestUploads';
+        value: number | RequestUpload;
       } | null)
     | ({
         relationTo: 'outboundClicks';
@@ -1120,6 +1222,58 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         wide?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "requests_select".
+ */
+export interface RequestsSelect<T extends boolean = true> {
+  summary?: T;
+  personGuess?: T;
+  image?: T;
+  sourceUrl?: T;
+  email?: T;
+  status?: T;
+  internalNotes?: T;
+  resultingLook?: T;
+  resultingArticle?: T;
+  answeredAt?: T;
+  notifiedAt?: T;
+  submitterHash?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "requestUploads_select".
+ */
+export interface RequestUploadsSelect<T extends boolean = true> {
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        preview?:
           | T
           | {
               url?: T;

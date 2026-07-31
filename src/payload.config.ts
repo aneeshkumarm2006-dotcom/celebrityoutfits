@@ -18,6 +18,8 @@ import { Looks } from './collections/Looks'
 import { Media } from './collections/Media'
 import { OutboundClicks } from './collections/OutboundClicks'
 import { Products } from './collections/Products'
+import { RequestUploads } from './collections/RequestUploads'
+import { Requests } from './collections/Requests'
 import { Users } from './collections/Users'
 import { globals } from './globals'
 
@@ -51,6 +53,8 @@ export default buildConfig({
     Brands,
     Articles,
     Media,
+    Requests,
+    RequestUploads,
     OutboundClicks,
     Users,
   ],
@@ -126,6 +130,12 @@ export default buildConfig({
          * *.public.blob.vercel-storage.com in next.config.
          */
         [Media.slug]: { disablePayloadAccessControl: true },
+        /**
+         * Submissions keep Payload's access control in front of them. These are
+         * strangers' photographs sent to us privately; serving them from a
+         * public CDN URL would publish every one the moment it arrived.
+         */
+        [RequestUploads.slug]: true,
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
