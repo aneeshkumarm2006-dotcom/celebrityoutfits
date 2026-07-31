@@ -72,7 +72,14 @@ const PRODUCTS = [
     priceCents: 45000,
     merchant: 'Resale — eBay, Grailed, Poshmark',
     affiliateUrl: 'https://www.ebay.com/b/RRL-Denim-Jackets-for-Men/57988/bn_7110292175',
-    inStock: false,
+    /**
+     * A standing resale search rather than a single listing, so there is always
+     * something to buy. Marking it out of stock made the card promote the
+     * indigo Ralph Lauren instead — an indigo photograph on a red look, which
+     * is the wrong garment leading the page.
+     */
+    inStock: true,
+    useLookPhoto: true,
   },
   {
     name: 'Denim corduroy-collar trucker jacket',
@@ -232,31 +239,6 @@ const run = async () => {
     : await payload.create({ collection: 'brands', data: brandData })
   console.log(`  brand     ${existingBrand[0] ? 'updated' : 'created'}  RRL`)
 
-  // Products
-  const productIds: Record<string, number> = {}
-  for (const seed of PRODUCTS) {
-    const data = {
-      name: seed.name,
-      description: seed.description,
-      priceCents: seed.priceCents,
-      currency: 'USD' as const,
-      merchant: seed.merchant,
-      affiliateUrl: seed.affiliateUrl,
-      ...(seed.imageUrl ? { imageUrl: seed.imageUrl } : {}),
-      inStock: seed.inStock,
-      priceCheckedAt: new Date().toISOString(),
-      ...(seed.brand === 'rrl' ? { brand: brand.id as number } : {}),
-    }
-    const { docs } = await payload.find({
-      collection: 'products', limit: 1, where: { name: { equals: seed.name } },
-    })
-    const product = docs[0]
-      ? await payload.update({ collection: 'products', id: docs[0].id, data })
-      : await payload.create({ collection: 'products', data })
-    productIds[seed.name] = product.id as number
-    console.log(`  product   ${docs[0] ? 'updated' : 'created'}  ${seed.name}`)
-  }
-
   // Celebrity
   const { docs: celebs } = await payload.find({
     collection: 'celebrities', limit: 1, where: { slug: { equals: 'ryan-gosling' } }, draft: true,
@@ -301,6 +283,32 @@ const run = async () => {
     photoId = image.id as number
   } else {
     console.warn(`  no photo at ${LOOK_PHOTO} — look seeds without one`)
+  }
+
+  // Products
+  const productIds: Record<string, number> = {}
+  for (const seed of PRODUCTS) {
+    const data = {
+      name: seed.name,
+      description: seed.description,
+      priceCents: seed.priceCents,
+      currency: 'USD' as const,
+      merchant: seed.merchant,
+      affiliateUrl: seed.affiliateUrl,
+      ...(seed.imageUrl ? { imageUrl: seed.imageUrl } : {}),
+      ...(seed.useLookPhoto && photoId ? { image: photoId } : {}),
+      inStock: seed.inStock,
+      priceCheckedAt: new Date().toISOString(),
+      ...(seed.brand === 'rrl' ? { brand: brand.id as number } : {}),
+    }
+    const { docs } = await payload.find({
+      collection: 'products', limit: 1, where: { name: { equals: seed.name } },
+    })
+    const product = docs[0]
+      ? await payload.update({ collection: 'products', id: docs[0].id, data })
+      : await payload.create({ collection: 'products', data })
+    productIds[seed.name] = product.id as number
+    console.log(`  product   ${docs[0] ? 'updated' : 'created'}  ${seed.name}`)
   }
 
   // Look
