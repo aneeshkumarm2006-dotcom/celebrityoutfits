@@ -75,11 +75,14 @@ export const ArticleCard = ({ article }: { article: Article }) => (
 )
 
 /**
- * One identified garment. The `/go/[id]` href is deliberate — the raw affiliate
- * URL never appears in the markup, which gives us first-party click data and
- * lets a merchant be swapped without touching content.
+ * Shared by both item layouts: works out which product to actually show, and
+ * what else is worth listing under it.
+ *
+ * The out-of-stock swap and the alternatives ordering are editorial rules, not
+ * presentation, so they belong in one place rather than duplicated across the
+ * grid card and the row.
  */
-export const ItemCard = ({ item }: { item: Item }) => {
+const resolveItem = (item: Item) => {
   const primary = asDoc<Product>(item.product)
   const alternative = asDoc<Product>(item.alternativeProduct)
 
@@ -87,32 +90,150 @@ export const ItemCard = ({ item }: { item: Item }) => {
   // the cheaper stand-in the editor already chose.
   const substituted = Boolean(primary && primary.inStock === false && alternative)
   const product = substituted ? alternative : (primary ?? alternative)
-  /**
-   * No product means nothing to photograph — the garment has not been matched
-   * to anything buyable yet. Reserving a square image slot for it just fills
-   * the grid with empty boxes and makes a working page look broken, so an
-   * unidentified item states itself in text instead.
-   */
-  if (!product) {
-    return (
-      <div className="flex flex-col justify-center gap-2 border border-rule-2 bg-raised/40 p-4">
-        <span className="text-[0.6875rem] font-medium tracking-[0.15em] text-muted uppercase">
-          {item.category}
-        </span>
-        {item.description ? (
-          <p className="m-0 text-[0.9375rem] leading-snug text-ink-2">{item.description}</p>
-        ) : null}
-        <ConfidenceTag confidence={item.confidence} />
-      </div>
-    )
-  }
+
+  const more = product
+    ? (Array.isArray(item.moreOptions) ? item.moreOptions : [])
+        .map((entry) => asDoc<Product>(entry))
+        .filter((entry): entry is Product => Boolean(entry) && entry!.id !== product.id)
+        .sort((a, b) => (a.priceCents ?? 0) - (b.priceCents ?? 0))
+    : []
+
+  return { product, substituted, more }
+}
+
+/**
+ * Two different lists share the extras slot, and calling them the same thing
+ * would mislead.
+ *
+ * On a confirmed garment the extras are the same thing sold elsewhere, so the
+ * shop name is what distinguishes them. On anything less than confirmed they
+ * are near misses — a different cut, or the right house in the wrong colour —
+ * and the shop name tells a reader nothing. Naming the product instead is the
+ * only version that survives contact with a three-way Farfetch listing.
+ */
+const MoreOptions = ({ item, more }: { item: Item; more: Product[] }) => {
+  if (more.length === 0) return null
+  const confirmed = item.confidence === 'confirmed'
+
+  return (
+    <div className="grid gap-1.5">
+      <span className="text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase">
+        {confirmed ? 'Also available' : 'Alternatives'}
+      </span>
+      {more.map((option) => (
+        <Link
+          key={option.id}
+          href={`/go/${option.id}`}
+          rel="sponsored noopener"
+          className="flex items-baseline justify-between gap-3 border-t border-rule-2 pt-1.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:text-accent"
+        >
+          <span className="truncate">
+            {confirmed ? option.merchant || option.name : option.name || option.merchant}
+          </span>
+          {/* `shrink-0` or a long product name squeezes the price and clips it. */}
+          <span className="shrink-0 tabular-nums whitespace-nowrap">
+            {formatPrice(option.priceCents, option.currency ?? 'USD') ?? '—'}
+          </span>
+        </Link>
+      ))}
+    </div>
+  )
+}
+
+/**
+ * An item with nothing buyable attached. Reserving an image slot for it fills
+ * the layout with empty boxes and makes a working page look broken, so it
+ * states itself in text instead.
+ */
+const UnmatchedItem = ({ item, className = '' }: { item: Item; className?: string }) => (
+  <div className={`flex flex-col justify-center gap-2 border border-rule-2 bg-raised/40 p-4 ${className}`}>
+    <span className="text-[0.6875rem] font-medium tracking-[0.15em] text-muted uppercase">
+      {item.category}
+    </span>
+    {item.description ? (
+      <p className="m-0 text-[0.9375rem] leading-snug text-ink-2">{item.description}</p>
+    ) : null}
+    <ConfidenceTag confidence={item.confidence} />
+  </div>
+)
+
+/**
+ * The look page's shopping list: one garment per row, thumbnail left, detail
+ * right.
+ *
+ * The grid card below stacks a large square image over its text, which is right
+ * when four sit side by side and wrong in a column beside the photograph —
+ * there it becomes a single tower of enormous squares and the reader has to
+ * scroll the whole outfit to see what is in it. Laid out as rows, the same
+ * items fit the space the portrait photograph leaves empty.
+ */
+export const ItemRow = ({ item }: { item: Item }) => {
+  const { product, substituted, more } = resolveItem(item)
+
+  if (!product) return <UnmatchedItem item={item} />
 
   const brand = asDoc<{ name?: string }>(product.brand)?.name
   const price = formatPrice(product.priceCents, product.currency ?? 'USD')
-  const more = (Array.isArray(item.moreOptions) ? item.moreOptions : [])
-    .map((entry) => asDoc<Product>(entry))
-    .filter((entry): entry is Product => Boolean(entry) && entry!.id !== product.id)
-    .sort((a, b) => (a.priceCents ?? 0) - (b.priceCents ?? 0))
+
+  return (
+    <div className="group flex gap-4 border-b border-rule-2 pb-5 last:border-b-0 last:pb-0">
+      <Link
+        href={`/go/${product.id}`}
+        rel="sponsored noopener"
+        aria-hidden="true"
+        tabIndex={-1}
+        className="w-[5.5rem] shrink-0 sm:w-24"
+      >
+        <Frame
+          media={product.image as Media}
+          fallbackUrl={product.imageUrl}
+          ratio="1x1"
+          size="square"
+          sizes="96px"
+        />
+      </Link>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <span className="text-[0.6875rem] font-medium tracking-[0.15em] text-muted uppercase">
+          {brand || item.category}
+        </span>
+        <p className="m-0 text-[0.9375rem] leading-snug text-ink">{product.name}</p>
+        <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
+        {substituted ? (
+          <span className="text-[0.6875rem] text-muted">
+            Original is out of stock — showing the closest available.
+          </span>
+        ) : null}
+
+        <div className="mt-1 flex items-baseline justify-between gap-3">
+          <span className="text-[0.9375rem] tabular-nums">{price ?? '—'}</span>
+          <Link
+            href={`/go/${product.id}`}
+            rel="sponsored noopener"
+            className="text-[0.75rem] tracking-[0.06em] whitespace-nowrap text-accent underline decoration-transparent underline-offset-[3px] transition-colors group-hover:decoration-current"
+          >
+            Shop →
+          </Link>
+        </div>
+
+        <MoreOptions item={item} more={more} />
+      </div>
+    </div>
+  )
+}
+
+/**
+ * One identified garment. The `/go/[id]` href is deliberate — the raw affiliate
+ * URL never appears in the markup, which gives us first-party click data and
+ * lets a merchant be swapped without touching content.
+ */
+export const ItemCard = ({ item }: { item: Item }) => {
+  const { product, substituted, more } = resolveItem(item)
+
+  if (!product) return <UnmatchedItem item={item} />
+
+  const brand = asDoc<{ name?: string }>(product.brand)?.name
+  const price = formatPrice(product.priceCents, product.currency ?? 'USD')
 
   return (
     <div className="group flex flex-col gap-3">
@@ -146,41 +267,7 @@ export const ItemCard = ({ item }: { item: Item }) => {
         </Link>
       </div>
 
-      {/**
-       * Two different lists share this slot, and calling them the same thing
-       * would mislead.
-       *
-       * On a confirmed garment the extras are the same thing sold elsewhere, so
-       * the shop name is what distinguishes them. On anything less than
-       * confirmed they are near misses — a different cut, or the right house in
-       * the wrong colour — and the shop name tells a reader nothing. Naming the
-       * product instead is the only version that survives contact with a
-       * three-way Farfetch listing.
-       */}
-      {more.length > 0 ? (
-        <div className="grid gap-1.5">
-          <span className="text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase">
-            {item.confidence === 'confirmed' ? 'Also available' : 'Alternatives'}
-          </span>
-          {more.map((option) => (
-            <Link
-              key={option.id}
-              href={`/go/${option.id}`}
-              rel="sponsored noopener"
-              className="flex items-baseline justify-between gap-3 border-t border-rule-2 pt-1.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:text-accent"
-            >
-              <span className="truncate">
-                {item.confidence === 'confirmed'
-                  ? option.merchant || option.name
-                  : option.name || option.merchant}
-              </span>
-              <span className="tabular-nums whitespace-nowrap">
-                {formatPrice(option.priceCents, option.currency ?? 'USD') ?? '—'}
-              </span>
-            </Link>
-          ))}
-        </div>
-      ) : null}
+      <MoreOptions item={item} more={more} />
     </div>
   )
 }

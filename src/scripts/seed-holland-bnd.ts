@@ -182,6 +182,15 @@ const run = async () => {
     const { docs: media } = await payload.find({
       collection: 'media', limit: 1, where: { filename: { equals: filename } },
     })
+    /**
+     * The focal point goes in at creation, not as a follow-up update.
+     *
+     * Updating it separately trips `clearStaleDerivatives`, which frees the
+     * blob paths so a re-crop can be written — but an update carrying no file
+     * gives Payload nothing to write, so the paths are freed and left empty.
+     * Doing it in one call means the sizes are generated once, already
+     * anchored, and never deleted.
+     */
     const image =
       media[0] ??
       (await payload.create({
@@ -193,12 +202,11 @@ const run = async () => {
           licence: 'agency',
           sourceAgency: 'Getty Images',
           caption: 'Tom Holland · Spider-Man: Brand New Day premiere, Los Angeles',
+          // Full-length shot: keeps the head in frame when cropped to a banner.
+          focalX: 50,
+          focalY: 18,
         },
       }))
-    // Full-length shot: keep the head in frame when it is cropped to a banner.
-    await payload.update({
-      collection: 'media', id: image.id, data: { focalX: 50, focalY: 18 },
-    })
     photoId = image.id as number
   } else {
     console.warn(`  no photo at ${LOOK_PHOTO}`)

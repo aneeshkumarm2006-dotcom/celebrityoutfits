@@ -14,9 +14,15 @@ import type { CollectionBeforeChangeHook } from 'payload'
  * is early enough: the storage plugin uploads in `afterChange`, so by the time
  * it writes, the paths are free.
  *
- * Only the original and its own `-WIDTHxHEIGHT` children are removed. Matching
- * on the raw prefix would also catch `<name>-look.jpg` and `<name>-hero.jpg`,
- * which are different images — that mistake cost 40 files once already.
+ * Only the `-WIDTHxHEIGHT` children are removed, never the original. A focal
+ * point does not change the source file, so Payload never rewrites it — delete
+ * it and it is simply gone, taking every future regeneration with it. That is
+ * not hypothetical: it wiped this collection's Tom Holland premiere photograph.
+ *
+ * Matching on the raw prefix would also catch `<name>-look.jpg` and
+ * `<name>-hero.jpg`, which are different images — that mistake cost 40 files
+ * once already. Hence the anchored `-WIDTHxHEIGHT` suffix rather than a
+ * `startsWith`.
  */
 const escapeRegex = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -45,7 +51,7 @@ export const clearStaleDerivatives: CollectionBeforeChangeHook = async ({
   try {
     const stem = filename.replace(/\.[^.]+$/, '')
     const extension = filename.slice(stem.length)
-    const own = new RegExp(`^${escapeRegex(stem)}(-\\d+x\\d+)?${escapeRegex(extension)}$`)
+    const own = new RegExp(`^${escapeRegex(stem)}-\\d+x\\d+${escapeRegex(extension)}$`)
 
     const { blobs } = await list({ prefix: stem, token })
     const mine = blobs.filter((blob) => own.test(blob.pathname))
