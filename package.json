@@ -21,6 +21,7 @@
     "tidy:journal": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/tidy-journal.ts",
     "seed:celebrity-articles": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-celebrity-articles.ts",
     "links:request": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/add-request-links.ts",
+    "seed:holland": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-holland-bnd.ts",
     "seed:gosling": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-gosling-sdcc.ts",
     "seed:looks": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-looks.ts",
     "seed:products": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-products.ts",

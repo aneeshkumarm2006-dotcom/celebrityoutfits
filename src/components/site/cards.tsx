@@ -146,11 +146,21 @@ export const ItemCard = ({ item }: { item: Item }) => {
         </Link>
       </div>
 
-      {/* Every other way to buy the same garment, cheapest first. */}
+      {/**
+       * Two different lists share this slot, and calling them the same thing
+       * would mislead.
+       *
+       * On a confirmed garment the extras are the same thing sold elsewhere, so
+       * the shop name is what distinguishes them. On anything less than
+       * confirmed they are near misses — a different cut, or the right house in
+       * the wrong colour — and the shop name tells a reader nothing. Naming the
+       * product instead is the only version that survives contact with a
+       * three-way Farfetch listing.
+       */}
       {more.length > 0 ? (
         <div className="grid gap-1.5">
           <span className="text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase">
-            Also available
+            {item.confidence === 'confirmed' ? 'Also available' : 'Alternatives'}
           </span>
           {more.map((option) => (
             <Link
@@ -159,7 +169,11 @@ export const ItemCard = ({ item }: { item: Item }) => {
               rel="sponsored noopener"
               className="flex items-baseline justify-between gap-3 border-t border-rule-2 pt-1.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:text-accent"
             >
-              <span className="truncate">{option.merchant || option.name}</span>
+              <span className="truncate">
+                {item.confidence === 'confirmed'
+                  ? option.merchant || option.name
+                  : option.name || option.merchant}
+              </span>
               <span className="tabular-nums whitespace-nowrap">
                 {formatPrice(option.priceCents, option.currency ?? 'USD') ?? '—'}
               </span>
