@@ -104,7 +104,7 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Research requests</h2>
           <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
-            Someone is waiting on each of these — the only queue here where that is true. Answer it,
+            Someone is waiting on each of these, the only queue here where that is true. Answer it,
             publish it, then mark it answered.
           </p>
           {newRequests.docs.length === 0 ? (
@@ -129,7 +129,7 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Review queue</h2>
           <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
-            Items marked open or closest match. Confirm them, or leave them open — never guess a
+            Items marked open or closest match. Confirm them, or leave them open, but never guess a
             brand to close one.
           </p>
           {openItems.docs.length === 0 ? (
@@ -151,7 +151,7 @@ export const Dashboard = async (_props: AdminViewServerProps) => {
         <section style={card}>
           <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Licences expiring</h2>
           <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
-            Renew or replace these images before the licence lapses — an expired agency image is the
+            Renew or replace these images before the licence lapses. An expired agency image is the
             most expensive kind of mistake on this site.
           </p>
           {expiring.docs.length === 0 ? (

@@ -50,17 +50,17 @@ export const SeoChecks = () => {
     {
       label: 'Meta title length',
       status: between(title.length, 50, 60) ? 'pass' : 'warn',
-      detail: `${title.length} characters — aim for 50–60`,
+      detail: `${title.length} characters, aim for 50–60`,
     },
     {
       label: 'Meta description length',
       status: between(description.length, 150, 160) ? 'pass' : 'warn',
-      detail: `${description.length} characters — aim for 150–160`,
+      detail: `${description.length} characters, aim for 150–160`,
     },
     {
       label: 'Word count',
       status: words >= 300 ? 'pass' : 'warn',
-      detail: words >= 300 ? `${words} words` : `${words} words — thin below 300`,
+      detail: words >= 300 ? `${words} words` : `${words} words, thin below 300`,
     },
     {
       label: 'Keywords appear in the body',
@@ -75,7 +75,7 @@ export const SeoChecks = () => {
     {
       label: 'Hero image',
       status: hasHero ? 'pass' : 'warn',
-      detail: hasHero ? 'Set' : 'Missing — cards and social shares will look empty',
+      detail: hasHero ? 'Set' : 'Missing: cards and social shares will look empty',
     },
   ]
 
@@ -87,7 +87,7 @@ export const SeoChecks = () => {
         {warnings === 0 ? 'Ready to publish' : `${warnings} thing${warnings === 1 ? '' : 's'} to look at`}
       </p>
       <p style={{ margin: '0 0 0.5rem', opacity: 0.65, fontSize: '0.8125rem' }}>
-        Warnings are advice, not blockers — publish anyway if the piece is right.
+        Warnings are advice, not blockers. Publish anyway if the piece is right.
       </p>
 
       {checks.map((check) => (

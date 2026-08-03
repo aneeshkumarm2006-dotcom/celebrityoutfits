@@ -94,10 +94,10 @@ export const Items: CollectionConfig = {
       required: true,
       defaultValue: 'open',
       options: [
-        { label: 'Confirmed — logo, hardware or stylist-credited', value: 'confirmed' },
-        { label: 'Closest match — unbranded in the photo', value: 'closest_match' },
-        { label: 'Get the look — cheaper equivalent', value: 'get_the_look' },
-        { label: 'Open — not enough detail to call', value: 'open' },
+        { label: 'Confirmed: logo, hardware or stylist-credited', value: 'confirmed' },
+        { label: 'Closest match: unbranded in the photo', value: 'closest_match' },
+        { label: 'Get the look: cheaper equivalent', value: 'get_the_look' },
+        { label: 'Open: not enough detail to call', value: 'open' },
       ],
       admin: {
         description: 'Shown to readers. Never mark something confirmed to fill a gap.',
@@ -108,7 +108,7 @@ export const Items: CollectionConfig = {
       type: 'textarea',
       admin: {
         description:
-          'Why this call was made — "logo visible on temple". Internal only, never shown publicly, but it is the audit trail if a brand queries it.',
+          'Why this call was made, for example "logo visible on temple". Internal only, never shown publicly, but it is the audit trail if a brand queries it.',
       },
     },
     {

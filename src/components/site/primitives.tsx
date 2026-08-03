@@ -163,7 +163,7 @@ export const ConfidenceTag = ({ confidence }: { confidence?: string | null }) =>
         ? 'Closest match'
         : confidence === 'get_the_look'
           ? 'Get the look'
-          : 'Open — not yet identified'
+          : 'Open: not yet identified'
 
   return (
     <span className="flex items-center gap-1.5 text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase">

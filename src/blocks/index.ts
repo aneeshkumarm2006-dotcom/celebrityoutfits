@@ -82,7 +82,7 @@ export const Embed: Block = {
       required: true,
       admin: {
         description:
-          'Official post URL. Embeds are the one way to show a celebrity photo without licensing it — the platform serves it, we do not host it.',
+          'Official post URL. Embeds are the one way to show a celebrity photo without licensing it: the platform serves it, we do not host it.',
       },
     },
   ],

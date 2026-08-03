@@ -51,7 +51,7 @@ const FARFETCH = 'https://www.farfetch.com/shopping/men'
  */
 const PRODUCTS = [
   {
-    name: 'La Veste Cabri blazer — navy',
+    name: 'La Veste Cabri blazer in navy',
     description:
       'Jacquemus tailoring at retail, in navy rather than crimson. Softer shoulder and shorter body than a conventional blazer, which is the part of the premiere look you can actually buy.',
     priceCents: 147700,
@@ -60,7 +60,7 @@ const PRODUCTS = [
     imageUrl: 'https://cdn-images.farfetch-contents.com/22/56/44/48/22564448_52595812_480.jpg',
   },
   {
-    name: 'The Cuadrada blazer — black',
+    name: 'The Cuadrada blazer in black',
     description:
       'The closest thing in the current line to the premiere jacket’s rounded, squared-off shape. Black, double-breasted, and the cheapest route into the house’s tailoring.',
     priceCents: 96600,
@@ -69,7 +69,7 @@ const PRODUCTS = [
     imageUrl: 'https://cdn-images.farfetch-contents.com/24/66/70/80/24667080_54899574_480.jpg',
   },
   {
-    name: 'Canvas blazer — sand',
+    name: 'Canvas blazer in sand',
     description:
       'Same relaxed construction in a warm neutral. Nothing like the colour, but the nearest match for the cut if crimson was never the point.',
     priceCents: 132600,
@@ -84,10 +84,10 @@ const ITEMS = [
     description: 'Crimson wrap-front blazer, no lapels',
     category: 'tailoring' as const,
     confidence: 'closest_match' as const,
-    product: 'La Veste Cabri blazer — navy',
-    more: ['The Cuadrada blazer — black', 'Canvas blazer — sand'],
+    product: 'La Veste Cabri blazer in navy',
+    more: ['The Cuadrada blazer in black', 'Canvas blazer in sand'],
     note:
-      'Custom Jacquemus, built off the Le Palmier collection — reported, not read off a label, so it stays a closest match. No retail version exists in crimson: the current men’s line is black, navy, beige and one neon green, and none has the lapel-less wrap front. Alternatives are the same house in the colours actually sold.',
+      'Custom Jacquemus, built off the Le Palmier collection, though that is reported rather than read off a label, so it stays a closest match. No retail version exists in crimson: the current men’s line is black, navy, beige and one neon green, and none has the lapel-less wrap front. Alternatives are the same house in the colours actually sold.',
   },
   {
     description: 'Matching crimson trousers, straight leg',
@@ -122,7 +122,7 @@ const STORY: LexicalNode[] = [
   ),
   h2('The setting'),
   p(
-    'The Dolby Theatre in Hollywood, 27 July, closing out a press tour that had already run through New York, Madrid and Amsterdam. Blue carpet rather than red — the film’s own palette, laid on the floor.',
+    'The Dolby Theatre in Hollywood, 27 July, closing out a press tour that had already run through New York, Madrid and Amsterdam. Blue carpet rather than red: the film’s own palette, laid on the floor.',
   ),
   p(
     'By this point in a tour the looks are usually running out of ideas. This was the last big one before London, and it was the best of them.',
@@ -132,12 +132,12 @@ const STORY: LexicalNode[] = [
     'A crimson suit, custom Jacquemus, built off the house’s Le Palmier collection. Under it, a poppy-red shirt in a slightly brighter, warmer red. Then a navy tie. Oxblood derbies.',
   ),
   p(
-    'The jacket is the interesting part. No lapels, no visible fastening — the front simply wraps and closes on an asymmetric curve, so the only line on the whole garment is that soft diagonal edge. It is Simon Porte Jacquemus’ signature move: take the structure out of tailoring and let the shape do the work.',
+    'The jacket is the interesting part. No lapels, no visible fastening. The front simply wraps and closes on an asymmetric curve, so the only line on the whole garment is that soft diagonal edge. It is Simon Porte Jacquemus’ signature move: take the structure out of tailoring and let the shape do the work.',
   ),
   quote('Red suit, red shirt, blue tie. Nobody says Spider-Man and everybody sees it.'),
   h2('Why it works'),
   p(
-    'Red on red should be a mess. It holds here because the two reds are deliberately different temperatures — the suit deep and slightly brown, the shirt bright and clean — so they read as a considered pair rather than a failed match.',
+    'Red on red should be a mess. It holds here because the two reds are deliberately different temperatures (the suit deep and slightly brown, the shirt bright and clean), so they read as a considered pair rather than a failed match.',
   ),
   p(
     'And the tie is the whole joke. One narrow strip of navy against all that red, and the reference lands. No logo, no crest, nothing a stranger on the street would clock. Someone who has never seen a Spider-Man film just sees a man in a very good red suit.',
@@ -147,10 +147,10 @@ const STORY: LexicalNode[] = [
   ),
   h2('What you can actually buy'),
   p(
-    'Not this. It was made for him, and Jacquemus does not sell it. The current men’s blazers run black, navy, beige and one alarming neon green — no crimson, and nothing with the wrap front.',
+    'Not this. It was made for him, and Jacquemus does not sell it. The current men’s blazers run black, navy, beige and one alarming neon green. No crimson, and nothing with the wrap front.',
   ),
   p(
-    'Several shops list a "Brand New Day Tom Holland blazer". Every one we checked turned out to be a different outfit from the same press tour, relabelled — one is a dark brown double-breasted suit from another city entirely. The alternatives below are the real house at retail, with the colour in the name, so you can see what you are and are not getting.',
+    'Several shops list a "Brand New Day Tom Holland blazer". Every one we checked turned out to be a different outfit from the same press tour, relabelled. One is a dark brown double-breasted suit from another city entirely. The alternatives below are the real house at retail, with the colour in the name, so you can see what you are and are not getting.',
   ),
 ]
 
@@ -248,7 +248,7 @@ const run = async () => {
     occasion: 'premiere' as const,
     event: 'Spider-Man: Brand New Day premiere · Dolby Theatre',
     description:
-      'A custom crimson Jacquemus suit over a poppy-red shirt, finished with a navy tie. The jacket has no lapels and no visible fastening — just an asymmetric curve across the wrap front.',
+      'A custom crimson Jacquemus suit over a poppy-red shirt, finished with a navy tie. The jacket has no lapels and no visible fastening, just an asymmetric curve across the wrap front.',
     story: doc(STORY),
     ...(photoId ? { photos: [photoId] } : {}),
     featured: true,

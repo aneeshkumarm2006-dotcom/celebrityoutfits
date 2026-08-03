@@ -11,7 +11,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Celebrity Spotted Outfits — What celebrities actually wear',
+    default: 'Celebrity Spotted Outfits: What celebrities actually wear',
     template: '%s · Celebrity Spotted Outfits',
   },
   description:

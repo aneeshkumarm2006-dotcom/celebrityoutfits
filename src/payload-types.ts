@@ -346,7 +346,7 @@ export interface Look {
    */
   event?: string | null;
   /**
-   * One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short — the long version goes in Story below.
+   * One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short: the long version goes in Story below.
    */
   description?: string | null;
   /**
@@ -432,7 +432,7 @@ export interface Item {
    */
   confidence: 'confirmed' | 'closest_match' | 'get_the_look' | 'open';
   /**
-   * Why this call was made — "logo visible on temple". Internal only, never shown publicly, but it is the audit trail if a brand queries it.
+   * Why this call was made, for example "logo visible on temple". Internal only, never shown publicly, but it is the audit trail if a brand queries it.
    */
   evidenceNote?: string | null;
   /**
@@ -463,11 +463,11 @@ export interface Product {
   name: string;
   brand?: (number | null) | Brand;
   /**
-   * One line. Cut, colour, material — what distinguishes it.
+   * One line. Cut, colour, material: what distinguishes it.
    */
   description?: string | null;
   /**
-   * In minor units — 17100 for $171.00.
+   * In minor units: 17100 for $171.00.
    */
   priceCents?: number | null;
   currency?: ('USD' | 'CAD' | 'GBP' | 'EUR') | null;
@@ -476,7 +476,7 @@ export interface Product {
    */
   priceDisplay?: string | null;
   /**
-   * The tracked merchant URL. Never rendered directly — the site links to /go/[id] and redirects.
+   * The tracked merchant URL. Never rendered directly: the site links to /go/[id] and redirects.
    */
   affiliateUrl: string;
   /**
@@ -510,11 +510,11 @@ export interface Brand {
   slug: string;
   logo?: (number | null) | Media;
   /**
-   * The brand’s own site. Rendered as a plain external link — never an affiliate one, so the page still says something useful for brands we have no programme with.
+   * The brand’s own site. Rendered as a plain external link, never an affiliate one, so the page still says something useful for brands we have no programme with.
    */
   website?: string | null;
   /**
-   * Year or era, shown under the brand name. Free text — “1937”, “1980s”.
+   * Year or era, shown under the brand name. Free text: “1937”, “1980s”.
    */
   founded?: string | null;
   /**
@@ -537,7 +537,7 @@ export interface Brand {
   } | null;
   affiliateNetwork?: ('impact' | 'cj' | 'rakuten' | 'shareasale' | 'amazon' | 'sovrn' | 'direct' | 'none') | null;
   /**
-   * Percent. Informational — used to prioritise which brands to chase.
+   * Percent. Informational, used to prioritise which brands to chase.
    */
   commissionRate?: number | null;
   /**
@@ -567,7 +567,7 @@ export interface Brand {
 export interface Article {
   id: number;
   /**
-   * Picks the heading skeleton for this kind of post. Guidance only — you can write anything.
+   * Picks the heading skeleton for this kind of post. Guidance only: you can write anything.
    */
   template: 'how-to' | 'listicle' | 'comparison' | 'review' | 'news' | 'generic';
   title: string;
@@ -600,7 +600,7 @@ export interface Article {
         url: string;
         rel?: ('auto' | 'dofollow' | 'nofollow' | 'sponsored') | null;
         /**
-         * Auto = dofollow for our own pages, nofollow for external. Only override to dofollow an external link when it is genuinely editorial — a paid one risks the whole site.
+         * Auto = dofollow for our own pages, nofollow for external. Only override to dofollow an external link when it is genuinely editorial. A paid one risks the whole site.
          */
         note?: string | null;
         id?: string | null;
@@ -1829,7 +1829,7 @@ export interface GalleryBlock {
 export interface EmbedBlock {
   platform: 'instagram' | 'youtube' | 'x';
   /**
-   * Official post URL. Embeds are the one way to show a celebrity photo without licensing it — the platform serves it, we do not host it.
+   * Official post URL. Embeds are the one way to show a celebrity photo without licensing it: the platform serves it, we do not host it.
    */
   url: string;
   id?: string | null;

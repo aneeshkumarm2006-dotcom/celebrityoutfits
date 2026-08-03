@@ -71,7 +71,7 @@ const run = async () => {
         category: garment.category as never,
         confidence: garment.confidence,
         evidenceNote:
-          `${garment.evidenceNote} — ${garment.colour} ${garment.material} ${garment.silhouette}` +
+          `${garment.evidenceNote} · ${garment.colour} ${garment.material} ${garment.silhouette}` +
           (garment.suggestedBrand ? ` · suggested: ${garment.suggestedBrand}` : '') +
           ' · [AI suggestion, unverified]',
         position: position++,

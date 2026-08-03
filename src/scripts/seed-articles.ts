@@ -73,14 +73,14 @@ const drafts: Draft[] = [
     celebrity: 'zendaya',
     featured: true,
     excerpt:
-      'Dressing to argue with the film you are promoting is not a gimmick — it is the most reliable way to make a red-carpet look mean something. A note on why the approach travels.',
+      'Dressing to argue with the film you are promoting is not a gimmick. It is the most reliable way to make a red-carpet look mean something. A note on why the approach travels.',
     keywords: [{ keyword: 'style archive', url: '/celebrities/zendaya', rel: 'auto' }],
     body: [
       p(
         'Most red-carpet dressing is decorative. A gown is chosen because it flatters, photographs cleanly and offends nobody, and the result is a picture that could have been taken at any event in any year. It is competent and it is forgettable.',
       ),
       p(
-        'Method dressing does something else. It treats the outfit as commentary on the work being promoted — a silhouette that echoes the film, a colour pulled from its palette, a reference only people who have seen it will catch. The look stops being decoration and starts being an argument.',
+        'Method dressing does something else. It treats the outfit as commentary on the work being promoted: a silhouette that echoes the film, a colour pulled from its palette, a reference only people who have seen it will catch. The look stops being decoration and starts being an argument.',
       ),
       h2('Why it survives the news cycle'),
       p(
@@ -94,7 +94,7 @@ const drafts: Draft[] = [
       ),
       h2('What is worth copying'),
       p(
-        'You do not need a film to promote. The transferable idea is narrower and more useful: decide what a look is meant to say before choosing anything, and let that decision settle the questions that follow. Most wardrobes fail because they never make the first decision at all — every piece is chosen on its own terms, and the result has no argument to make.',
+        'You do not need a film to promote. The transferable idea is narrower and more useful: decide what a look is meant to say before choosing anything, and let that decision settle the questions that follow. Most wardrobes fail because they never make the first decision at all: every piece is chosen on its own terms, and the result has no argument to make.',
       ),
     ],
   },
@@ -119,7 +119,7 @@ const drafts: Draft[] = [
       ),
       h2('Trousers break once, or not at all'),
       p(
-        'A single soft break at the shoe, or none. Anything more reads as fabric you did not ask for. If you are unsure, err shorter — a clean hem photographs better than a pooled one.',
+        'A single soft break at the shoe, or none. Anything more reads as fabric you did not ask for. If you are unsure, err shorter: a clean hem photographs better than a pooled one.',
       ),
       h2('Buttoning point sets the proportion'),
       p(
@@ -128,7 +128,7 @@ const drafts: Draft[] = [
       quote('A suit that fits is not a suit that is tight. Those are different problems.',),
       h2('What it costs'),
       p(
-        'Less than people assume. A mid-price suit that has been properly altered will consistently outperform an expensive one straight off the rack — tailoring is the cheapest quality upgrade available in menswear, and almost nobody bothers.',
+        'Less than people assume. A mid-price suit that has been properly altered will consistently outperform an expensive one straight off the rack. Tailoring is the cheapest quality upgrade available in menswear, and almost nobody bothers.',
       ),
     ],
   },
@@ -147,7 +147,7 @@ const drafts: Draft[] = [
       ),
       h2('The conservative reading'),
       p(
-        'Chris Evans dresses like someone who decided what worked a decade ago and saw no reason to revisit it. Clean lapel, quiet tie, no surprises. The effect is that nothing about the suit dates — but also that nothing about it is memorable on its own.',
+        'Chris Evans dresses like someone who decided what worked a decade ago and saw no reason to revisit it. Clean lapel, quiet tie, no surprises. The effect is that nothing about the suit dates, but also that nothing about it is memorable on its own.',
       ),
       h2('The built reading'),
       p(
@@ -176,7 +176,7 @@ const drafts: Draft[] = [
       ),
       h2('Why restriction works'),
       p(
-        'A narrow palette means everything you own goes with everything else you own. The decision cost of getting dressed collapses, and the failure rate goes with it — you cannot make a colour mistake if the wardrobe contains no colours that fight.',
+        'A narrow palette means everything you own goes with everything else you own. The decision cost of getting dressed collapses, and the failure rate goes with it. You cannot make a colour mistake if the wardrobe contains no colours that fight.',
       ),
       p(
         'It also compounds. Buy within a fixed palette for two years and you end up with a wardrobe where any two pieces work; buy on impulse for two years and you end up with a wardrobe of individually good garments that refuse to combine.',
@@ -184,7 +184,7 @@ const drafts: Draft[] = [
       quote('You cannot make a colour mistake in a wardrobe that contains no colours that fight.'),
       h2('The cost'),
       p(
-        'Restriction is genuinely boring in the shop and genuinely liberating on the day. If you enjoy clothes as a hobby, this approach will frustrate you — it is optimised for looking consistent rather than for the pleasure of variety, and those are different goals.',
+        'Restriction is genuinely boring in the shop and genuinely liberating on the day. If you enjoy clothes as a hobby, this approach will frustrate you. It is optimised for looking consistent rather than for the pleasure of variety, and those are different goals.',
       ),
       h2('How to start'),
       p(
@@ -211,7 +211,7 @@ const drafts: Draft[] = [
       ),
       h2('3. One decision, not five'),
       p(
-        'Colour, texture, silhouette, accessory, hair — pick one to be the story. Looks that try to do several things at once photograph as noise.',
+        'Colour, texture, silhouette, accessory, hair: pick one to be the story. Looks that try to do several things at once photograph as noise.',
       ),
       h2('4. Shoes that finish the line'),
       p(

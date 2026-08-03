@@ -68,7 +68,7 @@ export const submitRequest = async (
 
   const fieldErrors: RequestState['fieldErrors'] = {}
   if (summary.length < 10) {
-    fieldErrors.summary = 'Tell us a little more — ten characters at least.'
+    fieldErrors.summary = 'Tell us a little more. Ten characters at least.'
   }
   if (summary.length > 1200) {
     fieldErrors.summary = 'That is longer than we can use. Trim it to the essentials.'
@@ -82,7 +82,7 @@ export const submitRequest = async (
     if (file.size > MAX_UPLOAD_BYTES) {
       fieldErrors.image = 'That image is over 5MB. A screenshot is usually plenty.'
     } else if (!ALLOWED_TYPES.includes(file.type)) {
-      fieldErrors.image = 'Images only — JPEG, PNG, WebP or HEIC.'
+      fieldErrors.image = 'Images only: JPEG, PNG, WebP or HEIC.'
     }
   }
 

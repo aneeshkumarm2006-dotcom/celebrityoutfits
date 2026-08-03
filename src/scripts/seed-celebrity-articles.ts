@@ -86,7 +86,7 @@ const pieces: Piece[] = [
         'Dark two-piece tailoring, cut close but never tight. The jacket stays open. Underneath, more often than not, a fine knit or a shirt worn without a tie. Footwear is plain and dark. A steel sports watch, worn on a bracelet rather than leather.',
       ),
       p(
-        'None of those decisions is remarkable on its own. What is remarkable is that the combination has survived every shift in menswear since the early eighties — the wide-shouldered period, the minimal period, the deliberately ugly period — without acknowledging any of them.',
+        'None of those decisions is remarkable on its own. What is remarkable is that the combination has survived every shift in menswear since the early eighties (the wide-shouldered period, the minimal period, the deliberately ugly period) without acknowledging any of them.',
       ),
       quote('Consistency reads as confidence long before anyone works out why.'),
       h2('Why the open jacket matters'),
@@ -124,7 +124,7 @@ const pieces: Piece[] = [
       ),
       h2('The young-tailoring problem'),
       p(
-        'Cut a suit for someone in their twenties and there is a temptation to make it read young — shorter jacket, narrower lapel, higher trouser. Push any of those far enough and the suit stops being tailoring and starts being a costume of tailoring.',
+        'Cut a suit for someone in their twenties and there is a temptation to make it read young: shorter jacket, narrower lapel, higher trouser. Push any of those far enough and the suit stops being tailoring and starts being a costume of tailoring.',
       ),
       p(
         'The correction is boring and works: lengthen the jacket by a centimetre, widen the lapel slightly, and let the trouser break once. The look reads adult without reading old, which is the actual target.',
@@ -136,7 +136,7 @@ const pieces: Piece[] = [
     title: 'Maximalism is a discipline, not an absence of one',
     template: 'generic',
     excerpt:
-      'Colour, texture and volume worn without hedging. The loudest dresser on a carpet is usually the one following the strictest rules — here is what they are.',
+      'Colour, texture and volume worn without hedging. The loudest dresser on a carpet is usually the one following the strictest rules. Here is what they are.',
     links: ['valentino', 'versace'],
     body: [
       p(
@@ -144,7 +144,7 @@ const pieces: Piece[] = [
       ),
       h2('One structural idea, then decorate'),
       p(
-        'The looks that work have a single silhouette decision underneath — a defined waist, an exaggerated shoulder, a cape — and everything else is applied to that frame. The ones that fail have two structural ideas fighting, and no amount of colour rescues them.',
+        'The looks that work have a single silhouette decision underneath (a defined waist, an exaggerated shoulder, a cape), and everything else is applied to that frame. The ones that fail have two structural ideas fighting, and no amount of colour rescues them.',
       ),
       quote('Four strong ideas need more editing than none, not less.'),
       h2('Texture is the cheap version'),
@@ -153,7 +153,7 @@ const pieces: Piece[] = [
       ),
       h2('Why it needs age'),
       p(
-        'This register depends on the wearer looking like they are enjoying it rather than submitting to it. That confidence is hard to fake and tends to arrive later — which is why the best maximalist dressing is rarely done by the youngest people on the carpet.',
+        'This register depends on the wearer looking like they are enjoying it rather than submitting to it. That confidence is hard to fake and tends to arrive later, which is why the best maximalist dressing is rarely done by the youngest people on the carpet.',
       ),
     ],
   },
@@ -166,7 +166,7 @@ const pieces: Piece[] = [
     links: ['dior', 'saint-laurent'],
     body: [
       p(
-        'A consistently dark wardrobe is usually read as a mood. It is more useful to read it as a system, because the interesting part is not the black — it is what the black makes possible.',
+        'A consistently dark wardrobe is usually read as a mood. It is more useful to read it as a system, because the interesting part is not the black: it is what the black makes possible.',
       ),
       h2('The mechanics'),
       p(
@@ -175,7 +175,7 @@ const pieces: Piece[] = [
       quote('The black is not the statement. It is what makes one possible.'),
       h2('Sharp, not heavy'),
       p(
-        'The failure mode of dark dressing is bulk: black absorbs detail, so a heavy silhouette in it reads as a mass rather than a shape. The correction is structural — defined waists, clean shoulders, and surfaces with enough sheen or texture to give the camera something to catch.',
+        'The failure mode of dark dressing is bulk: black absorbs detail, so a heavy silhouette in it reads as a mass rather than a shape. The correction is structural: defined waists, clean shoulders, and surfaces with enough sheen or texture to give the camera something to catch.',
       ),
       h2('What to take'),
       p(
@@ -196,7 +196,7 @@ const pieces: Piece[] = [
       ),
       h2('The alternative'),
       p(
-        'Method dressing treats the outfit as commentary on the work being promoted — a silhouette that echoes the film, a colour pulled from its palette, a reference only people who have seen it will catch. The look stops being decoration and starts being an argument.',
+        'Method dressing treats the outfit as commentary on the work being promoted: a silhouette that echoes the film, a colour pulled from its palette, a reference only people who have seen it will catch. The look stops being decoration and starts being an argument.',
       ),
       quote('A look that argues with the film survives the news cycle. A look that merely flatters does not.'),
       h2('Why it outlives the evening'),
@@ -222,7 +222,7 @@ const pieces: Piece[] = [
     links: ['ray-ban', 'cartier'],
     body: [
       p(
-        'There is a category of dresser who wears an entirely conventional suit and then puts something in front of it — tinted glasses, a scarf, a brooch, a watch too large for the occasion — so the eye never quite settles.',
+        'There is a category of dresser who wears an entirely conventional suit and then puts something in front of it (tinted glasses, a scarf, a brooch, a watch too large for the occasion) so the eye never quite settles.',
       ),
       h2('The base has to be quiet'),
       p(
@@ -238,7 +238,7 @@ const pieces: Piece[] = [
         'This approach is easier later. A younger dresser doing the same thing tends to read as trying; the same outfit on someone with three decades of public record behind it reads as a person who has earned the right to be uninterested in your opinion.',
       ),
       p(
-        'That is not a reason to avoid it. It is a reason to expect the same clothes to say different things depending on who is in them — which is true of everything on this site.',
+        'That is not a reason to avoid it. It is a reason to expect the same clothes to say different things depending on who is in them, which is true of everything on this site.',
       ),
     ],
   },
@@ -260,7 +260,7 @@ const pieces: Piece[] = [
       quote('Buy for the shoulder. Everything below it is a tailoring bill, not a decision.'),
       h2('What actually helps'),
       p(
-        'A slightly softer shoulder construction, so the seam sits rather than perches. A lower button stance, which lengthens the torso line. And a trouser cut with room through the thigh — a slim leg under a broad top half exaggerates both.',
+        'A slightly softer shoulder construction, so the seam sits rather than perches. A lower button stance, which lengthens the torso line. And a trouser cut with room through the thigh, since a slim leg under a broad top half exaggerates both.',
       ),
       h2('The off-duty half'),
       p(
@@ -290,7 +290,7 @@ const pieces: Piece[] = [
       ),
       h2('The honest cost'),
       p(
-        'This is genuinely boring to shop for and genuinely freeing to wear. If clothes are a hobby, it will frustrate you — it optimises for looking consistent rather than for the pleasure of variety, and those are different goals that people routinely confuse.',
+        'This is genuinely boring to shop for and genuinely freeing to wear. If clothes are a hobby, it will frustrate you. It optimises for looking consistent rather than for the pleasure of variety, and those are different goals that people routinely confuse.',
       ),
     ],
   },
@@ -303,7 +303,7 @@ const pieces: Piece[] = [
     links: ['giorgio-armani', 'brunello-cucinelli'],
     body: [
       p(
-        'For twenty years menswear has been getting narrower and shorter. The counter-move now underway is not a new idea — it is the proportion that dominated from roughly 1935 to 1955, brought back at full size.',
+        'For twenty years menswear has been getting narrower and shorter. The counter-move now underway is not a new idea. It is the proportion that dominated from roughly 1935 to 1955, brought back at full size.',
       ),
       h2('Where the waist sits'),
       p(
@@ -316,7 +316,7 @@ const pieces: Piece[] = [
       ),
       h2('What it asks of you'),
       p(
-        'Commitment, essentially. The mid-century line does not blend with contemporary tailoring — you cannot wear the trousers with a modern jacket and expect either to work. It is an all-or-nothing wardrobe, which is why it stays rare.',
+        'Commitment, essentially. The mid-century line does not blend with contemporary tailoring. You cannot wear the trousers with a modern jacket and expect either to work. It is an all-or-nothing wardrobe, which is why it stays rare.',
       ),
     ],
   },
@@ -338,7 +338,7 @@ const pieces: Piece[] = [
       quote('A dinner suit says you turned up. Anything else says you had an opinion about turning up.'),
       h2('Why it is not costume'),
       p(
-        'The line holds as long as the garment is still tailoring — cut properly, fitted properly, in cloth that behaves. The failures in this mode are almost never too bold; they are badly made, and boldness makes bad making visible.',
+        'The line holds as long as the garment is still tailoring: cut properly, fitted properly, in cloth that behaves. The failures in this mode are almost never too bold; they are badly made, and boldness makes bad making visible.',
       ),
       h2('The risk nobody mentions'),
       p(
@@ -351,7 +351,7 @@ const pieces: Piece[] = [
     title: 'The discipline of a narrow palette',
     template: 'generic',
     excerpt:
-      'Wearing five colours well beats wearing twenty badly. On restriction as a wardrobe strategy — and on the value of detonating it exactly once.',
+      'Wearing five colours well beats wearing twenty badly. On restriction as a wardrobe strategy, and on the value of detonating it exactly once.',
     links: ['gucci', 'levis'],
     body: [
       p(
@@ -364,10 +364,10 @@ const pieces: Piece[] = [
       quote('You cannot make a colour mistake in a wardrobe that contains no colours that fight.'),
       h2('And then the exception'),
       p(
-        'The interesting move is what happens when someone who has held a narrow palette for years abandons it entirely for a single project — full colour, full theatre, no restraint. It lands precisely because the baseline was so controlled.',
+        'The interesting move is what happens when someone who has held a narrow palette for years abandons it entirely for a single project: full colour, full theatre, no restraint. It lands precisely because the baseline was so controlled.',
       ),
       p(
-        'That only works one way round. Restraint after excess is invisible; excess after restraint is an event. Which suggests the discipline is not the opposite of the fun — it is what pays for it.',
+        'That only works one way round. Restraint after excess is invisible; excess after restraint is an event. Which suggests the discipline is not the opposite of the fun. It is what pays for it.',
       ),
       h2('How to start'),
       p(
@@ -380,7 +380,7 @@ const pieces: Piece[] = [
     title: 'Archive dressing, done precisely',
     template: 'generic',
     excerpt:
-      'Referencing a decade is easy. Referencing it accurately — the right shoulder, the right hem, the right shoe — is the entire difference between homage and fancy dress.',
+      'Referencing a decade is easy. Referencing it accurately (the right shoulder, the right hem, the right shoe) is the entire difference between homage and fancy dress.',
     links: ['chanel', 'dior'],
     body: [
       p(
@@ -414,12 +414,12 @@ const pieces: Piece[] = [
       ),
       h2('What volume does'),
       p(
-        'A garment with real volume creates its own shape rather than tracing the body underneath. That is architecturally more interesting and photographically more distinctive — a silhouette the eye has not seen forty times that evening.',
+        'A garment with real volume creates its own shape rather than tracing the body underneath. That is architecturally more interesting and photographically more distinctive: a silhouette the eye has not seen forty times that evening.',
       ),
       quote('Flattering is the lowest thing an outfit can achieve. It is also the easiest.'),
       h2('Sheerness as a decision'),
       p(
-        'Transparent fabric is read as provocation, which undersells it. Structurally it is a way of showing construction — seams, boning, the actual engineering of a garment — that opaque cloth conceals. The provocation is a side effect of the honesty.',
+        'Transparent fabric is read as provocation, which undersells it. Structurally it is a way of showing construction (seams, boning, the actual engineering of a garment) that opaque cloth conceals. The provocation is a side effect of the honesty.',
       ),
       h2('The cost of the approach'),
       p(
@@ -449,7 +449,7 @@ const pieces: Piece[] = [
       ),
       h2('Formality is not stiffness'),
       p(
-        'The failure mode is looking upholstered. The correction is textural rather than structural — a knit instead of a shirt, a softer cloth, no tie. The formality stays in the cut, and the ease comes from the materials.',
+        'The failure mode is looking upholstered. The correction is textural rather than structural: a knit instead of a shirt, a softer cloth, no tie. The formality stays in the cut, and the ease comes from the materials.',
       ),
     ],
   },
@@ -471,7 +471,7 @@ const pieces: Piece[] = [
       quote('Buying big is not the same as buying oversize. One is a cut; the other is a mistake.'),
       h2('Height buys you volume'),
       p(
-        'The silhouette adds visual width and subtracts apparent height. Above roughly six feet that is a surplus you can spend. Below it, the same garment shortens the wearer, and the usual fix — cropping the jacket — reintroduces the proportions oversize was meant to escape.',
+        'The silhouette adds visual width and subtracts apparent height. Above roughly six feet that is a surplus you can spend. Below it, the same garment shortens the wearer, and the usual fix (cropping the jacket) reintroduces the proportions oversize was meant to escape.',
       ),
       h2('The workable middle'),
       p(
@@ -492,7 +492,7 @@ const pieces: Piece[] = [
       ),
       h2('The structured half'),
       p(
-        'Corsetry, boning, defined waists — garments that impose a shape rather than follow one. These are engineering-led and unforgiving of fit; a structured bodice that does not fit is visible from across a room.',
+        'Corsetry, boning, defined waists: garments that impose a shape rather than follow one. These are engineering-led and unforgiving of fit; a structured bodice that does not fit is visible from across a room.',
       ),
       h2('The workwear half'),
       p(
@@ -501,7 +501,7 @@ const pieces: Piece[] = [
       quote('Two settings and no dial. It sounds limiting and it removes the hardest decisions.'),
       h2('Why the gap is the point'),
       p(
-        'A blended middle — smart-casual, in the worst sense — is where most wardrobes go to die, because every garment is a compromise and none is excellent at anything. Keeping the halves separate means each can be optimised without negotiating with the other.',
+        'A blended middle (smart-casual, in the worst sense) is where most wardrobes go to die, because every garment is a compromise and none is excellent at anything. Keeping the halves separate means each can be optimised without negotiating with the other.',
       ),
       h2('What to copy'),
       p(
@@ -518,7 +518,7 @@ const pieces: Piece[] = [
     links: ['dior', 'prada'],
     body: [
       p(
-        'There is a mode of red-carpet dressing that behaves like a magazine editorial rather than an evening out — sculptural, occasionally uncomfortable, and never repeating a silhouette.',
+        'There is a mode of red-carpet dressing that behaves like a magazine editorial rather than an evening out: sculptural, occasionally uncomfortable, and never repeating a silhouette.',
       ),
       h2('What sculptural means in practice'),
       p(
@@ -527,7 +527,7 @@ const pieces: Piece[] = [
       quote('The garment holds the shape. The person is inside it, not underneath it.'),
       h2('Why it cannot be sustained alone'),
       p(
-        'This mode depends on access — to houses, to archives, to pieces made for a body rather than a size. It is the least replicable approach on this site, and pretending otherwise would be dishonest.',
+        'This mode depends on access: to houses, to archives, to pieces made for a body rather than a size. It is the least replicable approach on this site, and pretending otherwise would be dishonest.',
       ),
       h2('The part that is replicable'),
       p(
@@ -548,7 +548,7 @@ const pieces: Piece[] = [
       ),
       h2('The trouser has to move first'),
       p(
-        'A slim tailored trouser over a bulky sneaker produces a silhouette that narrows and then abruptly widens at the floor. Letting the trouser out through the leg, and shortening it slightly, resolves it — the line runs continuously into the shoe instead of colliding with it.',
+        'A slim tailored trouser over a bulky sneaker produces a silhouette that narrows and then abruptly widens at the floor. Letting the trouser out through the leg, and shortening it slightly, resolves it: the line runs continuously into the shoe instead of colliding with it.',
       ),
       quote('The sneaker is not the problem. The trouser that was drafted for a dress shoe is.'),
       h2('Keep the jacket sharp'),
@@ -566,7 +566,7 @@ const pieces: Piece[] = [
     title: 'Dressing like you are enjoying it',
     template: 'generic',
     excerpt:
-      'Colour, print and comfort in equal measure. The rare register that reads as pleasure rather than performance — and why it is harder than it looks.',
+      'Colour, print and comfort in equal measure. The rare register that reads as pleasure rather than performance, and why it is harder than it looks.',
     links: ['prada', 'valentino'],
     body: [
       p(
@@ -574,12 +574,12 @@ const pieces: Piece[] = [
       ),
       h2('Comfort is not the opposite of considered'),
       p(
-        'Softer construction, generous cut, cloth that moves. None of that requires sacrificing precision — it relocates the precision from the structure to the fit and the colour, which is a harder place to hide.',
+        'Softer construction, generous cut, cloth that moves. None of that requires sacrificing precision. It relocates the precision from the structure to the fit and the colour, which is a harder place to hide.',
       ),
       quote('Ease is a construction choice. It is not the absence of one.'),
       h2('Colour without a system'),
       p(
-        'Wearing colour well at this level is less about matching and more about committing: a single saturated colour across a whole look, or one deliberate clash. Timid colour — a bright accessory against neutrals — reads as a hedge, and hedges photograph badly.',
+        'Wearing colour well at this level is less about matching and more about committing: a single saturated colour across a whole look, or one deliberate clash. Timid colour (a bright accessory against neutrals) reads as a hedge, and hedges photograph badly.',
       ),
       h2('The bit that does not travel'),
       p(
@@ -605,7 +605,7 @@ const pieces: Piece[] = [
       quote('Refusing to signal is itself a signal, and a legible one.'),
       h2('Why it worked'),
       p(
-        'Because it was consistent. Any single element would read as not having thought about it. Repeated across two years of public appearances, the same elements read as a position — the consistency is what converts indifference into intent.',
+        'Because it was consistent. Any single element would read as not having thought about it. Repeated across two years of public appearances, the same elements read as a position. The consistency is what converts indifference into intent.',
       ),
       h2('The paradox'),
       p(
@@ -618,7 +618,7 @@ const pieces: Piece[] = [
     title: 'Soft construction, muted colour, worn slightly loose',
     template: 'generic',
     excerpt:
-      'Quiet tailoring, consistently. On the unstructured jacket — what it does, what it demands, and why it is the hardest thing to buy well.',
+      'Quiet tailoring, consistently. On the unstructured jacket: what it does, what it demands, and why it is the hardest thing to buy well.',
     links: ['giorgio-armani', 'brunello-cucinelli'],
     body: [
       p(
@@ -626,12 +626,12 @@ const pieces: Piece[] = [
       ),
       h2('What the structure was doing'),
       p(
-        'Canvas and padding impose a shape regardless of the wearer. Remove them and the jacket reports the body underneath exactly. Nothing is corrected, which is why an unstructured jacket in cheap cloth looks like a shirt and an expensive one looks like nothing at all — in the good sense.',
+        'Canvas and padding impose a shape regardless of the wearer. Remove them and the jacket reports the body underneath exactly. Nothing is corrected, which is why an unstructured jacket in cheap cloth looks like a shirt and an expensive one looks like nothing at all, in the good sense.',
       ),
       quote('Take out the structure and the cloth has to do all the work. Cheap cloth cannot.'),
       h2('The colour question'),
       p(
-        'Soft construction pairs naturally with muted, slightly complex colours — olive, stone, faded navy, brown. Flat black tends to flatten it further, removing the texture that is most of the appeal.',
+        'Soft construction pairs naturally with muted, slightly complex colours: olive, stone, faded navy, brown. Flat black tends to flatten it further, removing the texture that is most of the appeal.',
       ),
       h2('Loose, within limits'),
       p(
@@ -648,11 +648,11 @@ const pieces: Piece[] = [
     links: ['versace', 'chanel'],
     body: [
       p(
-        'The usual arc is that public dressing gets safer over time — early experimentation, then a settled register, then a long plateau. The reverse happens rarely and is worth paying attention to when it does.',
+        'The usual arc is that public dressing gets safer over time: early experimentation, then a settled register, then a long plateau. The reverse happens rarely and is worth paying attention to when it does.',
       ),
       h2('What decisive looks like'),
       p(
-        'Not louder. More committed. A single colour taken all the way, a silhouette held rather than softened, an absence of the small hedges — the cardigan over the dress, the neutral shoe — that most outfits use to soften a decision.',
+        'Not louder. More committed. A single colour taken all the way, a silhouette held rather than softened, an absence of the small hedges (the cardigan over the dress, the neutral shoe) that most outfits use to soften a decision.',
       ),
       quote('Most outfits are ruined by their hedges, not their choices.'),
       h2('Why it comes later'),
@@ -661,7 +661,7 @@ const pieces: Piece[] = [
       ),
       h2('The transferable bit'),
       p(
-        'Look at your own last five outfits and find the hedge in each. There is almost always one — a piece added to make the rest less definite. Removing it is free and does more than anything you could buy.',
+        'Look at your own last five outfits and find the hedge in each. There is almost always one: a piece added to make the rest less definite. Removing it is free and does more than anything you could buy.',
       ),
     ],
   },
@@ -670,7 +670,7 @@ const pieces: Piece[] = [
     title: 'Uncomplicated on purpose',
     template: 'generic',
     excerpt:
-      'A well-cut suit, a plain knit, and no interest in being the story. On dressing to get out of the way — and when that is the right call.',
+      'A well-cut suit, a plain knit, and no interest in being the story. On dressing to get out of the way, and when that is the right call.',
     links: ['zegna', 'common-projects'],
     body: [
       p(
@@ -683,7 +683,7 @@ const pieces: Piece[] = [
       quote('If the outfit raises a question, the answer had better be worth the interruption.'),
       h2('It still has to fit'),
       p(
-        'This only works if the execution is exact. Quiet clothes that fit badly are not quiet — a poorly fitting plain navy suit draws more attention than a well-cut bold one, because the eye catches on the error instead of the design.',
+        'This only works if the execution is exact. Quiet clothes that fit badly are not quiet. A poorly fitting plain navy suit draws more attention than a well-cut bold one, because the eye catches on the error instead of the design.',
       ),
       h2('When it is the wrong call'),
       p(

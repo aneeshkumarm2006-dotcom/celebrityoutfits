@@ -65,12 +65,12 @@ const LOOK_PHOTO = 'seed-assets/looks/ryan-gosling-sdcc-look.jpg'
 
 const PRODUCTS = [
   {
-    name: 'Vintage trucker jacket, red — 1980s',
+    name: 'Vintage 1980s trucker jacket in red',
     brand: 'rrl',
     description:
-      'The jacket itself: an eighties RRL trucker in faded red denim with a camel corduroy collar. Long out of production, so the only route is the resale market — search the brand and the collar detail rather than the film or the actor, or you will land in a wall of recreations.',
+      'The jacket itself: an eighties RRL trucker in faded red denim with a camel corduroy collar. Long out of production, so the only route is the resale market. Search the brand and the collar detail rather than the film or the actor, or you will land in a wall of recreations.',
     priceCents: 45000,
-    merchant: 'Resale — eBay, Grailed, Poshmark',
+    merchant: 'Resale: eBay, Grailed, Poshmark',
     affiliateUrl: 'https://www.ebay.com/b/RRL-Denim-Jackets-for-Men/57988/bn_7110292175',
     /**
      * A standing resale search rather than a single listing, so there is always
@@ -84,7 +84,7 @@ const PRODUCTS = [
     name: 'Denim corduroy-collar trucker jacket',
     brand: 'rrl',
     description:
-      'Still in production, same house, same collar detail. Indigo rather than red, so what you are matching is the cut and the corduroy — which is most of what makes the original read the way it does.',
+      'Still in production, same house, same collar detail. Indigo rather than red, so what you are matching is the cut and the corduroy, which is most of what makes the original read the way it does.',
     priceCents: 39800,
     merchant: 'Ralph Lauren',
     affiliateUrl:
@@ -100,7 +100,7 @@ const PRODUCTS = [
     inStock: true,
   },
   {
-    name: 'Red denim trucker — Comic-Con recreation',
+    name: 'Red denim trucker (Comic-Con recreation)',
     brand: undefined,
     description:
       'Not the jacket, and the seller says so: “we recreated this jacket for you.” Denim with a viscose lining, cut to echo the Comic-Con look at a fraction of resale money. Judge it as an inspired-by piece, which is what it is.',
@@ -112,7 +112,7 @@ const PRODUCTS = [
     inStock: true,
   },
   {
-    name: 'Ghost Rider red denim jacket — recreation',
+    name: 'Ghost Rider red denim jacket (recreation)',
     brand: undefined,
     description:
       'The same idea from a second maker, cut a little longer through the body. Sold on the Comic-Con appearance rather than on the original label, which is the honest way round.',
@@ -124,7 +124,7 @@ const PRODUCTS = [
     inStock: true,
   },
   {
-    name: 'Marvel SDCC red trucker — recreation',
+    name: 'Marvel SDCC red trucker (recreation)',
     brand: undefined,
     description:
       'The cheapest of the three recreations, viscose-lined and buttoned like the original. Same caveat: it echoes the jacket, it is not the jacket.',
@@ -142,10 +142,10 @@ const ITEMS = [
     label: 'Red denim trucker jacket, corduroy collar',
     category: 'outerwear' as const,
     confidence: 'closest_match' as const,
-    product: 'Marvel SDCC red trucker — recreation',
+    product: 'Marvel SDCC red trucker (recreation)',
     more: [
-      'Red denim trucker — Comic-Con recreation',
-      'Ghost Rider red denim jacket — recreation',
+      'Red denim trucker (Comic-Con recreation)',
+      'Ghost Rider red denim jacket (recreation)',
     ],
     note: 'Identified as an eighties RRL by Esquire Australia. No label is visible in the photograph, so this stays a closest match rather than confirmed.',
   },
@@ -179,22 +179,22 @@ const LOOK_STORY: LexicalNode[] = [
   ),
   h2('The setting'),
   p(
-    'It was the Project Hail Mary panel — the Andy Weir adaptation, first proper look at the film. He spent most of it explaining that his character is essentially a space caveman, which tells you the register of the afternoon: not a premiere, not a carpet, a room full of people who had queued since dawn.',
+    'It was the Project Hail Mary panel: the Andy Weir adaptation, first proper look at the film. He spent most of it explaining that his character is essentially a space caveman, which tells you the register of the afternoon: not a premiere, not a carpet, a room full of people who had queued since dawn.',
   ),
   p(
-    'That matters for the clothes. A premiere calls for tailoring. A Hall H panel is closer to a press conference held in a stadium, and the dress code sits somewhere between the two — which is exactly the gap this outfit is cut for.',
+    'That matters for the clothes. A premiere calls for tailoring. A Hall H panel is closer to a press conference held in a stadium, and the dress code sits somewhere between the two, which is exactly the gap this outfit is cut for.',
   ),
   h2('The outfit'),
   p(
     'A faded red denim trucker, worn open. A plain white crew-neck underneath. Navy pleated trousers, a dark leather belt with a plain buckle. That is the whole thing: four garments, no pattern, no logo, nothing on the wrist.',
   ),
   p(
-    'The collar is up, and under it there is a strip of camel corduroy — the detail that identifies the jacket as RRL rather than any of the hundred other brands that have made a red trucker. It also happens to be the only piece of styling in the outfit.',
+    'The collar is up, and under it there is a strip of camel corduroy, the detail that identifies the jacket as RRL rather than any of the hundred other brands that have made a red trucker. It also happens to be the only piece of styling in the outfit.',
   ),
   quote('One colour, three neutrals, and a single styling decision.'),
   h2('Why it works'),
   p(
-    'Red is difficult on camera. Under stage light it blooms, and against a busy backdrop it usually loses. This one holds because everything around it refuses to compete — white, navy, black, and nothing else asking for attention.',
+    'Red is difficult on camera. Under stage light it blooms, and against a busy backdrop it usually loses. This one holds because everything around it refuses to compete: white, navy, black, and nothing else asking for attention.',
   ),
   p(
     'The wear helps too. A new red jacket in that cut would read as costume, particularly in a room where half the audience is in costume. Forty years of fading is what keeps it on the right side of the line.',
@@ -207,7 +207,7 @@ const articleBody = (id: Record<string, number>): LexicalNode[] => [
     'Within about twelve hours of Ryan Gosling walking onto the Hall H stage, somebody had posted the photograph to Reddit with three words underneath it: ID on jacket? Nine replies, no answer. That is usually a sign the jacket is worth the trouble.',
   ),
   p(
-    'It is a red denim trucker, worn open over a plain white tee, with navy pleated trousers and a dark belt. The collar is up. Underneath the collar, if you look at the right frame, there is a strip of camel corduroy — and that detail is the whole identification.',
+    'It is a red denim trucker, worn open over a plain white tee, with navy pleated trousers and a dark belt. The collar is up. Underneath the collar, if you look at the right frame, there is a strip of camel corduroy, and that detail is the whole identification.',
   ),
   h2('What it is'),
   p(
@@ -219,7 +219,7 @@ const articleBody = (id: Record<string, number>): LexicalNode[] => [
   quote('The corduroy collar is the identification. Everything else about the jacket is common.'),
   h2('Why you cannot buy it'),
   p(
-    'Because it is forty years old. This is a piece his stylist Mark Avery pulled from somewhere, and Avery has been dressing Gosling for over a decade — the whole Project Hail Mary run has been worn-in workwear, trucker hats and faded denim rather than tailoring. It is a sourced garment, not a gifted one, and there is no product page waiting at the end of it.',
+    'Because it is forty years old. This is a piece his stylist Mark Avery pulled from somewhere, and Avery has been dressing Gosling for over a decade. The whole Project Hail Mary run has been worn-in workwear, trucker hats and faded denim rather than tailoring. It is a sourced garment, not a gifted one, and there is no product page waiting at the end of it.',
   ),
   p(
     'Which is why searching the actor\'s name gets you nowhere useful. Every result is a recreation. Search the brand instead.',
@@ -229,14 +229,14 @@ const articleBody = (id: Record<string, number>): LexicalNode[] => [
     'The real thing, second hand. Vintage RRL turns up on eBay, Grailed and Poshmark, usually between two and seven hundred dollars depending on how hard it has been worn. The corduroy collar is common in the line; red is the difficult part. Set a saved search and be patient.',
   ),
   p(
-    'The same house, in production. Ralph Lauren still makes a denim trucker with a corduroy point collar. It is indigo, not red — but the cut and the collar are the two things doing the work in the original photograph, and you can have both today without waiting for a listing.',
+    'The same house, in production. Ralph Lauren still makes a denim trucker with a corduroy point collar. It is indigo, not red, but the cut and the collar are the two things doing the work in the original photograph, and you can have both today without waiting for a listing.',
   ),
   p(
-    'A recreation, if you want the colour more than the label. Three shops have already cut a red denim version off the Comic-Con photographs, between a hundred and twenty and a hundred and forty dollars. They are explicit about what they are: one writes, in as many words, that they recreated the jacket. That is a different product from an eighties RRL and should be judged as one — but if what you actually want is a red trucker with a popped collar, this is the cheapest route to it.',
+    'A recreation, if you want the colour more than the label. Three shops have already cut a red denim version off the Comic-Con photographs, between a hundred and twenty and a hundred and forty dollars. They are explicit about what they are: one writes, in as many words, that they recreated the jacket. That is a different product from an eighties RRL and should be judged as one. But if what you actually want is a red trucker with a popped collar, this is the cheapest route to it.',
   ),
-  shoppable(id['Marvel SDCC red trucker — recreation'], 'Recreation · $119'),
-  shoppable(id['Red denim trucker — Comic-Con recreation'], 'Recreation · $129'),
-  shoppable(id['Ghost Rider red denim jacket — recreation'], 'Recreation · $139'),
+  shoppable(id['Marvel SDCC red trucker (recreation)'], 'Recreation · $119'),
+  shoppable(id['Red denim trucker (Comic-Con recreation)'], 'Recreation · $129'),
+  shoppable(id['Ghost Rider red denim jacket (recreation)'], 'Recreation · $139'),
   h2('The part worth stealing'),
   p(
     'Strip the provenance away and this is four plain things: a red jacket, a white tee, navy trousers, a dark belt. No pattern. No logo. One colour doing all the work, against a neutral that refuses to compete with it.',
@@ -260,7 +260,7 @@ const run = async () => {
     website: 'https://www.ralphlauren.com/brands-double-rl',
     founded: '1993',
     description: richText([
-      'Ralph Lauren’s Double RL line: American workwear treated as a period exercise rather than a seasonal theme. Repro denim, faded dye lots, and details — the corduroy collar among them — that the rest of the market abandoned decades ago.',
+      'Ralph Lauren’s Double RL line: American workwear treated as a period exercise rather than a seasonal theme. Repro denim, faded dye lots, and details (the corduroy collar among them) that the rest of the market abandoned decades ago.',
     ]),
     _status: 'published' as const,
   }
@@ -293,7 +293,7 @@ const run = async () => {
         filePath: LOOK_PHOTO,
         data: {
           alt: 'Ryan Gosling at San Diego Comic-Con in a red RRL denim trucker jacket with the collar up',
-          credit: 'Press image — rights holder to be confirmed before publication',
+          credit: 'Press image, rights holder to be confirmed before publication',
           licence: 'agency',
           caption: 'Ryan Gosling · San Diego Comic-Con 2026',
         },

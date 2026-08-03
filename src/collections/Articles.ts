@@ -45,7 +45,7 @@ export const Articles: CollectionConfig = {
               options: articleTemplates.map((t) => ({ label: t.label, value: t.value })),
               admin: {
                 description:
-                  'Picks the heading skeleton for this kind of post. Guidance only — you can write anything.',
+                  'Picks the heading skeleton for this kind of post. Guidance only: you can write anything.',
               },
             },
             { name: 'title', type: 'text', required: true },
@@ -124,7 +124,7 @@ export const Articles: CollectionConfig = {
                   type: 'text',
                   admin: {
                     description:
-                      'Auto = dofollow for our own pages, nofollow for external. Only override to dofollow an external link when it is genuinely editorial — a paid one risks the whole site.',
+                      'Auto = dofollow for our own pages, nofollow for external. Only override to dofollow an external link when it is genuinely editorial. A paid one risks the whole site.',
                   },
                 },
               ],

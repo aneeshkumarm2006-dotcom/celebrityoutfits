@@ -103,7 +103,7 @@ export const Looks: CollectionConfig = {
       type: 'textarea',
       admin: {
         description:
-          'One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short — the long version goes in Story below.',
+          'One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short: the long version goes in Story below.',
       },
     },
     {

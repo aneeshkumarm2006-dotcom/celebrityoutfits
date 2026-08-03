@@ -75,7 +75,7 @@ export default async function ArticlePage({ params }: Props) {
             <p className="eyebrow">
               Journal
               {article.template && article.template !== 'generic'
-                ? ` — ${article.template.replace(/-/g, ' ')}`
+                ? ` · ${article.template.replace(/-/g, ' ')}`
                 : ''}
             </p>
             <h1 className="mt-4 mb-5 font-display text-[var(--text-step-4)] leading-[1.08] font-normal tracking-[-0.015em] text-balance">

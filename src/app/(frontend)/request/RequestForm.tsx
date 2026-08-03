@@ -50,7 +50,7 @@ export const RequestForm = () => {
         <p className="m-0 max-w-[46ch] text-[0.9375rem] text-ink-2">
           We work through these by hand, so it is not instant. When we have identified it we will
           publish the answer and email you the link. If it turns out to be unidentifiable, we will
-          tell you that too — we would rather say so than invent a brand.
+          tell you that too. We would rather say so than invent a brand.
         </p>
       </div>
     )
@@ -77,7 +77,7 @@ export const RequestForm = () => {
           required
           maxLength={1200}
           className={field}
-          placeholder="The red denim jacket with the corduroy collar — the one from the Comic-Con panel."
+          placeholder="The red denim jacket with the corduroy collar, the one from the Comic-Con panel."
         />
         {state.fieldErrors?.summary ? <p className={error}>{state.fieldErrors.summary}</p> : null}
       </div>
@@ -91,7 +91,7 @@ export const RequestForm = () => {
           name="personGuess"
           type="text"
           className={field}
-          placeholder="Ryan Gosling — or a guess, if you are not sure"
+          placeholder="Ryan Gosling, or a guess if you are not sure"
         />
       </div>
 

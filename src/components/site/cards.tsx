@@ -132,7 +132,7 @@ const MoreOptions = ({ item, more }: { item: Item; more: Product[] }) => {
           </span>
           {/* `shrink-0` or a long product name squeezes the price and clips it. */}
           <span className="shrink-0 tabular-nums whitespace-nowrap">
-            {formatPrice(option.priceCents, option.currency ?? 'USD') ?? '—'}
+            {formatPrice(option.priceCents, option.currency ?? 'USD') ?? 'Price on request'}
           </span>
         </Link>
       ))}
@@ -201,12 +201,12 @@ export const ItemRow = ({ item }: { item: Item }) => {
         <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
         {substituted ? (
           <span className="text-[0.6875rem] text-muted">
-            Original is out of stock — showing the closest available.
+            Original is out of stock. Showing the closest available.
           </span>
         ) : null}
 
         <div className="mt-1 flex items-baseline justify-between gap-3">
-          <span className="text-[0.9375rem] tabular-nums">{price ?? '—'}</span>
+          <span className="text-[0.9375rem] tabular-nums">{price ?? 'Price on request'}</span>
           <Link
             href={`/go/${product.id}`}
             rel="sponsored noopener"
@@ -253,11 +253,11 @@ export const ItemCard = ({ item }: { item: Item }) => {
       <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
       {substituted ? (
         <span className="-mt-1 text-[0.6875rem] text-muted">
-          Original is out of stock — showing the closest available.
+          Original is out of stock. Showing the closest available.
         </span>
       ) : null}
       <div className="mt-auto flex items-baseline justify-between gap-3 border-t border-rule-2 pt-2.5">
-        <span className="text-[0.9375rem] tabular-nums">{price ?? '—'}</span>
+        <span className="text-[0.9375rem] tabular-nums">{price ?? 'Price on request'}</span>
         <Link
           href={`/go/${product.id}`}
           rel="sponsored noopener"

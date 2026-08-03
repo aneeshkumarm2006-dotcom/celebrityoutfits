@@ -94,7 +94,7 @@ const LOOKS: LookSeed[] = [
     title: 'Black on black, texture doing the work',
     occasion: 'press',
     description:
-      'A black textured shirt worn buttoned high at a press panel — no contrast anywhere, the entire interest carried by the surface of the cloth rather than by colour or cut.',
+      'A black textured shirt worn buttoned high at a press panel. No contrast anywhere, the entire interest carried by the surface of the cloth rather than by colour or cut.',
     items: [
       { label: 'Textured black shirt', category: 'shirting', confidence: 'open' },
       { label: 'Black Chelsea boot', category: 'footwear', confidence: 'get_the_look',
@@ -142,7 +142,7 @@ const LOOKS: LookSeed[] = [
     title: 'Green jacket, gold shirt',
     occasion: 'premiere',
     description:
-      'A dark green jacket over a gold shirt and a patterned tie — three colours doing the work, in an otherwise plain silhouette.',
+      'A dark green jacket over a gold shirt and a patterned tie: three colours doing the work, in an otherwise plain silhouette.',
     items: [
       { label: 'Dark green jacket', category: 'tailoring', confidence: 'open' },
       { label: 'Gold shirt', category: 'shirting', confidence: 'open' },
@@ -249,7 +249,7 @@ const LOOKS: LookSeed[] = [
     title: 'Black jacket, white piping',
     occasion: 'event',
     description:
-      'A black jacket with contrast white piping running along the collar and placket — the only detail in an otherwise plain outfit.',
+      'A black jacket with contrast white piping running along the collar and placket, the only detail in an otherwise plain outfit.',
     items: [
       { label: 'Piped black jacket', category: 'outerwear', confidence: 'open' },
       { label: 'Trail running shoe', category: 'footwear', confidence: 'get_the_look',
@@ -328,7 +328,7 @@ const run = async () => {
         collection: 'media',
         filePath: photo.file,
         data: {
-          alt: `${photo.name} — ${seed.description.split('.')[0]}`,
+          alt: `${photo.name} ${seed.description.split('.')[0].replace(/^A(n?) /, 'in a$1 ')}`,
           credit: photo.credit,
           licence: /^(cc|public domain)/i.test(photo.licence) ? 'cc' : 'own',
           caption: `${photo.name} · ${photo.licence}`,

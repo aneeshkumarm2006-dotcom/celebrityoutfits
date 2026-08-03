@@ -26,7 +26,7 @@ export const Brands: CollectionConfig = {
       type: 'text',
       admin: {
         description:
-          'The brand’s own site. Rendered as a plain external link — never an affiliate one, so the page still says something useful for brands we have no programme with.',
+          'The brand’s own site. Rendered as a plain external link, never an affiliate one, so the page still says something useful for brands we have no programme with.',
         placeholder: 'https://www.ray-ban.com',
       },
       validate: (value: unknown) =>
@@ -39,7 +39,7 @@ export const Brands: CollectionConfig = {
       type: 'text',
       admin: {
         width: '50%',
-        description: 'Year or era, shown under the brand name. Free text — “1937”, “1980s”.',
+        description: 'Year or era, shown under the brand name. Free text: “1937”, “1980s”.',
       },
     },
     {
@@ -70,7 +70,7 @@ export const Brands: CollectionConfig = {
         {
           name: 'commissionRate',
           type: 'number',
-          admin: { description: 'Percent. Informational — used to prioritise which brands to chase.' },
+          admin: { description: 'Percent. Informational, used to prioritise which brands to chase.' },
         },
       ],
     },

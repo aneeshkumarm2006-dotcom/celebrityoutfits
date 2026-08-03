@@ -24,7 +24,7 @@ export const Products: CollectionConfig = {
     {
       name: 'description',
       type: 'textarea',
-      admin: { description: 'One line. Cut, colour, material — what distinguishes it.' },
+      admin: { description: 'One line. Cut, colour, material: what distinguishes it.' },
     },
     {
       type: 'row',
@@ -32,7 +32,7 @@ export const Products: CollectionConfig = {
         {
           name: 'priceCents',
           type: 'number',
-          admin: { width: '50%', description: 'In minor units — 17100 for $171.00.' },
+          admin: { width: '50%', description: 'In minor units: 17100 for $171.00.' },
         },
         {
           name: 'currency',
@@ -71,7 +71,7 @@ export const Products: CollectionConfig = {
       required: true,
       admin: {
         description:
-          'The tracked merchant URL. Never rendered directly — the site links to /go/[id] and redirects.',
+          'The tracked merchant URL. Never rendered directly: the site links to /go/[id] and redirects.',
       },
     },
     { name: 'merchant', type: 'text', admin: { description: 'Where it is bought, e.g. Nordstrom.' } },

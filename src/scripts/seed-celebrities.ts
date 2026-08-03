@@ -34,7 +34,7 @@ const roster: Seed[] = [
     name: 'Zendaya',
     category: 'film',
     standfirst:
-      'The most method-dressed person on any red carpet — outfits chosen to argue with the film she is promoting rather than to flatter her.',
+      'The most method-dressed person on any red carpet: outfits chosen to argue with the film she is promoting rather than to flatter her.',
     featured: true,
     rank: 3,
   },
@@ -62,7 +62,7 @@ const roster: Seed[] = [
     name: 'David Corenswet',
     category: 'film',
     standfirst:
-      'Old-Hollywood proportions revived without irony — high-rise trousers, generous lapels, and a shoulder line most of his peers avoid.',
+      'Old-Hollywood proportions revived without irony: high-rise trousers, generous lapels, and a shoulder line most of his peers avoid.',
   },
   {
     name: 'Timothée Chalamet',
@@ -76,7 +76,7 @@ const roster: Seed[] = [
     name: 'Ryan Gosling',
     category: 'film',
     standfirst:
-      'A narrow, controlled palette worn with unusual discipline — then occasionally detonated entirely for a press tour.',
+      'A narrow, controlled palette worn with unusual discipline, then occasionally detonated entirely for a press tour.',
   },
   {
     name: 'Margot Robbie',
@@ -94,7 +94,7 @@ const roster: Seed[] = [
     name: 'Austin Butler',
     category: 'film',
     standfirst:
-      'A leaner, dressier silhouette than most of his generation — jackets buttoned, boots pointed, tailoring taken seriously.',
+      'A leaner, dressier silhouette than most of his generation: jackets buttoned, boots pointed, tailoring taken seriously.',
   },
   {
     name: 'Jacob Elordi',
@@ -112,7 +112,7 @@ const roster: Seed[] = [
     name: 'Anya Taylor-Joy',
     category: 'film',
     standfirst:
-      'The closest thing to a house muse on a modern carpet — sculptural, editorial, and rarely repeating a silhouette.',
+      'The closest thing to a house muse on a modern carpet: sculptural, editorial, and rarely repeating a silhouette.',
   },
   {
     name: 'Michael B. Jordan',
@@ -124,7 +124,7 @@ const roster: Seed[] = [
     name: 'Pedro Pascal',
     category: 'film',
     standfirst:
-      'Colour, print and comfort in equal measure — the rare A-lister who dresses like he is enjoying it.',
+      'Colour, print and comfort in equal measure: the rare A-lister who dresses like he is enjoying it.',
   },
   {
     name: 'Paul Mescal',
@@ -148,7 +148,7 @@ const roster: Seed[] = [
     name: 'Colman Domingo',
     category: 'film',
     standfirst:
-      'Colour, texture and volume used without hedging — the most consistently maximalist dresser working the current carpet, and the most disciplined about it.',
+      'Colour, texture and volume used without hedging: the most consistently maximalist dresser working the current carpet, and the most disciplined about it.',
     featured: true,
     rank: 6,
   },
