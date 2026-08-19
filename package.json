@@ -24,6 +24,7 @@
     "dashes": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/dashes.ts",
     "seed:holland-rest": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-holland-rest.ts",
     "seed:holland": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-holland-bnd.ts",
+    "seed:bnd-cast": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-bnd-cast.ts",
     "seed:gosling": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-gosling-sdcc.ts",
     "seed:looks": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-looks.ts",
     "seed:products": "node --no-deprecation --import=tsx/esm --env-file=.env src/scripts/seed-products.ts",
