@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Celebrity Spotted Outfits · Editor Guide</title>
+<style>
+  :root {
+    --paper: #fcfcfa;
+    --raised: #f4f3ef;
+    --ink: #1a1a18;
+    --ink-2: #4a4a45;
+    --muted: #87867e;
+    --faint: #b0afa7;
+    --rule: #e4e3dd;
+    --accent: #8a2b3b;
+    --display: Georgia, 'Times New Roman', serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  @page {
+    size: A4;
+    margin: 18mm 16mm 20mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 10.2pt;
+    line-height: 1.62;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---------- Cover ---------- */
+  .cover {
+    height: 247mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+  }
+  .cover-top { padding-top: 34mm; }
+  .mark {
+    font-family: var(--display);
+    font-size: 11pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cover h1 {
+    font-family: var(--display);
+    font-size: 46pt;
+    line-height: 1.02;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 14mm 0 0;
+    max-width: 15ch;
+  }
+  .cover .lede {
+    font-size: 12pt;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 58ch;
+    margin: 8mm 0 0;
+  }
+  .cover-foot {
+    border-top: 1px solid var(--rule);
+    padding-top: 5mm;
+    font-size: 9pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ---------- Structure ---------- */
+  h2 {
+    font-family: var(--display);
+    font-size: 22pt;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 0 0 1mm;
+    page-break-after: avoid;
+  }
+  .section {
+    page-break-before: always;
+    padding-top: 2mm;
+  }
+  .section-n {
+    font-size: 8.5pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 3mm;
+  }
+  .section-lede {
+    font-size: 11pt;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0 0 7mm;
+    padding-bottom: 5mm;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 14pt;
+    font-weight: 400;
+    margin: 8mm 0 2.5mm;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 10.2pt;
+    font-weight: 600;
+    margin: 6mm 0 1.5mm;
+    page-break-after: avoid;
+  }
+  p { margin: 0 0 3.2mm; max-width: 74ch; }
+  ul, ol { margin: 0 0 3.5mm; padding-left: 5mm; max-width: 74ch; }
+  li { margin-bottom: 1.4mm; }
+  strong { font-weight: 600; }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--raised);
+    border: 1px solid var(--rule);
+    padding: 0.5mm 1.2mm;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Tables ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 5mm;
+    font-size: 9.4pt;
+    page-break-inside: avoid;
+  }
+  th {
+    text-align: left;
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--ink);
+    padding: 0 3mm 1.8mm 0;
+    vertical-align: bottom;
+  }
+  td {
+    border-bottom: 1px solid var(--rule);
+    padding: 2.2mm 3mm 2.2mm 0;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  td:last-child, th:last-child { padding-right: 0; }
+  .field-name { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 8.8pt; white-space: nowrap; }
+  .req { color: var(--accent); font-weight: 600; font-size: 8.5pt; }
+
+  /* ---------- Callouts ---------- */
+  .note, .warn, .rule-box {
+    padding: 4mm 5mm;
+    margin: 0 0 5mm;
+    page-break-inside: avoid;
+    font-size: 9.6pt;
+  }
+  .note { background: var(--raised); border-left: 2px solid var(--muted); }
+  .warn { background: #fbf4f5; border-left: 2px solid var(--accent); }
+  .rule-box { border: 1px solid var(--rule); background: var(--paper); }
+  .note p:last-child, .warn p:last-child, .rule-box p:last-child { margin-bottom: 0; }
+  .callout-label {
+    font-size: 8pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 1.5mm;
+  }
+  .note .callout-label { color: var(--muted); }
+
+  /* ---------- Steps ---------- */
+  ol.steps { list-style: none; padding-left: 0; counter-reset: step; }
+  ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 9mm;
+    margin-bottom: 3.5mm;
+    page-break-inside: avoid;
+  }
+  ol.steps > li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.3mm;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ---------- Contents ---------- */
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li {
+    display: flex;
+    gap: 4mm;
+    padding: 2.2mm 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 10.5pt;
+  }
+  .toc .n { color: var(--accent); font-weight: 600; font-size: 8.5pt; padding-top: 0.9mm; width: 8mm; flex: none; }
+  .toc .t { font-family: var(--display); font-size: 12pt; }
+  .toc .d { margin-left: auto; color: var(--muted); font-size: 9pt; text-align: right; max-width: 44%; padding-top: 0.6mm; }
+
+  /* ---------- Model diagram ---------- */
+  .chain {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 0 0 5mm;
+    page-break-inside: avoid;
+  }
+  .chain-node {
+    flex: 1;
+    border: 1px solid var(--rule);
+    padding: 3.5mm 3mm;
+    text-align: center;
+    background: var(--raised);
+  }
+  .chain-node .cn-t { font-family: var(--display); font-size: 11.5pt; display: block; }
+  .chain-node .cn-d { font-size: 8.2pt; color: var(--muted); display: block; margin-top: 1mm; line-height: 1.4; }
+  .chain-arrow {
+    align-self: center;
+    padding: 0 2.5mm;
+    color: var(--accent);
+    font-size: 11pt;
+  }
+
+  .kicker { color: var(--muted); font-size: 9.2pt; margin-top: -2mm; margin-bottom: 4mm; }
+  .tight { margin-bottom: 1.5mm; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="cover-top">
+    <p class="mark">Celebrity Spotted Outfits</p>
+    <h1>The Editor’s Guide</h1>
+    <p class="lede">
+      How to add celebrities, looks, garments, products and articles to the archive.
+      Written for someone who has never opened this system before. Read section 3 first;
+      it is the job in one page. Everything after that is detail you can look up when you need it.
+    </p>
+  </div>
+  <div class="cover-foot">
+    <span>Content &amp; publishing handbook</span>
+    <span>Version 1</span>
+  </div>
+</div>
+
+<!-- ============ CONTENTS ============ -->
+<div class="section">
+  <p class="section-n">Contents</p>
+  <h2>What is in here</h2>
+  <div class="section-lede">Fourteen sections. The first four get you publishing; the rest you can read once and return to.</div>
+
+  <ul class="toc">
+    <li><span class="n">01</span><span class="t">How the archive is built</span><span class="d">The five things, and how they connect</span></li>
+    <li><span class="n">02</span><span class="t">Getting in</span><span class="d">The admin, and how it is laid out</span></li>
+    <li><span class="n">03</span><span class="t">Publishing a look, start to finish</span><span class="d">The whole job in nine steps</span></li>
+    <li><span class="n">04</span><span class="t">Adding a celebrity</span><span class="d">Every field, and the two images</span></li>
+    <li><span class="n">05</span><span class="t">Adding a look</span><span class="d">Every field, and what the story is for</span></li>
+    <li><span class="n">06</span><span class="t">Identifying garments</span><span class="d">The confidence call: the heart of the site</span></li>
+    <li><span class="n">07</span><span class="t">Products and buy links</span><span class="d">Prices, merchants, and the /go rule</span></li>
+    <li><span class="n">08</span><span class="t">Images and licensing</span><span class="d">The one thing that can cost real money</span></li>
+    <li><span class="n">09</span><span class="t">Writing an article</span><span class="d">Templates, blocks, keyword links</span></li>
+    <li><span class="n">10</span><span class="t">The request queue</span><span class="d">Answering readers who ask us to find something</span></li>
+    <li><span class="n">11</span><span class="t">Brands</span><span class="d">The directory, and affiliate settings</span></li>
+    <li><span class="n">12</span><span class="t">Homepage, navigation, footer</span><span class="d">The parts you can rearrange</span></li>
+    <li><span class="n">13</span><span class="t">Publishing, drafts and URLs</span><span class="d">Draft, schedule, and never break a link</span></li>
+    <li><span class="n">14</span><span class="t">House rules and gotchas</span><span class="d">What not to do, and why</span></li>
+  </ul>
+</div>
+
+<!-- ============ 01 ============ -->
+<div class="section">
+  <p class="section-n">Section 01</p>
+  <h2>How the archive is built</h2>
+  <div class="section-lede">
+    Everything on the public site is assembled from five kinds of record. Understand how they
+    hang together and the rest of this guide is obvious.
+  </div>
+
+  <div class="chain">
+    <div class="chain-node"><span class="cn-t">Celebrity</span><span class="cn-d">A person</span></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node"><span class="cn-t">Look</span><span class="cn-d">One outfit, one occasion</span></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node"><span class="cn-t">Item</span><span class="cn-d">One garment in it</span></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node"><span class="cn-t">Product</span><span class="cn-d">Where to buy it</span></div>
+  </div>
+
+  <p>
+    A <strong>Celebrity</strong> is a person we cover. A <strong>Look</strong> is one outfit they wore
+    on one occasion, and it gets its own page and its own web address. An <strong>Item</strong> is a
+    single garment inside that look: the jacket, the shoes, the brooch. A <strong>Product</strong> is a
+    thing a reader can actually buy, which an item points at. <strong>Brands</strong> sit alongside as a
+    directory, and <strong>Articles</strong> are the journal: longer writing that is not tied to one outfit.
+  </p>
+
+  <p>
+    The reason a look gets its own page rather than being a section of the celebrity page is search:
+    people search for <em>an outfit</em>, not only for a person. A page with a title, a photograph and
+    forty words gives search engines nothing to index, which is why the story field in section 05 matters
+    more than it looks.
+  </p>
+
+  <h3>Where each one shows up</h3>
+  <table>
+    <thead><tr><th style="width:26%">Record</th><th style="width:38%">Public address</th><th>Also appears</th></tr></thead>
+    <tbody>
+      <tr><td>Celebrity</td><td><code>/celebrities/name</code></td><td>Celebrity index, homepage grid</td></tr>
+      <tr><td>Look</td><td><code>/celebrities/name/look</code></td><td>The celebrity’s page, homepage latest looks</td></tr>
+      <tr><td>Item</td><td>No page of its own</td><td>Listed on the look page it belongs to</td></tr>
+      <tr><td>Product</td><td>No page of its own</td><td>Buy links on look pages and inside articles</td></tr>
+      <tr><td>Brand</td><td><code>/brands/name</code></td><td>Brand index</td></tr>
+      <tr><td>Article</td><td><code>/journal/title</code></td><td>Journal index, homepage preview</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <p class="callout-label">Worth knowing early</p>
+    <p>
+      Items are not created inside a look. You create them separately and point each one at its look.
+      This trips up everybody once. Section 06 explains why it is built that way and how to do it.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 02 ============ -->
+<div class="section">
+  <p class="section-n">Section 02</p>
+  <h2>Getting in</h2>
+  <div class="section-lede">
+    The editing system is called Payload. You reach it in a browser and it looks like a database with
+    good manners.
+  </div>
+
+  <h3>The address</h3>
+  <p>
+    Add <code>/admin</code> to the end of the site address. You will be asked for the email and password
+    you were given. If you do not have one, ask for an account to be created; you cannot sign yourself up.
+  </p>
+
+  <h3>How the left-hand menu is grouped</h3>
+  <table>
+    <thead><tr><th style="width:22%">Group</th><th style="width:38%">Contains</th><th>What it is for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Archive</strong></td><td>Celebrities, Looks, Items, Products, Brands</td><td>The main body of work. You will live here.</td></tr>
+      <tr><td><strong>Journal</strong></td><td>Articles</td><td>Longer writing</td></tr>
+      <tr><td><strong>Library</strong></td><td>Media</td><td>Every image on the site</td></tr>
+      <tr><td><strong>Requests</strong></td><td>Requests, Request uploads</td><td>Readers asking us to identify something</td></tr>
+      <tr><td><strong>Reporting</strong></td><td>Outbound clicks</td><td>Which buy links get clicked</td></tr>
+      <tr><td><strong>Settings</strong></td><td>Site settings, Navigation, Footer, Homepage, Redirects</td><td>Site-wide controls. Change with care.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Two habits that will save you</h3>
+  <ul>
+    <li><strong>Your work saves itself.</strong> Drafts autosave every few tenths of a second. You will not lose anything by navigating away.</li>
+    <li><strong>Saving is not publishing.</strong> A record stays a draft until you publish it. Nothing you type appears on the public site until then. See section 13.</li>
+  </ul>
+</div>
+
+<!-- ============ 03 ============ -->
+<div class="section">
+  <p class="section-n">Section 03</p>
+  <h2>Publishing a look, start to finish</h2>
+  <div class="section-lede">
+    This is the job. If you read one section, read this one. The detail behind each step is in the
+    sections that follow.
+  </div>
+
+  <ol class="steps">
+    <li>
+      <h4>Check the celebrity already exists</h4>
+      <p class="tight">Open <strong>Archive → Celebrities</strong> and search. If they are not there, create them first (section 04). A look cannot be saved without a celebrity attached.</p>
+    </li>
+    <li>
+      <h4>Get the photograph, and get it licensed</h4>
+      <p class="tight">Before anything else. An unlicensed photograph is the one mistake on this site that costs real money. Section 08 sets out which sources are allowed.</p>
+    </li>
+    <li>
+      <h4>Upload the photograph to the Library</h4>
+      <p class="tight"><strong>Library → Media → Create.</strong> Fill in the description, the credit and the licence. The system will not let you save without all three. Set the focal point so the crop keeps the face in frame.</p>
+    </li>
+    <li>
+      <h4>Create the look</h4>
+      <p class="tight"><strong>Archive → Looks → Create.</strong> Choose the celebrity, give it a title, set the date, place and occasion, and attach the photograph. Full field list in section 05.</p>
+    </li>
+    <li>
+      <h4>Write the story</h4>
+      <p class="tight">A few hundred words on where it was worn, what the outfit is doing, and why it works. This is what makes the page worth its own address.</p>
+    </li>
+    <li>
+      <h4>Save it as a draft</h4>
+      <p class="tight">You need the look to exist before you can attach garments to it.</p>
+    </li>
+    <li>
+      <h4>Add the garments, one at a time</h4>
+      <p class="tight"><strong>Archive → Items → Create</strong>, once per garment, each pointing at this look. For every one you must choose a confidence level. That decision is section 06, and it is the most important judgement you will make here.</p>
+    </li>
+    <li>
+      <h4>Attach products where a reader can buy something</h4>
+      <p class="tight">Search the existing Products first; most arrive automatically from merchant feeds. Only create one by hand if it genuinely is not there. Section 07.</p>
+    </li>
+    <li>
+      <h4>Read it back, then publish</h4>
+      <p class="tight">Check every confidence label is one you would defend to the brand’s lawyer. Then publish the look. The public pages update within seconds.</p>
+    </li>
+  </ol>
+
+  <div class="rule-box">
+    <p class="callout-label">The standard to hold</p>
+    <p>
+      A reader should never be told something is confirmed when it is a guess. The site’s whole
+      value is that its labels are honest. An open “we could not confirm this” costs us nothing;
+      one invented brand costs us the reason anybody trusts the archive.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 04 ============ -->
+<div class="section">
+  <p class="section-n">Section 04</p>
+  <h2>Adding a celebrity</h2>
+  <div class="section-lede">
+    <strong>Archive → Celebrities → Create.</strong> Short record, two images, one piece of real writing.
+  </div>
+
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Name</td><td class="req">Required</td><td>As they are normally credited. “Michael B. Jordan”, not “Jordan, Michael B.”</td></tr>
+      <tr><td class="field-name">Slug</td><td class="req">Required</td><td>The web address. Fills in automatically from the name. Leave it alone unless you have a reason, and read section 13 before changing one that is already live.</td></tr>
+      <tr><td class="field-name">Category</td><td class="req">Required</td><td>Film &amp; TV, Music, Sport, or Creator. Pick what they are best known for.</td></tr>
+      <tr><td class="field-name">Standfirst</td><td></td><td>One paragraph. Not a biography: a thesis. What is distinctive about how this person dresses? This is the hardest sentence on the record and the most read.</td></tr>
+      <tr><td class="field-name">Bio</td><td></td><td>Longer background. Optional, and it can wait.</td></tr>
+      <tr><td class="field-name">Portrait image</td><td></td><td>Upright, taller than wide (3:4). Used on cards and lists.</td></tr>
+      <tr><td class="field-name">Hero image</td><td></td><td>Wide. Used for the full-width band at the top of their page.</td></tr>
+      <tr><td class="field-name">Featured</td><td></td><td>Pins them above everything else on the index.</td></tr>
+      <tr><td class="field-name">Rank</td><td></td><td>Lower numbers come first among featured people. Ignore it unless you are ordering the front page.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <p class="callout-label">Why two images</p>
+    <p>
+      A tall portrait cropped into a wide band loses the head; a wide shot squeezed into a card
+      becomes a sliver of shoulder. They are different pictures for different shapes, not the same
+      picture twice. If you only have one, upload it as the portrait and leave the hero empty.
+    </p>
+  </div>
+
+  <h3>A good standfirst, and a bad one</h3>
+  <p class="kicker">Weak: “An English actor known for the Spider-Man films and a number of stage roles.”</p>
+  <p class="kicker">Strong: “Dresses like someone who knows exactly how much of the reference to leave in. The Spider-Man tours are the clearest case: the colours are always there, the logo never is.”</p>
+</div>
+
+<!-- ============ 05 ============ -->
+<div class="section">
+  <p class="section-n">Section 05</p>
+  <h2>Adding a look</h2>
+  <div class="section-lede">
+    <strong>Archive → Looks → Create.</strong> One outfit, on one occasion. This is the page the reader
+    lands on from search, so it carries the most weight.
+  </div>
+
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Celebrity</td><td class="req">Required</td><td>Who is wearing it. Must exist already.</td></tr>
+      <tr><td class="field-name">Title</td><td class="req">Required</td><td>Describe the outfit, do not name the event. “Crimson Jacquemus, and a navy tie” beats “Spider-Man premiere”. The event has its own field.</td></tr>
+      <tr><td class="field-name">Slug</td><td class="req">Required</td><td>Auto-filled from the title.</td></tr>
+      <tr><td class="field-name">Date</td><td class="req">Required</td><td>When it was worn, not when you are writing.</td></tr>
+      <tr><td class="field-name">Location</td><td></td><td>City, or the venue if it is famous. “London”, “Leicester Square”.</td></tr>
+      <tr><td class="field-name">Occasion</td><td></td><td>Airport, Premiere, Press call, On set, Street, or Event.</td></tr>
+      <tr><td class="field-name">Event</td><td></td><td>The specific occasion. “Spider-Man: Brand New Day UK premiere · Odeon Luxe Leicester Square”. Leave empty rather than guess.</td></tr>
+      <tr><td class="field-name">Description</td><td></td><td>One or two sentences on what is being worn. Used on cards and as the search-result snippet, so keep it short and concrete.</td></tr>
+      <tr><td class="field-name">Story</td><td></td><td>The long form. See below.</td></tr>
+      <tr><td class="field-name">Photos</td><td></td><td>One or more. <strong>The first one is the lead image.</strong> Drag to reorder.</td></tr>
+      <tr><td class="field-name">Items</td><td></td><td>Read-only list. It fills in as you create items pointing at this look.</td></tr>
+      <tr><td class="field-name">Featured / Rank</td><td></td><td>Pinning and ordering, as with celebrities.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What the story is for</h3>
+  <p>
+    Aim for three or four short sections with headings. A shape that works every time:
+  </p>
+  <ul>
+    <li><strong>The setting.</strong> Where, when, what the occasion was.</li>
+    <li><strong>The outfit.</strong> What the pieces are, in order, in plain words.</li>
+    <li><strong>Why it works.</strong> The actual argument. This is the part readers come back for.</li>
+    <li><strong>What you can actually buy.</strong> Honest about what is bespoke, couture, or long gone.</li>
+  </ul>
+  <p>
+    You can drop a buy module directly into the writing, so a product sits next to the sentence about
+    it rather than only in the list underneath. Use the block menu in the editor.
+  </p>
+
+  <div class="warn">
+    <p class="callout-label">House style</p>
+    <p>
+      No em dashes anywhere in reader-facing writing. Use a colon for a gloss, a full stop for a
+      separate thought, brackets for an aside, a comma for a trailing qualifier. This is enforced
+      across the site and it is the fastest way to spot copy that was not written by a person.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 06 ============ -->
+<div class="section">
+  <p class="section-n">Section 06</p>
+  <h2>Identifying garments</h2>
+  <div class="section-lede">
+    <strong>Archive → Items → Create</strong>, once per garment. Every item carries a confidence level,
+    and that label is the most important thing you will type here.
+  </div>
+
+  <h3>Why items are created separately</h3>
+  <p>
+    You do not add garments inside the look. You create each one in the Items collection and point it
+    at the look using the <strong>Look</strong> field in the sidebar. It is built that way so the whole
+    archive can be reviewed at once: “show me every unidentified jacket” is a question worth being able
+    to answer, and it is impossible if items are buried inside individual outfits.
+  </p>
+
+  <h3>The fields</h3>
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Description</td><td></td><td>The garment in words a reader recognises. “Plain white crew-neck tee”, not “knitwear”. Without it the page can only show a category the reader can already see.</td></tr>
+      <tr><td class="field-name">Look</td><td class="req">Required</td><td>Which outfit this belongs to. In the sidebar.</td></tr>
+      <tr><td class="field-name">Category</td><td class="req">Required</td><td>Outerwear, knitwear, shirting, tailoring, denim, trousers, footwear, eyewear, watch, bag, jewellery, other.</td></tr>
+      <tr><td class="field-name">Confidence</td><td class="req">Required</td><td>See the table below. Never mark something confirmed to fill a gap.</td></tr>
+      <tr><td class="field-name">Evidence note</td><td></td><td>Why you made this call. “Logo visible on temple.” Never shown publicly, but it is the audit trail if a brand queries it. Always fill it in.</td></tr>
+      <tr><td class="field-name">Product</td><td></td><td>The main thing we link to.</td></tr>
+      <tr><td class="field-name">Alternative product</td><td></td><td>A cheaper stand-in, shown when the original is over $500 or out of stock.</td></tr>
+      <tr><td class="field-name">More options</td><td></td><td>Further ways to buy the same garment. Cheapest first.</td></tr>
+      <tr><td class="field-name">Position</td><td></td><td>Display order within the look. Top of the body downwards is a sensible default.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The four confidence levels</h3>
+  <table>
+    <thead><tr><th style="width:26%">Level</th><th style="width:34%">Use it when</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Confirmed</strong><br><span style="color:var(--muted);font-size:8.6pt">Logo, hardware or stylist-credited</span></td>
+        <td>You can point at proof: a visible logo, distinctive hardware, or a credit from the stylist or brand.</td>
+        <td>The style name matches a current listing and the brand posted the look themselves.</td>
+      </tr>
+      <tr>
+        <td><strong>Closest match</strong><br><span style="color:var(--muted);font-size:8.6pt">Unbranded in the photo</span></td>
+        <td>You are confident about the house but cannot read a label, or the piece is custom and built off a known collection.</td>
+        <td>Reported as custom Jacquemus off a named collection, but not read off a label.</td>
+      </tr>
+      <tr>
+        <td><strong>Get the look</strong><br><span style="color:var(--muted);font-size:8.6pt">Cheaper equivalent</span></td>
+        <td>You are openly offering something similar rather than the real thing.</td>
+        <td>A high-street coat in the same cut as an unbuyable bespoke one.</td>
+      </tr>
+      <tr>
+        <td><strong>Open</strong><br><span style="color:var(--muted);font-size:8.6pt">Not enough detail to call</span></td>
+        <td>You genuinely cannot tell. This is a perfectly good answer.</td>
+        <td>A plain white shirt with no visible detail.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <p class="callout-label">The one rule that matters</p>
+    <p>
+      If you are choosing between two levels, choose the lower one. Marking something confirmed
+      because the page looks better with a brand name on it is the only way to genuinely damage this
+      site. Readers forgive “we could not tell”. They do not come back after being sold the wrong coat.
+    </p>
+  </div>
+
+  <div class="note">
+    <p class="callout-label">Known gap</p>
+    <p>
+      There is no “dress” or “gown” category yet, so evening wear currently goes under
+      <strong>other</strong>. Flag it if this starts getting in your way; it is a small change.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 07 ============ -->
+<div class="section">
+  <p class="section-n">Section 07</p>
+  <h2>Products and buy links</h2>
+  <div class="section-lede">
+    <strong>Archive → Products.</strong> Most of these arrive automatically from merchant feeds, along
+    with their photography. Search before you create.
+  </div>
+
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Name</td><td class="req">Required</td><td>As the merchant lists it, but say the colour out loud if it differs from the worn piece. “La Veste Cabri blazer in navy” tells the reader before they click that it is not the crimson one.</td></tr>
+      <tr><td class="field-name">Brand</td><td></td><td>Links to the brand directory.</td></tr>
+      <tr><td class="field-name">Description</td><td></td><td>One line. Cut, colour, material: what distinguishes it.</td></tr>
+      <tr><td class="field-name">Price</td><td></td><td><strong>In minor units.</strong> $171.00 is entered as <code>17100</code>. This catches everyone once.</td></tr>
+      <tr><td class="field-name">Currency</td><td></td><td>USD, CAD, GBP or EUR.</td></tr>
+      <tr><td class="field-name">Affiliate URL</td><td class="req">Required</td><td>The tracked merchant link.</td></tr>
+      <tr><td class="field-name">Merchant</td><td></td><td>Where it is bought. “Nordstrom”, “Farfetch”.</td></tr>
+      <tr><td class="field-name">Image / Image URL</td><td></td><td>Uploaded image, or the address of the merchant’s own photograph.</td></tr>
+      <tr><td class="field-name">SKU</td><td></td><td>The merchant’s code. This is what feed updates match on, so do not edit it.</td></tr>
+      <tr><td class="field-name">In stock</td><td></td><td>Kept up to date automatically for feed products.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <p class="callout-label">Never paste a raw affiliate link into writing</p>
+    <p>
+      Buy links must always go through a product record. The public site turns them into a tracked
+      redirect of its own, which is how we get click data the same day and how a merchant can be
+      swapped without editing a single article. A raw affiliate link pasted into a story bypasses
+      all of that and silently stops earning if the merchant changes.
+    </p>
+  </div>
+
+  <h3>Honesty about price and availability</h3>
+  <p>
+    If the exact piece is unbuyable, say so in the writing and link the nearest honest thing, with the
+    difference in the product name. Do not attach a lookalike as though it were the original. Several
+    resellers list “as worn by” garments that turn out to be a different outfit relabelled; check that
+    what you are linking is actually the piece in the photograph.
+  </p>
+</div>
+
+<!-- ============ 08 ============ -->
+<div class="section">
+  <p class="section-n">Section 08</p>
+  <h2>Images and licensing</h2>
+  <div class="section-lede">
+    This is the single largest legal risk to the business, so the system refuses to save an image
+    without a credit and a licence. That is deliberate. Do not look for a way around it.
+  </div>
+
+  <h3>Every image needs three things</h3>
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Alt text</td><td class="req">Required</td><td>Describe the picture for someone who cannot see it, and for search. “Tom Holland at the UK premiere in a burgundy double-breasted suit with a jewelled brooch.”</td></tr>
+      <tr><td class="field-name">Caption</td><td></td><td>Optional line shown under the image.</td></tr>
+      <tr><td class="field-name">Credit</td><td class="req">Required</td><td>Photographer or agency, worded exactly as the licence demands. “Amy Sussman / Getty Images”.</td></tr>
+      <tr><td class="field-name">Licence</td><td class="req">Required</td><td>Which of the five routes below.</td></tr>
+      <tr><td class="field-name">Source agency</td><td></td><td>Appears when the licence is an agency one. Which agency it is with.</td></tr>
+      <tr><td class="field-name">Licence expires</td><td></td><td>Leave empty if it does not expire. Fill it in if it does, or we will still be publishing it after the right has lapsed.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The five permitted routes</h3>
+  <table>
+    <thead><tr><th style="width:28%">Licence</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Agency licence</strong></td><td>We pay an agency such as Getty. Record which one.</td></tr>
+      <tr><td><strong>Official embed</strong></td><td>The celebrity’s or brand’s own Instagram or X post, embedded the official way. Free, and permitted by those platforms’ terms.</td></tr>
+      <tr><td><strong>Creative Commons</strong></td><td>Freely licensed, usually from Wikimedia. Credit exactly as the licence requires.</td></tr>
+      <tr><td><strong>Our own</strong></td><td>We shot or commissioned it.</td></tr>
+      <tr><td><strong>Brand promotional asset</strong></td><td>Supplied by a brand’s press office for editorial coverage.</td></tr>
+      <tr><td><strong>Merchant product feed</strong></td><td>Product photography that came with an affiliate feed.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <p class="callout-label">A credit is not a licence</p>
+    <p>
+      Adding “courtesy of” to a photograph you found online does not give you the right to publish it.
+      Red carpet photographs belong to agencies, and finding a copy somewhere it has been reposted does
+      not change that. If you cannot honestly pick one of the six routes above, you do not have the
+      picture. Publish the look without an image, or do not publish it yet.
+    </p>
+  </div>
+
+  <h3>Focal point</h3>
+  <p>
+    Each image is automatically cut into eight different shapes for different parts of the site. On a
+    full-length shot, the automatic centre crop will cut the head off in the wide banner. Drag the focal
+    point onto the face and every crop follows it. Takes three seconds and it is the difference between
+    a professional page and a broken one.
+  </p>
+</div>
+
+<!-- ============ 09 ============ -->
+<div class="section">
+  <p class="section-n">Section 09</p>
+  <h2>Writing an article</h2>
+  <div class="section-lede">
+    <strong>Journal → Articles → Create.</strong> Longer writing that is not tied to a single outfit.
+  </div>
+
+  <h3>Pick a template first</h3>
+  <p>
+    The template shapes how the piece is presented and what search engines are told about it.
+    Choose it before you write, not after.
+  </p>
+  <table>
+    <thead><tr><th style="width:30%">Template</th><th>Use for</th></tr></thead>
+    <tbody>
+      <tr><td>How-to / tutorial</td><td>“How to wear a fishtail parka”</td></tr>
+      <tr><td>Listicle</td><td>“Eight premiere suits worth stealing”</td></tr>
+      <tr><td>Comparison</td><td>“Bespoke vs made to measure”</td></tr>
+      <tr><td>Review</td><td>A single product or service, assessed</td></tr>
+      <tr><td>News / update</td><td>Something that just happened</td></tr>
+      <tr><td>Generic article</td><td>Anything that does not fit the others</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The fields</h3>
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Title</td><td class="req">Required</td><td>The headline.</td></tr>
+      <tr><td class="field-name">Excerpt</td><td class="req">Required</td><td>The card summary and the search snippet. Write it as a promise the piece keeps.</td></tr>
+      <tr><td class="field-name">Hero image</td><td></td><td>Licensed, as always.</td></tr>
+      <tr><td class="field-name">Body</td><td></td><td>The writing, with blocks. See below.</td></tr>
+      <tr><td class="field-name">Published at</td><td></td><td>The date shown to readers.</td></tr>
+      <tr><td class="field-name">Author</td><td></td><td>Byline.</td></tr>
+      <tr><td class="field-name">Related celebrity / brand</td><td></td><td>Cross-links the piece into the archive.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Blocks you can drop into the body</h3>
+  <ul>
+    <li><strong>Shoppable product</strong> — a buy module inline, with a small label above it.</li>
+    <li><strong>Pull quote</strong> — a line lifted out, with optional attribution.</li>
+    <li><strong>Image</strong> — at text width, wider than the text, or full bleed.</li>
+    <li><strong>Gallery</strong> — several images together.</li>
+    <li><strong>Embed</strong> — Instagram, YouTube, or X. This is also the licensed way to show a celebrity’s own photograph.</li>
+    <li><strong>Callout</strong> — a note, or a “get the look” box.</li>
+  </ul>
+
+  <h3>Keyword links</h3>
+  <p>
+    In the SEO tab you can list keywords with the address each should link to. Set the relationship
+    for each one: leave it on <strong>Auto</strong> unless you know better. Use <strong>Sponsored</strong>
+    for anything paid or affiliate, and <strong>Nofollow</strong> for links you do not want to vouch for.
+    Getting this wrong is a search penalty, not a style question.
+  </p>
+  <p>
+    The same tab shows live checks on the piece as you write. Work down them until they are clear.
+  </p>
+</div>
+
+<!-- ============ 10 ============ -->
+<div class="section">
+  <p class="section-n">Section 10</p>
+  <h2>The request queue</h2>
+  <div class="section-lede">
+    <strong>Requests → Requests.</strong> Readers send us outfits to identify through the “Find my
+    outfit” page. Each one is a person waiting for an answer.
+  </div>
+
+  <h3>Working a request</h3>
+  <ol class="steps">
+    <li><h4>Open the oldest new request</h4><p class="tight">They are worked in the order they arrive. There is no queue to jump, and we say so publicly.</p></li>
+    <li><h4>Set it to Researching</h4><p class="tight">So nobody else picks up the same one.</p></li>
+    <li><h4>Do the work</h4><p class="tight">Reverse image search, runway and lookbook archives, stylist credits, the brand’s own catalogue.</p></li>
+    <li><h4>Publish the answer as a look or an article</h4><p class="tight">Then link it back using the resulting look or resulting article field, so the queue records where the answer went.</p></li>
+    <li><h4>Set the outcome and email the reader</h4><p class="tight">Answered, or could not identify. Both are real outcomes. Record the date you told them.</p></li>
+  </ol>
+
+  <h3>The five statuses</h3>
+  <table>
+    <thead><tr><th style="width:28%">Status</th><th>Means</th></tr></thead>
+    <tbody>
+      <tr><td><strong>New</strong></td><td>Nobody has looked at it.</td></tr>
+      <tr><td><strong>Researching</strong></td><td>Being worked on now.</td></tr>
+      <tr><td><strong>Answered</strong></td><td>Identified and published, reader told.</td></tr>
+      <tr><td><strong>Could not identify</strong></td><td>Genuinely unidentifiable. Tell them plainly. This is not a failure.</td></tr>
+      <tr><td><strong>Declined / spam</strong></td><td>Not a real request.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <p class="callout-label">Reader photographs are private</p>
+    <p>
+      Images sent in through the form are held separately from the main library and are not public.
+      We look at them to do the research. Never move one into the Library or publish it, whatever it
+      shows, unless we have licensed that image ourselves. We promise this on the form, in writing.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 11 ============ -->
+<div class="section">
+  <p class="section-n">Section 11</p>
+  <h2>Brands</h2>
+  <div class="section-lede">
+    <strong>Archive → Brands.</strong> The directory. Each brand gets a page, which is also how we rank
+    for the brand’s own name.
+  </div>
+
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:12%"></th><th>What to put in it</th></tr></thead>
+    <tbody>
+      <tr><td class="field-name">Name</td><td class="req">Required</td><td>The house name.</td></tr>
+      <tr><td class="field-name">Logo</td><td></td><td>Only if it is freely licensed. A plain wordmark usually is; a pictorial mark usually is not. If in doubt, leave it empty rather than borrow a file we have no right to.</td></tr>
+      <tr><td class="field-name">Website</td><td></td><td>Their own site.</td></tr>
+      <tr><td class="field-name">Founded</td><td></td><td>Free text. “1937”, “1980s”.</td></tr>
+      <tr><td class="field-name">Description</td><td></td><td>Shown on the brand page. Worth writing properly.</td></tr>
+      <tr><td class="field-name">Affiliate network</td><td></td><td>In the collapsible section. Which network we earn through.</td></tr>
+      <tr><td class="field-name">Commission rate</td><td></td><td>A percentage. Informational, used to decide which brands are worth chasing. It must never influence what we identify or how we label it.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ 12 ============ -->
+<div class="section">
+  <p class="section-n">Section 12</p>
+  <h2>Homepage, navigation, footer</h2>
+  <div class="section-lede">
+    Under <strong>Settings</strong>. These affect every page on the site, so change one thing at a time
+    and look at the result.
+  </div>
+
+  <h3>Homepage</h3>
+  <p>
+    Built from sections you can switch on and off and reorder: <strong>hero</strong>,
+    <strong>latest looks</strong>, <strong>celebrity grid</strong>, <strong>standards</strong>, and
+    <strong>journal preview</strong>. Each has its own heading and settings, and each can be disabled
+    without deleting it.
+  </p>
+
+  <h3>Site settings</h3>
+  <p>
+    Site name, tagline, default description, logo, and the default sharing image. It also holds two
+    pieces of legally required text:
+  </p>
+  <ul>
+    <li><strong>Affiliate disclosure</strong> — appears on every page carrying a buy link. Required by law. Do not remove it or water it down.</li>
+    <li><strong>Non-affiliation notice</strong> — states that we are not endorsed by the celebrities or brands we cover. Also do not remove it.</li>
+  </ul>
+
+  <h3>Navigation and footer</h3>
+  <p>
+    Lists of links with a label and an address each; the footer is grouped into columns. If you add a
+    link to a page that does not exist, it will 404 for every visitor, so paste addresses rather than
+    typing them.
+  </p>
+</div>
+
+<!-- ============ 13 ============ -->
+<div class="section">
+  <p class="section-n">Section 13</p>
+  <h2>Publishing, drafts and URLs</h2>
+  <div class="section-lede">
+    How work goes live, and the one action that can quietly cost the site traffic.
+  </div>
+
+  <h3>Draft and published</h3>
+  <ul>
+    <li>Everything starts as a <strong>draft</strong> and is invisible to the public.</li>
+    <li>Drafts <strong>autosave continuously</strong>. You will not lose work.</li>
+    <li><strong>Publish</strong> makes it live. The public pages refresh within seconds.</li>
+    <li>You can <strong>schedule</strong> a publish for a future date, which is how you have a premiere look go live the moment an embargo lifts.</li>
+    <li>The last <strong>20 versions</strong> of each record are kept, so you can compare and roll back.</li>
+  </ul>
+
+  <h3>Featured and rank</h3>
+  <p>
+    <strong>Featured</strong> pins a record above everything else. <strong>Rank</strong> orders the pinned
+    ones, lower numbers first. If everything is featured, nothing is.
+  </p>
+
+  <div class="warn">
+    <p class="callout-label">Changing a slug on a live page</p>
+    <p>
+      The slug is the web address. It fills in from the title automatically, but only while it is empty,
+      so renaming a title never silently moves a published page. If you deliberately change a slug that
+      is already live, every existing link to it and every search ranking it holds will break.
+    </p>
+    <p>
+      If you must: change it, then immediately add a redirect under <strong>Settings → Redirects</strong>
+      pointing the old address at the new one. Do not do one without the other.
+    </p>
+  </div>
+</div>
+
+<!-- ============ 14 ============ -->
+<div class="section">
+  <p class="section-n">Section 14</p>
+  <h2>House rules and gotchas</h2>
+  <div class="section-lede">
+    The short list. Most of these are mistakes that are easy to make once and awkward to undo.
+  </div>
+
+  <h3>Never</h3>
+  <ul>
+    <li>Mark an item <strong>confirmed</strong> without evidence you could point at.</li>
+    <li>Publish a photograph that does not fit one of the licence routes in section 08.</li>
+    <li>Publish a reader’s submitted photograph.</li>
+    <li>Paste a raw affiliate link into writing instead of using a product record.</li>
+    <li>Remove the affiliate disclosure or the non-affiliation notice.</li>
+    <li>Change a live slug without adding a redirect.</li>
+    <li>Let a commission rate influence what we identify or how we label it.</li>
+  </ul>
+
+  <h3>Always</h3>
+  <ul>
+    <li>Fill in the evidence note, even when the answer is obvious. It is the audit trail.</li>
+    <li>Set the focal point on any photograph with a face in it.</li>
+    <li>Say the colour out loud in a product name when it differs from the piece worn.</li>
+    <li>Check whether a product already exists before creating one.</li>
+    <li>Choose the lower confidence level when you are torn between two.</li>
+  </ul>
+
+  <h3>Things that catch everyone once</h3>
+  <table>
+    <thead><tr><th style="width:38%">You expect</th><th>What actually happens</th></tr></thead>
+    <tbody>
+      <tr><td>To add garments inside the look</td><td>Items are created separately and pointed at the look.</td></tr>
+      <tr><td>To type a price as 171.00</td><td>Prices are in minor units. $171.00 is <code>17100</code>.</td></tr>
+      <tr><td>Saving to publish it</td><td>Saving keeps it a draft. Publishing is a separate button.</td></tr>
+      <tr><td>Renaming the title to change the address</td><td>The slug stays put once set. Change it deliberately, with a redirect.</td></tr>
+      <tr><td>To find a “dress” category</td><td>Not there yet. Gowns go under <strong>other</strong>.</td></tr>
+      <tr><td>To credit a photo as “courtesy of”</td><td>Not a licence. See section 08.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="rule-box">
+    <p class="callout-label">If you are unsure</p>
+    <p>
+      Leave it as a draft and ask. Nothing here is urgent enough to justify guessing in public. The
+      archive is worth something precisely because a reader can believe what it says, and that is
+      rebuilt or spent one label at a time.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
