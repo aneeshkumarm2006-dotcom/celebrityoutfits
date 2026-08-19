@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { ArticleBody } from '@/components/site/ArticleBody'
-import { ItemRow } from '@/components/site/cards'
+import { ItemCard, ItemRow } from '@/components/site/cards'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
+import { ShopBar } from '@/components/site/ShopBar'
 import { formatDate, formatPrice, mediaUrl } from '@/lib/media'
 import { getCelebrityBySlug, getItemsForLook, getLookBySlug } from '@/lib/payload'
 import { breadcrumbSchema, buildMetadata } from '@/lib/seo'
@@ -39,6 +40,18 @@ export default async function LookPage({ params }: Props) {
 
   const items = await getItemsForLook(look.id)
   const photo = Array.isArray(look.photos) ? (look.photos[0] as Media) : null
+
+  /**
+   * Only garments that resolve to something buyable belong in the shop grid.
+   * An unidentified item has no image and no price, so as a card it is an empty
+   * box stretched to the height of its row. It still appears in the list beside
+   * the photograph, which is where the honest "we could not place this" belongs.
+   */
+  const shoppable = items.filter(
+    (item) =>
+      (item.product && typeof item.product === 'object') ||
+      (item.alternativeProduct && typeof item.alternativeProduct === 'object'),
+  )
 
   const products = items
     .map((item) => (typeof item.product === 'object' ? (item.product as Product) : null))
@@ -177,6 +190,30 @@ export default async function LookPage({ params }: Props) {
         </section>
 
         {/**
+         * The same garments again, full width, as a grid of cards.
+         *
+         * The column beside the photograph is a little over a third of the
+         * page, which fits one readable row and no more: two cards side by side
+         * in there come out narrower than the thumbnails they replaced. So the
+         * grid gets the full measure underneath, where the cards can carry a
+         * real image, and the list upstairs stays as the reference next to the
+         * photograph.
+         *
+         * Two across on a phone, widening with the screen. Holding it at two on
+         * a desktop would set each card about seven hundred pixels wide.
+         */}
+        {shoppable.length > 0 ? (
+          <section id="shop-this-look" className="scroll-mt-24 border-t border-rule py-12 sm:py-16">
+            <SectionHead heading="Shop this look" />
+            <div className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
+              {shoppable.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {/**
          * The write-up stays full width underneath, at a comfortable reading
          * measure. Squeezed into the column beside the photograph it would set
          * long prose about thirty characters wide.
@@ -186,7 +223,24 @@ export default async function LookPage({ params }: Props) {
             <ArticleBody data={look.story as SerializedEditorState} />
           </section>
         ) : null}
+        {/* Room for the sticky bar so it never covers the last line. */}
+        <div aria-hidden="true" className="h-20 lg:hidden" />
       </Container>
+
+      {shoppable.length > 0 ? (
+        <ShopBar
+          targetId="shop-this-look"
+          itemCount={shoppable.length}
+          total={
+            products.length > 0
+              ? formatPrice(
+                  products.reduce((sum, p) => sum + (p.priceCents ?? 0), 0),
+                  products[0]?.currency ?? 'USD',
+                )
+              : null
+          }
+        />
+      ) : null}
     </>
   )
 }

@@ -14,7 +14,7 @@ export const Products: CollectionConfig = {
   labels: { singular: 'Product', plural: 'Products' },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'brand', 'priceDisplay', 'inStock', 'priceCheckedAt'],
+    defaultColumns: ['name', 'brand', 'tag', 'priceDisplay', 'inStock', 'priceCheckedAt'],
     group: 'Archive',
   },
   access: { read: anyone, create: admins, update: admins, delete: admins },
@@ -75,6 +75,33 @@ export const Products: CollectionConfig = {
       },
     },
     { name: 'merchant', type: 'text', admin: { description: 'Where it is bought, e.g. Nordstrom.' } },
+    {
+      /**
+       * A merchandising badge, set by hand.
+       *
+       * Deliberately not derived from anything. The retail sites this borrows
+       * from compute their badges from sales data we do not have, and inventing
+       * "selling fast" from nothing is the kind of false urgency this archive
+       * exists to be the opposite of. An editor puts it there or it is absent.
+       *
+       * It never replaces an item's confidence label. Confidence says whether we
+       * know what the garment is; this says something about the deal. They sit
+       * side by side and the confidence one stays visually primary.
+       */
+      name: 'tag',
+      type: 'select',
+      options: [
+        { label: 'Best price', value: 'best-price' },
+        { label: "Editor's pick", value: 'editors-pick' },
+        { label: 'Selling fast', value: 'selling-fast' },
+        { label: 'New in', value: 'new-in' },
+        { label: 'On sale', value: 'on-sale' },
+      ],
+      admin: {
+        description:
+          'Optional badge shown on the product card. Leave empty unless it is actually true.',
+      },
+    },
     { name: 'image', type: 'upload', relationTo: 'media' },
     {
       name: 'imageUrl',

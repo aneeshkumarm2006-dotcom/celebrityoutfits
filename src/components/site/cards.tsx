@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { ConfidenceTag, Frame } from '@/components/site/primitives'
+import { ConfidenceTag, Frame, ProductTag } from '@/components/site/primitives'
 import { formatDate, formatPrice } from '@/lib/media'
 import type { Article, Celebrity, Item, Look, Media, Product } from '@/payload-types'
 
@@ -125,9 +125,14 @@ const MoreOptions = ({ item, more }: { item: Item; more: Product[] }) => {
           key={option.id}
           href={`/go/${option.id}`}
           rel="sponsored noopener"
-          className="flex items-baseline justify-between gap-3 border-t border-rule-2 pt-1.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:text-accent"
+          /* `min-w-0` twice on purpose. A grid child and a flex child both
+             default to min-width:auto, which is the width of their content, so
+             without it `truncate` below has nothing to shrink into and the row
+             runs straight out of the card. Invisible until the card is narrow,
+             which is exactly what the two-up grid made it. */
+          className="flex min-w-0 items-baseline justify-between gap-3 border-t border-rule-2 pt-1.5 text-[0.8125rem] text-ink-2 no-underline transition-colors hover:text-accent"
         >
-          <span className="truncate">
+          <span className="min-w-0 truncate">
             {confirmed ? option.merchant || option.name : option.name || option.merchant}
           </span>
           {/* `shrink-0` or a long product name squeezes the price and clips it. */}
@@ -198,7 +203,11 @@ export const ItemRow = ({ item }: { item: Item }) => {
           {brand || item.category}
         </span>
         <p className="m-0 text-[0.9375rem] leading-snug text-ink">{product.name}</p>
-        <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
+        {/* Confidence first, always. The badge is the secondary signal. */}
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+          <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
+          <ProductTag tag={product.tag} />
+        </div>
         {substituted ? (
           <span className="text-[0.6875rem] text-muted">
             Original is out of stock. Showing the closest available.
@@ -250,7 +259,10 @@ export const ItemCard = ({ item }: { item: Item }) => {
         </span>
       ) : null}
       <p className="-mt-1.5 mb-0 text-[0.9375rem] leading-snug text-ink">{product.name}</p>
-      <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
+      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+        <ConfidenceTag confidence={substituted ? 'get_the_look' : item.confidence} />
+        <ProductTag tag={product.tag} />
+      </div>
       {substituted ? (
         <span className="-mt-1 text-[0.6875rem] text-muted">
           Original is out of stock. Showing the closest available.

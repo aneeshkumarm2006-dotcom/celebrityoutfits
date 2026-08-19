@@ -155,6 +155,35 @@ export const SectionHead = ({
 )
 
 /** Confidence indicator: filled dot = confirmed, hollow = everything else. */
+/**
+ * Merchandising badge, set by hand on the product.
+ *
+ * Borrowed in structure from the retail sites, not in temperature. No red, no
+ * countdown, no crossed-out price: the palette is the site's own, and the badge
+ * sits quietly beside the confidence label rather than shouting over it. If it
+ * ever competes with the confidence line for attention, the balance is wrong.
+ */
+const PRODUCT_TAGS: Record<string, { label: string; className: string }> = {
+  'best-price': { label: 'Best price', className: 'border-ink text-ink' },
+  'editors-pick': { label: "Editor's pick", className: 'border-accent text-accent' },
+  'selling-fast': { label: 'Selling fast', className: 'border-rule bg-raised text-ink-2' },
+  'new-in': { label: 'New in', className: 'border-rule bg-raised text-ink-2' },
+  'on-sale': { label: 'On sale', className: 'border-accent bg-accent/[0.06] text-accent' },
+}
+
+export const ProductTag = ({ tag }: { tag?: string | null }) => {
+  const found = tag ? PRODUCT_TAGS[tag] : null
+  if (!found) return null
+
+  return (
+    <span
+      className={`inline-flex items-center border px-1.5 py-[0.1rem] text-[0.625rem] font-medium tracking-[0.1em] uppercase ${found.className}`}
+    >
+      {found.label}
+    </span>
+  )
+}
+
 export const ConfidenceTag = ({ confidence }: { confidence?: string | null }) => {
   const label =
     confidence === 'confirmed'

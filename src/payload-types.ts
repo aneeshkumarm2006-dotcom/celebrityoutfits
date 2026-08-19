@@ -483,6 +483,10 @@ export interface Product {
    * Where it is bought, e.g. Nordstrom.
    */
   merchant?: string | null;
+  /**
+   * Optional badge shown on the product card. Leave empty unless it is actually true.
+   */
+  tag?: ('best-price' | 'editors-pick' | 'selling-fast' | 'new-in' | 'on-sale') | null;
   image?: (number | null) | Media;
   /**
    * Fallback image straight from the merchant feed.
@@ -1088,6 +1092,7 @@ export interface ProductsSelect<T extends boolean = true> {
   priceDisplay?: T;
   affiliateUrl?: T;
   merchant?: T;
+  tag?: T;
   image?: T;
   imageUrl?: T;
   sku?: T;
