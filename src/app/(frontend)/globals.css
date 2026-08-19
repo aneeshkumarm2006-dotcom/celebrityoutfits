@@ -104,6 +104,22 @@
   }
 }
 
+/*
+  Used wherever something appears in response to an action the reader took:
+  an attached photo, a confirmation, an error. Short, small travel, and it
+  eases out only, so it reads as the thing settling rather than sliding in.
+*/
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

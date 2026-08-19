@@ -36,6 +36,31 @@ const steps = [
   },
 ]
 
+/**
+ * The privacy and cost terms, previously one paragraph of grey small print
+ * below the submit button. Same commitments, said where they answer the
+ * question someone is actually asking as they type.
+ */
+const assurances = [
+  {
+    term: 'It is free',
+    detail: 'No charge and no queue to jump. We work through them in the order they arrive.',
+  },
+  {
+    term: 'Your address is only used to answer you',
+    detail: 'No list, no forwarding, no newsletter you did not ask for.',
+  },
+  {
+    term: 'Your photo stays private',
+    detail:
+      'We look at it to do the research. We do not publish an image unless we have licensed it ourselves.',
+  },
+  {
+    term: 'We will admit it if we cannot tell',
+    detail: 'An honest "we could not confirm this" is worth more to you than a brand we guessed.',
+  },
+]
+
 export default function RequestPage() {
   return (
     <Container>
@@ -49,12 +74,32 @@ export default function RequestPage() {
           piece, and where to buy it. If we cannot confirm it, we will say so plainly rather than
           guess.
         </p>
+
+        {/*
+          The three things people want to know before they start typing, said
+          before they start typing rather than in the small print underneath.
+        */}
+        <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-[0.8125rem] text-muted">
+          {['Free, and no queue to jump', 'Answered by a person, not a bot', 'Usually a few days'].map(
+            (fact) => (
+              <li key={fact} className="flex items-center gap-2">
+                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" />
+                {fact}
+              </li>
+            ),
+          )}
+        </ul>
       </section>
 
       <section className="border-t border-rule py-12 sm:py-16">
         <div className="grid gap-8 sm:grid-cols-3 lg:gap-14">
           {steps.map((step) => (
-            <div key={step.n}>
+            <div key={step.n} className="relative sm:pt-6">
+              {/* Hairline above each step, so the three read as one sequence. */}
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 hidden h-px bg-rule sm:block"
+              />
               <p className="eyebrow m-0">{step.n}</p>
               <h2 className="mt-3 mb-2 font-display text-[var(--text-step-2)] font-normal">
                 {step.title}
@@ -65,14 +110,32 @@ export default function RequestPage() {
         </div>
       </section>
 
+      {/*
+        The form sat alone in a wide column with the reassurances set as grey
+        small print underneath it, which is the one place nobody reads them.
+        They are worth more beside the fields they are reassuring about.
+      */}
       <section className="border-t border-rule py-12 sm:py-16">
-        <RequestForm />
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,42rem)_minmax(0,19rem)] lg:gap-16">
+          <RequestForm />
 
-        <p className="mt-10 max-w-[52ch] text-[0.8125rem] leading-relaxed text-muted">
-          It is free, and there is no queue to jump. We use your address to answer this request and
-          nothing else: no list, no forwarding. Images you send stay private: we look at them to do
-          the research, and we do not publish one unless we have licensed it ourselves.
-        </p>
+          {/* Clears the sticky header (70px at this breakpoint) plus a margin. */}
+          <aside className="lg:sticky lg:top-[86px] lg:self-start">
+            <div className="border border-rule bg-raised p-6">
+              <p className="eyebrow m-0">Before you send</p>
+              <dl className="mt-5 grid gap-5">
+                {assurances.map((item) => (
+                  <div key={item.term}>
+                    <dt className="text-[0.875rem] text-ink">{item.term}</dt>
+                    <dd className="m-0 mt-1 text-[0.8125rem] leading-relaxed text-ink-2">
+                      {item.detail}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </aside>
+        </div>
       </section>
     </Container>
   )
