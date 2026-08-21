@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { themeScript } from '@/components/site/ThemeToggle'
-import { DisclosureBar, SiteFooter, SiteHeader } from '@/components/site/chrome'
+import { DisclosureBar, SiteBottomNav, SiteFooter, SiteHeader } from '@/components/site/chrome'
 
 import { bodoni, hanken } from './fonts'
 import './globals.css'
@@ -47,6 +47,12 @@ export default function FrontendLayout({
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
+        {/*
+          Reserves the bar's height so the footer is never trapped underneath
+          it, and the bar itself, which is fixed and mobile-only.
+        */}
+        <div aria-hidden="true" className="h-[4.25rem] lg:hidden" />
+        <SiteBottomNav />
       </body>
     </html>
   )

@@ -7,6 +7,12 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  /**
+   * The dev-only overlay badge sits bottom-left, which is exactly where the
+   * sticky buy bar lives on a phone. It covered the item count and made a
+   * working bar look broken.
+   */
+  devIndicators: false,
   images: {
     /**
      * An allow-list, so anything served through next/image from our own origin

@@ -4,9 +4,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { ArticleBody } from '@/components/site/ArticleBody'
-import { ItemCard, ItemRow } from '@/components/site/cards'
+import { ItemCard } from '@/components/site/cards'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
-import { ShopBar } from '@/components/site/ShopBar'
 import { formatDate, formatPrice, mediaUrl } from '@/lib/media'
 import { getCelebrityBySlug, getItemsForLook, getLookBySlug } from '@/lib/payload'
 import { breadcrumbSchema, buildMetadata } from '@/lib/seo'
@@ -53,9 +52,13 @@ export default async function LookPage({ params }: Props) {
       (item.alternativeProduct && typeof item.alternativeProduct === 'object'),
   )
 
+  const unmatched = items.filter((item) => !shoppable.includes(item))
+
   const products = items
     .map((item) => (typeof item.product === 'object' ? (item.product as Product) : null))
     .filter(Boolean) as Product[]
+
+  const retailTotal = products.reduce((sum, p) => sum + (p.priceCents ?? 0), 0)
 
   return (
     <>
@@ -128,19 +131,89 @@ export default async function LookPage({ params }: Props) {
           ) : null}
 
           {/**
-           * Photograph and shopping list side by side.
+           * Photograph and shop grid side by side, two products per row.
            *
-           * A look photograph is portrait, so run full width it stands over a
-           * thousand pixels tall on a laptop and leaves half the page empty
-           * beside it — while the items, which are the point of the page, sit
-           * below the fold. Putting the list in that empty space fixes both at
-           * once.
+           * The grid was full width underneath for a while on the reasoning
+           * that two cards would not fit in this column. That was measured at a
+           * 1280px window, where each card lands at 220px. On the screens this
+           * is actually read on it is 300px and upwards, so the objection was
+           * wrong and the products belong next to the photograph they came out
+           * of, which is where they were asked for.
            *
-           * Below `lg` it stacks back to photo-then-items. Same markup in the
-           * same order either way, so nothing is duplicated for crawlers.
+           * The products column is first in the markup and moved second by
+           * `order` at `lg`. That way a phone stacks products above the
+           * photograph, and a desktop still reads photo-left, products-right.
+           * One set of markup, so nothing is duplicated for crawlers.
            */}
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-start lg:gap-14">
-            <div className="max-w-[34rem] lg:max-w-none">
+          <div
+            id="shop-this-look"
+            className="grid scroll-mt-24 gap-10 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:items-start lg:gap-14"
+          >
+            <div className="lg:order-2">
+              <SectionHead
+                heading={`${items.length} item${items.length === 1 ? '' : 's'} in this look`}
+              />
+
+              {items.length === 0 ? <p className="text-muted">Nothing identified yet.</p> : null}
+
+              {shoppable.length > 0 ? (
+                /*
+                 * `auto-rows-fr` divides the height above between the rows, and
+                 * each card fills its row, so the boxes shrink or grow to suit
+                 * rather than the column overrunning the photograph. Capped so
+                 * a two-item look does not stretch one card to full height.
+                 */
+                <div className="grid grid-cols-2 gap-x-5 gap-y-9 sm:gap-x-6">
+                  {shoppable.map((item) => (
+                    <ItemCard key={item.id} item={item} />
+                  ))}
+                </div>
+              ) : null}
+
+              {/**
+               * The garments we could not place, kept out of the card grid.
+               * They have no image and no price, so as cards they are empty
+               * boxes stretched to the height of whatever sits beside them.
+               * Stated in a line each instead, still on the page, still honest.
+               */}
+              {unmatched.length > 0 ? (
+                <div className={shoppable.length > 0 ? 'mt-9' : ''}>
+                  <p className="eyebrow m-0 mb-3">Not identified</p>
+                  <ul className="m-0 grid list-none gap-2.5 p-0">
+                    {unmatched.map((item) => (
+                      <li
+                        key={item.id}
+                        className="flex items-baseline justify-between gap-3 border-b border-rule-2 pb-2.5 text-[0.875rem] last:border-b-0"
+                      >
+                        <span className="min-w-0 text-ink-2">
+                          {item.description || item.category}
+                        </span>
+                        <span className="shrink-0 text-[0.6875rem] tracking-[0.13em] text-muted uppercase">
+                          {item.category}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {/**
+               * Only when something actually carries a price. Summing a list of
+               * products that have none gives zero, and "this look runs $0" reads
+               * as a broken page rather than as missing data.
+               */}
+              {retailTotal > 0 ? (
+                <p className="mt-8 border-t border-rule pt-5 text-[0.8125rem] text-muted">
+                  Assembled at full retail this look runs{' '}
+                  <b className="font-medium text-ink">
+                    {formatPrice(retailTotal, products[0]?.currency ?? 'USD')}
+                  </b>
+                  .
+                </p>
+              ) : null}
+            </div>
+
+            <div className="max-w-[34rem] lg:order-1 lg:max-w-none">
               <Frame
                 media={photo}
                 ratio="3x4"
@@ -151,67 +224,8 @@ export default async function LookPage({ params }: Props) {
                 sizes="(min-width: 1024px) 55vw, (min-width: 640px) 34rem, 100vw"
               />
             </div>
-
-            {/**
-             * Deliberately not sticky. A sticky column taller than the viewport
-             * can never be scrolled to its end, and the usual fix — capping its
-             * height and giving it its own scrollbar — buried the retail total
-             * inside a nested scroll area nobody would find. A plain column
-             * costs a little whitespace under short lists and hides nothing.
-             */}
-            <div>
-              <SectionHead
-                heading={`${items.length} item${items.length === 1 ? '' : 's'} in this look`}
-              />
-              {items.length === 0 ? (
-                <p className="text-muted">Nothing identified yet.</p>
-              ) : (
-                <div className="grid gap-5">
-                  {items.map((item) => (
-                    <ItemRow key={item.id} item={item} />
-                  ))}
-                </div>
-              )}
-
-              {products.length > 0 ? (
-                <p className="mt-8 border-t border-rule pt-5 text-[0.8125rem] text-muted">
-                  Assembled at full retail this look runs{' '}
-                  <b className="font-medium text-ink">
-                    {formatPrice(
-                      products.reduce((sum, p) => sum + (p.priceCents ?? 0), 0),
-                      products[0]?.currency ?? 'USD',
-                    )}
-                  </b>
-                  .
-                </p>
-              ) : null}
-            </div>
           </div>
         </section>
-
-        {/**
-         * The same garments again, full width, as a grid of cards.
-         *
-         * The column beside the photograph is a little over a third of the
-         * page, which fits one readable row and no more: two cards side by side
-         * in there come out narrower than the thumbnails they replaced. So the
-         * grid gets the full measure underneath, where the cards can carry a
-         * real image, and the list upstairs stays as the reference next to the
-         * photograph.
-         *
-         * Two across on a phone, widening with the screen. Holding it at two on
-         * a desktop would set each card about seven hundred pixels wide.
-         */}
-        {shoppable.length > 0 ? (
-          <section id="shop-this-look" className="scroll-mt-24 border-t border-rule py-12 sm:py-16">
-            <SectionHead heading="Shop this look" />
-            <div className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
-              {shoppable.map((item) => (
-                <ItemCard key={item.id} item={item} />
-              ))}
-            </div>
-          </section>
-        ) : null}
 
         {/**
          * The write-up stays full width underneath, at a comfortable reading
@@ -223,24 +237,8 @@ export default async function LookPage({ params }: Props) {
             <ArticleBody data={look.story as SerializedEditorState} />
           </section>
         ) : null}
-        {/* Room for the sticky bar so it never covers the last line. */}
-        <div aria-hidden="true" className="h-20 lg:hidden" />
       </Container>
 
-      {shoppable.length > 0 ? (
-        <ShopBar
-          targetId="shop-this-look"
-          itemCount={shoppable.length}
-          total={
-            products.length > 0
-              ? formatPrice(
-                  products.reduce((sum, p) => sum + (p.priceCents ?? 0), 0),
-                  products[0]?.currency ?? 'USD',
-                )
-              : null
-          }
-        />
-      ) : null}
     </>
   )
 }

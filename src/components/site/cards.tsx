@@ -116,10 +116,20 @@ const MoreOptions = ({ item, more }: { item: Item; more: Product[] }) => {
   const confirmed = item.confidence === 'confirmed'
 
   return (
-    <div className="grid gap-1.5">
-      <span className="text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase">
-        {confirmed ? 'Also available' : 'Alternatives'}
-      </span>
+    /*
+     * `details` rather than a state toggle: it collapses without JavaScript,
+     * is keyboard operable for free, and closed it costs one line instead of
+     * ninety pixels per card. That difference is what lets the product column
+     * finish level with the photograph beside it.
+     */
+    <details className="group/more mt-auto">
+      <summary className="flex cursor-pointer list-none items-center gap-1.5 text-[0.625rem] font-medium tracking-[0.13em] text-muted uppercase marker:content-none hover:text-ink">
+        {more.length} {confirmed ? 'more to buy' : more.length === 1 ? 'alternative' : 'alternatives'}
+        <span aria-hidden="true" className="transition-transform group-open/more:rotate-90">
+          ›
+        </span>
+      </summary>
+      <div className="grid gap-1.5 pt-1.5">
       {more.map((option) => (
         <Link
           key={option.id}
@@ -141,7 +151,8 @@ const MoreOptions = ({ item, more }: { item: Item; more: Product[] }) => {
           </span>
         </Link>
       ))}
-    </div>
+      </div>
+    </details>
   )
 }
 

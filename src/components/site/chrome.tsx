@@ -1,10 +1,25 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { BottomNav } from '@/components/site/BottomNav'
 import { MobileNav } from '@/components/site/MobileNav'
 import { ThemeToggle } from '@/components/site/ThemeToggle'
 import { Container } from '@/components/site/primitives'
 import { getFooter, getNavigation, getSiteSettings } from '@/lib/payload'
+
+/**
+ * The bottom bar and the header read the same Navigation global, so the two can
+ * never say different things. Rendered from the layout rather than the header
+ * because it is pinned to the other end of the screen.
+ */
+export const SiteBottomNav = async () => {
+  const nav = await getNavigation()
+  const items = (nav?.items ?? []).filter(
+    (item): item is { label: string; href: string } =>
+      Boolean(item?.label) && Boolean(item?.href),
+  )
+  return <BottomNav items={items} />
+}
 
 export const SiteHeader = async () => {
   const [nav, settings] = await Promise.all([getNavigation(), getSiteSettings()])
