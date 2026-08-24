@@ -42,7 +42,12 @@ const getSnapshot = (): Theme => {
 /** Nothing truthful to report before the browser has been asked. */
 const getServerSnapshot = (): Theme | null => null
 
-export const ThemeToggle = () => {
+/**
+ * Shared so the header button and the mobile bottom bar drive the same switch.
+ * Two components, one source of truth: flipping either updates the other in the
+ * same tick, because both are subscribed to the same store.
+ */
+export const useTheme = () => {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
   const isDark = theme === 'dark'
 
@@ -58,35 +63,48 @@ export const ThemeToggle = () => {
     listeners.forEach((notify) => notify())
   }
 
+  return { theme, isDark, toggle }
+}
+
+/** Sun when dark is on (it offers light), moon when light is on. */
+export const ThemeIcon = ({ isDark, size = 15 }: { isDark: boolean; size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    aria-hidden="true"
+  >
+    {isDark ? (
+      <>
+        <circle cx="12" cy="12" r="4.2" />
+        <path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
+      </>
+    ) : (
+      <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z" />
+    )}
+  </svg>
+)
+
+export const ThemeToggle = () => {
+  const { theme, isDark, toggle } = useTheme()
+
   return (
     <button
       type="button"
       onClick={toggle}
       aria-label={theme ? `Switch to ${isDark ? 'light' : 'dark'} theme` : 'Switch theme'}
       aria-pressed={theme ? isDark : undefined}
-      className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-rule text-ink-2 transition-colors hover:border-ink hover:text-ink"
+      /*
+       * Hidden on phones, where the same switch sits in the bottom bar under
+       * the thumb. Showing both would be two controls for one setting.
+       */
+      className="hidden h-8 w-8 shrink-0 place-items-center rounded-full border border-rule text-ink-2 transition-colors hover:border-ink hover:text-ink lg:grid"
     >
-      <svg
-        width="15"
-        height="15"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        aria-hidden="true"
-      >
-        {isDark ? (
-          // Sun — offering the light theme.
-          <>
-            <circle cx="12" cy="12" r="4.2" />
-            <path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
-          </>
-        ) : (
-          // Moon — offering the dark theme.
-          <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z" />
-        )}
-      </svg>
+      <ThemeIcon isDark={isDark} />
     </button>
   )
 }
