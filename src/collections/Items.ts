@@ -18,7 +18,7 @@ export const Items: CollectionConfig = {
   labels: { singular: 'Item', plural: 'Items' },
   admin: {
     useAsTitle: 'label',
-    defaultColumns: ['label', 'look', 'category', 'confidence', 'product'],
+    defaultColumns: ['description', 'look', 'category', 'confidence', 'product'],
     group: 'Archive',
   },
   access: { read: anyone, create: admins, update: admins, delete: admins },
@@ -39,8 +39,20 @@ export const Items: CollectionConfig = {
        * data loss — a prompt nothing can answer in CI or a script. Nullable
        * column, filled in by the seeds and expected of editors.
        */
+      /**
+       * Required in the editor without being required in the database.
+       * `required: true` would add a NOT NULL column to a table that already
+       * holds rows without one, and Drizzle's push stops to ask about data
+       * loss — a prompt nothing can answer in CI. A validator runs in the
+       * application instead: new and edited rows must carry a description,
+       * existing ones are left alone until someone opens them.
+       */
+      validate: (value: unknown) =>
+        String(value ?? '').trim().length > 0
+          ? true
+          : 'Describe the garment, so this item can be told apart from the others on this look.',
       admin: {
-        description: 'The garment in plain words. Shown on the look page.',
+        description: 'The garment in plain words. Shown on the look page, and the title everywhere in here.',
         placeholder: 'Plain white crew-neck tee',
       },
     },
@@ -54,9 +66,17 @@ export const Items: CollectionConfig = {
       hooks: {
         beforeChange: [
           ({ siblingData }) => {
+            /**
+             * The description leads, because it is the only part that differs
+             * between two garments on the same look. Built from category and
+             * confidence alone, three necklaces on one look all titled
+             * "jewellery · confirmed" and adding a second one read as the first
+             * one being overwritten.
+             */
+            const description = String(siblingData?.description ?? '').trim()
             const category = siblingData?.category || 'item'
             const confidence = siblingData?.confidence || 'open'
-            return `${category} · ${confidence}`
+            return `${description || category} · ${confidence}`
           },
         ],
       },
