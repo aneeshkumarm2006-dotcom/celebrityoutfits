@@ -6,6 +6,7 @@ import type { ServerFunctionClient } from 'payload'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import React from 'react'
 
+import { bodoni, hanken } from '../(frontend)/fonts'
 import { importMap } from './admin/importMap.js'
 import './custom.scss'
 
@@ -23,7 +24,14 @@ const serverFunction: ServerFunctionClient = async function (args) {
 }
 
 const Layout = ({ children }: Args) => (
-  <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
+  <RootLayout
+    config={config}
+    // The site's own Bodoni and Hanken, self-hosted by next/font. Each sets a
+    // CSS variable on <html> that the admin theme in custom.scss reads.
+    htmlProps={{ className: `${bodoni.variable} ${hanken.variable}` }}
+    importMap={importMap}
+    serverFunction={serverFunction}
+  >
     {children}
   </RootLayout>
 )

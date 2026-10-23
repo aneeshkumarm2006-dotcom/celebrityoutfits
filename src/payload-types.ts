@@ -118,12 +118,14 @@ export interface Config {
     navigation: Navigation;
     footer: Footer;
     homepage: Homepage;
+    pageSeo: PageSeo;
   };
   globalsSelect: {
     siteSettings: SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    pageSeo: PageSeoSelect<false> | PageSeoSelect<true>;
   };
   locale: null;
   widgets: {
@@ -213,6 +215,10 @@ export interface Celebrity {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
+    /**
+     * Comma separated, e.g. selena gomez outfits, selena gomez style.
+     */
+    keywords?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -394,6 +400,10 @@ export interface Look {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
+    /**
+     * Comma separated, e.g. selena gomez outfits, selena gomez style.
+     */
+    keywords?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -406,7 +416,7 @@ export interface Look {
 export interface Item {
   id: number;
   /**
-   * The garment in plain words. Shown on the look page.
+   * The garment in plain words. Shown on the look page, and the title everywhere in here.
    */
   description?: string | null;
   /**
@@ -559,6 +569,10 @@ export interface Brand {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
+    /**
+     * Comma separated, e.g. selena gomez outfits, selena gomez style.
+     */
+    keywords?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -617,6 +631,10 @@ export interface Article {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
+    /**
+     * Comma separated, e.g. selena gomez outfits, selena gomez style.
+     */
+    keywords?: string | null;
   };
   /**
    * The URL segment. Auto-filled from the title; edit with care once published.
@@ -751,6 +769,10 @@ export interface OutboundClick {
  */
 export interface User {
   id: number;
+  /**
+   * Used to greet you on the dashboard.
+   */
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1027,6 +1049,7 @@ export interface CelebritiesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        keywords?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1056,6 +1079,7 @@ export interface LooksSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        keywords?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1122,6 +1146,7 @@ export interface BrandsSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        keywords?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1152,6 +1177,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        keywords?: T;
       };
   slug?: T;
   publishedAt?: T;
@@ -1341,6 +1367,7 @@ export interface OutboundClicksSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1600,6 +1627,124 @@ export interface JournalPreviewBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pageSeo".
+ */
+export interface PageSeo {
+  id: number;
+  /**
+   * Off means every page tells Google not to list it. Turn on once the archive is ready to be found.
+   */
+  allowIndexing?: boolean | null;
+  /**
+   * Shown in Google and when / is shared.
+   */
+  home?: {
+    /**
+     * Aim for 50 to 60 characters.
+     */
+    title?: string | null;
+    /**
+     * Aim for 150 to 160 characters.
+     */
+    description?: string | null;
+    /**
+     * Comma separated, e.g. celebrity outfits, red carpet looks.
+     */
+    keywords?: string | null;
+    /**
+     * Share image, 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Shown in Google and when /celebrities is shared.
+   */
+  celebrities?: {
+    /**
+     * Aim for 50 to 60 characters.
+     */
+    title?: string | null;
+    /**
+     * Aim for 150 to 160 characters.
+     */
+    description?: string | null;
+    /**
+     * Comma separated, e.g. celebrity outfits, red carpet looks.
+     */
+    keywords?: string | null;
+    /**
+     * Share image, 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Shown in Google and when /brands is shared.
+   */
+  brands?: {
+    /**
+     * Aim for 50 to 60 characters.
+     */
+    title?: string | null;
+    /**
+     * Aim for 150 to 160 characters.
+     */
+    description?: string | null;
+    /**
+     * Comma separated, e.g. celebrity outfits, red carpet looks.
+     */
+    keywords?: string | null;
+    /**
+     * Share image, 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Shown in Google and when /journal is shared.
+   */
+  journal?: {
+    /**
+     * Aim for 50 to 60 characters.
+     */
+    title?: string | null;
+    /**
+     * Aim for 150 to 160 characters.
+     */
+    description?: string | null;
+    /**
+     * Comma separated, e.g. celebrity outfits, red carpet looks.
+     */
+    keywords?: string | null;
+    /**
+     * Share image, 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Shown in Google and when /request is shared.
+   */
+  request?: {
+    /**
+     * Aim for 50 to 60 characters.
+     */
+    title?: string | null;
+    /**
+     * Aim for 150 to 160 characters.
+     */
+    description?: string | null;
+    /**
+     * Comma separated, e.g. celebrity outfits, red carpet looks.
+     */
+    keywords?: string | null;
+    /**
+     * Share image, 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "siteSettings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1738,6 +1883,56 @@ export interface JournalPreviewBlockSelect<T extends boolean = true> {
   count?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pageSeo_select".
+ */
+export interface PageSeoSelect<T extends boolean = true> {
+  allowIndexing?: T;
+  home?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        image?: T;
+      };
+  celebrities?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        image?: T;
+      };
+  brands?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        image?: T;
+      };
+  journal?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        image?: T;
+      };
+  request?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

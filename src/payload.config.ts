@@ -37,9 +37,30 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: ' · Celebrity Spotted Outfits' },
     components: {
+      graphics: {
+        Icon: '@/components/admin/Graphics#Icon',
+        Logo: '@/components/admin/Graphics#Logo',
+      },
+      beforeNavLinks: ['@/components/admin/NavToday#NavToday'],
+      beforeLogin: ['@/components/admin/BeforeLogin#BeforeLogin'],
       views: {
         dashboard: {
           Component: '@/components/admin/Dashboard#Dashboard',
+        },
+        identify: {
+          Component: '@/components/admin/IdentifyView#IdentifyView',
+          path: '/identify',
+          meta: { title: 'Items to identify' },
+        },
+        requestsBoard: {
+          Component: '@/components/admin/RequestsBoardView#RequestsBoardView',
+          path: '/requests-board',
+          meta: { title: 'Reader requests' },
+        },
+        reporting: {
+          Component: '@/components/admin/ReportingView#ReportingView',
+          path: '/reporting',
+          meta: { title: 'Reporting' },
         },
       },
     },
@@ -104,6 +125,41 @@ export default buildConfig({
           ? `${doc.title || doc.name} · Celebrity Spotted Outfits`
           : 'Celebrity Spotted Outfits',
       generateDescription: ({ doc }) => doc?.excerpt || doc?.standfirst || doc?.description || '',
+      // Feeds the search preview in the SEO tab, so editors see the real address.
+      generateURL: async ({ doc, collectionSlug, req }) => {
+        const site = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+        switch (collectionSlug) {
+          case 'celebrities':
+            return `${site}/celebrities/${doc?.slug ?? ''}`
+          case 'brands':
+            return `${site}/brands/${doc?.slug ?? ''}`
+          case 'articles':
+            return `${site}/journal/${doc?.slug ?? ''}`
+          case 'looks': {
+            // The form holds the celebrity as an id; the URL needs their slug.
+            const ref = doc?.celebrity as { slug?: string } | number | string | undefined
+            const celebrity =
+              typeof ref === 'object'
+                ? ref
+                : ref
+                  ? await req.payload
+                      .findByID({ collection: 'celebrities', id: ref, depth: 0, req })
+                      .catch(() => null)
+                  : null
+            return `${site}/celebrities/${celebrity?.slug ?? '…'}/${doc?.slug ?? ''}`
+          }
+          default:
+            return site
+        }
+      },
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
+        {
+          name: 'keywords',
+          type: 'text',
+          admin: { description: 'Comma separated, e.g. selena gomez outfits, selena gomez style.' },
+        },
+      ],
     }),
 
     // Needed the first time a slug changes — without it, every inbound link

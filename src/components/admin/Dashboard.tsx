@@ -1,175 +1,243 @@
+import { Gutter } from '@payloadcms/ui'
 import Link from 'next/link'
 import type { AdminViewServerProps } from 'payload'
 
 import { getPayloadClient } from '@/lib/payload'
+import { mediaUrl } from '@/lib/media'
+import type { Celebrity, Look, Media } from '@/payload-types'
 
-const card: React.CSSProperties = {
-  border: '1px solid var(--theme-elevation-100)',
-  padding: '1.25rem',
-  borderRadius: 4,
-}
+import { CATEGORY_LABEL, getDeskCounts } from './data'
 
-const linkStyle: React.CSSProperties = {
-  display: 'block',
-  padding: '0.5rem 0',
-  borderTop: '1px solid var(--theme-elevation-100)',
-  textDecoration: 'none',
-}
+const dateLine = () =>
+  new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date())
+
+const shortDate = (value?: string | null) =>
+  value ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' }).format(new Date(value)) : ''
+
+const daysSince = (value: string) => Math.floor((Date.now() - new Date(value).getTime()) / 86_400_000)
 
 /**
- * Replaces Payload's default "list of collections" dashboard with the two
- * questions that actually govern this business day to day:
- *
- *   1. Which items are unresolved and need a human call?
- *   2. Which image licences are about to expire?
- *
- * Both are queries the team would otherwise have to remember to run.
+ * Replaces Payload's default "list of collections" dashboard with what needs a
+ * decision today: items nobody has identified, people saved twice, readers
+ * waiting on an answer, and image licences about to lapse. Every number is a
+ * link into the screen where it gets resolved.
  */
-export const Dashboard = async (_props: AdminViewServerProps) => {
+export const Dashboard = async ({ initPageResult }: AdminViewServerProps) => {
   const payload = await getPayloadClient()
+  const user = initPageResult?.req.user as { name?: string | null; email?: string } | null
 
   const soon = new Date()
   soon.setDate(soon.getDate() + 30)
 
-  const [openItems, expiring, draftLooks, draftArticles, clicks, newRequests] = await Promise.all([
+  const [counts, queue, requests, expiring, recent] = await Promise.all([
+    getDeskCounts(payload),
     payload.find({
       collection: 'items',
-      limit: 8,
+      limit: 6,
       depth: 2,
       where: { confidence: { in: ['open', 'closest_match'] } },
-      sort: 'createdAt',
+      sort: '-createdAt',
     }),
-    payload.find({
-      collection: 'media',
-      limit: 8,
-      where: { licenceExpiresAt: { less_than_equal: soon.toISOString() } },
-      sort: 'licenceExpiresAt',
-    }),
-    payload.count({ collection: 'looks', where: { _status: { equals: 'draft' } } }),
-    payload.count({ collection: 'articles', where: { _status: { equals: 'draft' } } }),
-    payload.count({ collection: 'outboundClicks' }),
     payload.find({
       collection: 'requests',
-      limit: 8,
+      limit: 3,
       depth: 0,
       where: { status: { in: ['new', 'researching'] } },
       sort: 'createdAt',
     }),
+    payload.count({ collection: 'media', where: { licenceExpiresAt: { less_than_equal: soon.toISOString() } } }),
+    payload.find({
+      collection: 'looks',
+      limit: 4,
+      depth: 1,
+      where: { _status: { equals: 'published' } },
+      sort: '-date',
+    }),
   ])
 
+  const handle = user?.name?.split(' ')[0] || user?.email?.split('@')[0]
+  const firstName = handle ? handle.charAt(0).toUpperCase() + handle.slice(1) : null
+  const decisions = [counts.identify, counts.duplicates, counts.requests, expiring.totalDocs].filter(Boolean).length
+
   const stats = [
-    { label: 'Open research requests', value: newRequests.totalDocs },
-    { label: 'Items needing review', value: openItems.totalDocs },
-    { label: 'Licences expiring in 30 days', value: expiring.totalDocs },
-    { label: 'Draft looks', value: draftLooks.totalDocs },
-    { label: 'Draft articles', value: draftArticles.totalDocs },
-    { label: 'Outbound clicks', value: clicks.totalDocs },
+    { label: 'Items to identify', value: counts.identify, note: 'Open or closest match', href: '/admin/identify' },
+    {
+      label: 'Possible duplicates',
+      value: counts.duplicates,
+      note: counts.duplicates ? 'Celebrities saved twice' : 'None, all merged',
+      href: '/admin/collections/celebrities',
+      accent: counts.duplicates > 0,
+    },
+    { label: 'Reader requests', value: counts.requests, note: 'New or researching', href: '/admin/requests-board' },
+    { label: 'Outbound clicks', value: counts.clicks, note: 'All time, to retailers', href: '/admin/reporting' },
   ]
 
   return (
-    <div style={{ padding: '2rem', display: 'grid', gap: '1.5rem' }}>
-      <div>
-        <h1 style={{ margin: 0 }}>Celebrity Spotted Outfits</h1>
-        <p style={{ margin: '0.25rem 0 0', opacity: 0.65 }}>
-          What needs a decision today.
-        </p>
-      </div>
+    <Gutter>
+    <div className="desk-page">
+      <header className="desk-page__header">
+        <div className="desk-page__heading">
+          <span className="desk-eyebrow">{dateLine()}</span>
+          <h1 className="desk-title">{firstName ? `Hello, ${firstName}` : 'Today'}</h1>
+          <p className="desk-lede">
+            {decisions === 0
+              ? 'Nothing needs a decision today.'
+              : `${decisions} ${decisions === 1 ? 'thing needs' : 'things need'} a decision today.`}
+          </p>
+        </div>
+        <div className="desk-actions">
+          <Link className="desk-btn" href="/admin/collections/products/create">
+            Add product
+          </Link>
+          <Link className="desk-btn desk-btn--primary" href="/admin/collections/looks/create">
+            New look
+          </Link>
+        </div>
+      </header>
 
-      <div
-        style={{
-          display: 'grid',
-          gap: '1rem',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(11rem, 1fr))',
-        }}
-      >
+      <section className="desk-stats" aria-label="Today at a glance">
         {stats.map((stat) => (
-          <div key={stat.label} style={card}>
-            <div style={{ fontSize: '2rem', fontVariantNumeric: 'tabular-nums', lineHeight: 1.1 }}>
-              {stat.value}
-            </div>
-            <div style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: '0.375rem' }}>
-              {stat.label}
+          <Link key={stat.label} href={stat.href} className="desk-stat">
+            <span className="desk-stat__label">{stat.label}</span>
+            <span className={`desk-stat__value${stat.accent ? ' desk-stat__value--accent' : ''}`}>{stat.value}</span>
+            <span className="desk-stat__note">{stat.note}</span>
+          </Link>
+        ))}
+      </section>
+
+      <div className="desk-columns">
+        <section className="desk-card desk-card--wide">
+          <div className="desk-card__head">
+            <div>
+              <h2 className="desk-card__title">Items to identify</h2>
+              <p className="desk-card__sub">Pieces spotted in a photo with no confirmed product yet</p>
             </div>
           </div>
-        ))}
-      </div>
-
-      <div
-        style={{
-          display: 'grid',
-          gap: '1.5rem',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(22rem, 1fr))',
-        }}
-      >
-        <section style={card}>
-          <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Research requests</h2>
-          <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
-            Someone is waiting on each of these, the only queue here where that is true. Answer it,
-            publish it, then mark it answered.
-          </p>
-          {newRequests.docs.length === 0 ? (
-            <p style={{ opacity: 0.6, margin: 0 }}>Nothing waiting.</p>
+          {queue.docs.length === 0 ? (
+            <p className="desk-empty">Every item is identified.</p>
           ) : (
-            newRequests.docs.map((request) => (
-              <Link
-                key={request.id}
-                href={`/admin/collections/requests/${request.id}`}
-                style={linkStyle}
-              >
-                <strong>{request.summary?.slice(0, 60)}</strong>
-                <span style={{ opacity: 0.6 }}> · {request.status}</span>
-                {request.personGuess ? (
-                  <span style={{ opacity: 0.6 }}> · {request.personGuess}</span>
-                ) : null}
-              </Link>
-            ))
+            <div className="desk-table-wrap">
+              <table className="desk-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Look</th>
+                    <th>Category</th>
+                    <th className="desk-table__end">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {queue.docs.map((item) => {
+                    const look = typeof item.look === 'object' ? (item.look as Look | null) : null
+                    return (
+                      <tr key={item.id}>
+                        <td>
+                          <span className={item.description ? undefined : 'desk-muted-italic'}>
+                            {item.description || 'No description yet'}
+                          </span>
+                        </td>
+                        <td className="desk-table__secondary">{look?.title || 'No look'}</td>
+                        <td>
+                          <span className="desk-chip">{CATEGORY_LABEL[item.category ?? ''] ?? item.category}</span>
+                        </td>
+                        <td className="desk-table__end">
+                          <Link className="desk-btn desk-btn--small" href={`/admin/collections/items/${item.id}`}>
+                            Identify
+                          </Link>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           )}
+          <Link className="desk-card__foot" href="/admin/identify">
+            See all {counts.identify} items to identify →
+          </Link>
         </section>
 
-        <section style={card}>
-          <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Review queue</h2>
-          <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
-            Items marked open or closest match. Confirm them, or leave them open, but never guess a
-            brand to close one.
-          </p>
-          {openItems.docs.length === 0 ? (
-            <p style={{ opacity: 0.6, margin: 0 }}>Nothing waiting. </p>
-          ) : (
-            openItems.docs.map((item) => {
-              const look = typeof item.look === 'object' ? item.look : null
-              return (
-                <Link key={item.id} href={`/admin/collections/items/${item.id}`} style={linkStyle}>
-                  <strong>{item.category}</strong>
-                  <span style={{ opacity: 0.6 }}> · {item.confidence?.replace(/_/g, ' ')}</span>
-                  {look ? <span style={{ opacity: 0.6 }}> · {look.title}</span> : null}
+        <div className="desk-rail">
+          <section className={`desk-card${counts.duplicates ? ' desk-card--alert' : ''}`}>
+            <h2 className="desk-card__title desk-card__title--small">Possible duplicates</h2>
+            {counts.duplicateGroups.length === 0 ? (
+              <p className="desk-card__sub">No celebrity is published twice.</p>
+            ) : (
+              <>
+                <p className="desk-card__sub">
+                  Same person published more than once. Move their looks onto one profile and unpublish the spare.
+                </p>
+                <ul className="desk-list">
+                  {counts.duplicateGroups.map((group) => (
+                    <li key={group.name}>
+                      <span>{group.name}</span>
+                      <Link
+                        className="desk-btn desk-btn--small"
+                        href={`/admin/collections/celebrities?search=${encodeURIComponent(group.name)}`}
+                      >
+                        Review {group.ids.length}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+
+          <section className="desk-card">
+            <h2 className="desk-card__title desk-card__title--small">Reader requests</h2>
+            {requests.docs.length === 0 ? (
+              <p className="desk-card__sub">Nobody is waiting.</p>
+            ) : (
+              requests.docs.map((request) => (
+                <Link key={request.id} className="desk-request" href={`/admin/collections/requests/${request.id}`}>
+                  <strong>{request.summary || 'Untitled request'}</strong>
+                  <span>
+                    {request.status === 'new' ? 'New' : 'Researching'} · waiting {daysSince(request.createdAt)} days
+                  </span>
                 </Link>
-              )
-            })
-          )}
-        </section>
+              ))
+            )}
+          </section>
 
-        <section style={card}>
-          <h2 style={{ marginTop: 0, fontSize: '1rem' }}>Licences expiring</h2>
-          <p style={{ opacity: 0.65, fontSize: '0.8125rem', marginTop: 0 }}>
-            Renew or replace these images before the licence lapses. An expired agency image is the
-            most expensive kind of mistake on this site.
-          </p>
-          {expiring.docs.length === 0 ? (
-            <p style={{ opacity: 0.6, margin: 0 }}>Nothing expiring in the next 30 days.</p>
-          ) : (
-            expiring.docs.map((media) => (
-              <Link key={media.id} href={`/admin/collections/media/${media.id}`} style={linkStyle}>
-                <strong>{media.filename}</strong>
-                <span style={{ opacity: 0.6 }}> · {media.credit}</span>
-                <span style={{ opacity: 0.6 }}>
-                  {' '}
-                  · expires {new Date(media.licenceExpiresAt as string).toLocaleDateString('en-GB')}
-                </span>
-              </Link>
-            ))
-          )}
-        </section>
+          <section className="desk-card">
+            <h2 className="desk-card__title desk-card__title--small">Image licences</h2>
+            <p className="desk-status">
+              <span className={`desk-dot${expiring.totalDocs ? ' desk-dot--warn' : ''}`} aria-hidden="true" />
+              {expiring.totalDocs
+                ? `${expiring.totalDocs} expire in the next 30 days`
+                : 'None expire in the next 30 days'}
+            </p>
+          </section>
+        </div>
       </div>
+
+      <section className="desk-section">
+        <div className="desk-section__head">
+          <h2 className="desk-card__title">Recently published</h2>
+          <Link href="/admin/collections/looks">All looks →</Link>
+        </div>
+        <div className="desk-looks">
+          {recent.docs.map((look) => {
+            const photo = Array.isArray(look.photos) ? (look.photos[0] as Media | undefined) : undefined
+            const src = photo ? mediaUrl(photo, 'thumb') : null
+            const celebrity = typeof look.celebrity === 'object' ? (look.celebrity as Celebrity | null) : null
+            return (
+              <Link key={look.id} href={`/admin/collections/looks/${look.id}`} className="desk-look">
+                <span className="desk-look__photo">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- admin thumbnails, already sized */}
+                  {src ? <img src={src} alt="" /> : null}
+                </span>
+                <span className="desk-look__meta">
+                  {celebrity?.name ?? 'No celebrity'} · {shortDate(look.date)}
+                </span>
+                <span className="desk-look__title">{look.title}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
     </div>
+    </Gutter>
   )
 }

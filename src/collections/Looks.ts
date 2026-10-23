@@ -53,7 +53,10 @@ export const Looks: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
-      admin: { description: 'Write a thesis, not a label. "The knit polo has quietly replaced the shirt".' },
+      admin: {
+        description: 'Write a thesis, not a label. "The knit polo has quietly replaced the shirt".',
+        components: { Cell: { path: '@/components/admin/ThumbCell#ThumbCell', clientProps: { imageField: 'photos' } } },
+      },
     },
     slugField('title'),
     {

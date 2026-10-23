@@ -19,7 +19,12 @@ export const Products: CollectionConfig = {
   },
   access: { read: anyone, create: admins, update: admins, delete: admins },
   fields: [
-    { name: 'name', type: 'text', required: true },
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      admin: { components: { Cell: { path: '@/components/admin/ThumbCell#ThumbCell', clientProps: { imageField: 'image' } } } },
+    },
     { name: 'brand', type: 'relationship', relationTo: 'brands' },
     {
       name: 'description',
