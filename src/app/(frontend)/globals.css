@@ -179,3 +179,28 @@
   :root:not([data-theme='light']) .mark-light { display: none; }
   :root:not([data-theme='light']) .mark-dark { display: block; }
 }
+
+/* ---------------------------------------------------------------------------
+   Brand logos.
+
+   Logos arrive as black marks, mostly on transparency but some on a white
+   ground, and both vanish or glare on the dark paper. In dark mode they are
+   turned into a light mono mark: grayscale + invert makes the ink near-white
+   and any white ground black, and `screen` then drops that dark ground
+   into the panel colour so no box shows. Mono marks on a dark ground are how
+   fashion houses present themselves anyway.
+--------------------------------------------------------------------------- */
+
+:root[data-theme='dark'] .logo-mark {
+  filter: grayscale(1) invert(1);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .logo-mark {
+    filter: grayscale(1) invert(1);
+    opacity: 0.9;
+    mix-blend-mode: screen;
+  }
+}

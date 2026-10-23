@@ -3,14 +3,18 @@ import Link from 'next/link'
 
 import { Container, Frame } from '@/components/site/primitives'
 import { getBrands } from '@/lib/payload'
+import { buildPageMetadata } from '@/lib/seo'
 import type { Media } from '@/payload-types'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Brands',
-  description: 'Every brand we have identified across the archive.',
-}
+export const generateMetadata = (): Promise<Metadata> =>
+  buildPageMetadata('brands', {
+    title: 'Brands',
+    description:
+      'Every brand we have identified across the archive.',
+    path: '/brands',
+  })
 
 export default async function BrandsPage() {
   const brands = await getBrands()
@@ -29,7 +33,14 @@ export default async function BrandsPage() {
           <div className="grid gap-6 sm:grid-cols-3 lg:grid-cols-5 lg:gap-9">
             {brands.map((brand) => (
               <Link key={brand.id} href={`/brands/${brand.slug}`} className="group block no-underline">
-                <Frame media={brand.logo as Media} ratio="3x2" size="logo" fit="contain" className="mb-3" />
+                <Frame
+                  media={brand.logo as Media}
+                  ratio="3x2"
+                  size="logo"
+                  fit="contain"
+                  label={brand.logo ? null : brand.name}
+                  className="mb-3"
+                />
                 <h3 className="m-0 font-display text-[var(--text-step-1)] font-normal">{brand.name}</h3>
               </Link>
             ))}

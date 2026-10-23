@@ -9,6 +9,8 @@ import { clearStaleDerivatives } from '@/hooks/clearStaleDerivatives'
  * saved without them. Licensing is the single largest legal risk to this
  * business, so it is enforced by the schema rather than by discipline.
  */
+const photo = { format: 'webp' as const, options: { quality: 82 } }
+
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
@@ -112,13 +114,20 @@ export const Media: CollectionConfig = {
      * double-crop this table exists to prevent, so every ratio is guaranteed to
      * exist even when it costs a little interpolation.
      */
+    /**
+     * Photo crops are written as WebP whatever the upload was. Editors upload
+     * screenshots and generated PNGs, and a 900x1200 PNG crop of one is ~3 MB:
+     * big enough that the image optimiser times out fetching it on a cold
+     * cache, and the reader sees an empty frame. As WebP the same crop is a
+     * few hundred KB. Logos stay in their own format to keep exact edges.
+     */
     imageSizes: [
-      { name: 'thumb', width: 400, height: 400, position: 'centre', withoutEnlargement: false }, // 1:1
-      { name: 'square', width: 900, height: 900, position: 'centre', withoutEnlargement: false }, // 1:1
-      { name: 'portrait', width: 900, height: 1200, position: 'top', withoutEnlargement: false }, // 3:4
-      { name: 'landscape', width: 1200, height: 800, position: 'top', withoutEnlargement: false }, // 3:2
-      { name: 'hero', width: 1600, height: 900, position: 'top', withoutEnlargement: false }, // 16:9
-      { name: 'og', width: 1200, height: 630, position: 'top', withoutEnlargement: false }, // 1.91:1, social
+      { name: 'thumb', width: 400, height: 400, position: 'centre', withoutEnlargement: false, formatOptions: photo }, // 1:1
+      { name: 'square', width: 900, height: 900, position: 'centre', withoutEnlargement: false, formatOptions: photo }, // 1:1
+      { name: 'portrait', width: 900, height: 1200, position: 'top', withoutEnlargement: false, formatOptions: photo }, // 3:4
+      { name: 'landscape', width: 1200, height: 800, position: 'top', withoutEnlargement: false, formatOptions: photo }, // 3:2
+      { name: 'hero', width: 1600, height: 900, position: 'top', withoutEnlargement: false, formatOptions: photo }, // 16:9
+      { name: 'og', width: 1200, height: 630, position: 'top', withoutEnlargement: false, formatOptions: photo }, // 1.91:1, social
       { name: 'logo', width: 800, fit: 'inside' }, // bounded, never cropped
       /**
        * Retired — nothing renders 2:1 any more. Kept because deleting a size

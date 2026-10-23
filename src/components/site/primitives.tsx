@@ -62,6 +62,12 @@ export const Frame = ({
    * allow-listed up front. Used only when there is no uploaded image.
    */
   fallbackUrl,
+  /**
+   * Text set in the empty panel when there is no image at all. Half the brands
+   * have no logo uploaded yet, and a grid of blank boxes reads as broken; the
+   * name in the display face reads as a deliberate wordmark.
+   */
+  label,
   className = '',
 }: {
   media: MediaLike
@@ -73,13 +79,14 @@ export const Frame = ({
   fit?: 'cover' | 'contain'
   position?: 'center' | 'top'
   fallbackUrl?: string | null
+  label?: string | null
   className?: string
 }) => {
   const url = mediaUrl(media, size)
   const credit = mediaCredit(media)
   const objectFit = `${fit === 'contain' ? 'object-contain p-6' : 'object-cover'} ${
     position === 'top' ? 'object-top' : ''
-  }`
+  } ${size === 'logo' ? 'logo-mark' : ''}`
 
   return (
     <figure className={`m-0 ${className}`}>
@@ -104,6 +111,10 @@ export const Frame = ({
             loading="lazy"
             className={`absolute inset-0 h-full w-full ${objectFit} transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
           />
+        ) : label ? (
+          <span className="absolute inset-0 grid place-items-center p-6 text-center font-display text-[var(--text-step-1)] leading-tight text-ink-2">
+            {label}
+          </span>
         ) : (
           /**
            * An item we have not identified yet legitimately has no photograph,
