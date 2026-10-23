@@ -1,7 +1,7 @@
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 
 import { ArticleBody } from '@/components/site/ArticleBody'
 import { ItemCard } from '@/components/site/cards'
@@ -15,6 +15,11 @@ export const revalidate = 3600
 
 type Props = { params: Promise<{ slug: string; lookSlug: string }> }
 
+const celebritySlugOf = (look: { celebrity?: unknown }) =>
+  typeof look.celebrity === 'object' && look.celebrity
+    ? ((look.celebrity as { slug?: string }).slug ?? null)
+    : null
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, lookSlug } = await params
   const look = await getLookBySlug(lookSlug)
@@ -23,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     doc: look,
     fallbackTitle: look.title,
     fallbackDescription: look.description,
-    path: `/celebrities/${slug}/${look.slug}`,
+    path: `/celebrities/${celebritySlugOf(look) ?? slug}/${look.slug}`,
   })
 }
 
@@ -34,8 +39,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  */
 export default async function LookPage({ params }: Props) {
   const { slug, lookSlug } = await params
-  const [look, celebrity] = await Promise.all([getLookBySlug(lookSlug), getCelebrityBySlug(slug)])
-  if (!look || !celebrity) notFound()
+  const look = await getLookBySlug(lookSlug)
+  if (!look) notFound()
+
+  /**
+   * A look's address is decided by the celebrity it belongs to, not by the URL
+   * it was reached on. When duplicate profiles are merged the look moves to
+   * another person, and its old URL must forward to the new one rather than 404.
+   */
+  const canonical = celebritySlugOf(look)
+  if (canonical && canonical !== slug) permanentRedirect(`/celebrities/${canonical}/${look.slug}`)
+
+  const celebrity = await getCelebrityBySlug(slug)
+  if (!celebrity) notFound()
 
   const items = await getItemsForLook(look.id)
   const photo = Array.isArray(look.photos) ? (look.photos[0] as Media) : null

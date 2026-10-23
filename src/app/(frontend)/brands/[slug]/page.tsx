@@ -1,12 +1,12 @@
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 
 import { ArticleBody } from '@/components/site/ArticleBody'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
 import { formatDate, formatPrice } from '@/lib/media'
-import { getArticlesByBrand, getBrandBySlug, getProductsByBrand } from '@/lib/payload'
+import { getArticlesByBrand, getBrandBySlug, getProductsByBrand, resolveRedirect } from '@/lib/payload'
 import { buildMetadata } from '@/lib/seo'
 import type { Media } from '@/payload-types'
 
@@ -35,7 +35,11 @@ const displayHost = (url: string): string =>
 export default async function BrandPage({ params }: Props) {
   const { slug } = await params
   const brand = await getBrandBySlug(slug)
-  if (!brand) notFound()
+  if (!brand) {
+    const moved = await resolveRedirect(`/brands/${slug}`)
+    if (moved) permanentRedirect(moved)
+    notFound()
+  }
 
   const [products, articles] = await Promise.all([
     getProductsByBrand(brand.id),

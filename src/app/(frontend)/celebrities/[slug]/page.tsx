@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 
 import { ArticleCard, ItemCard } from '@/components/site/cards'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
@@ -11,6 +11,7 @@ import {
   getCelebrityBySlug,
   getItemsForLook,
   getLooks,
+  resolveRedirect,
 } from '@/lib/payload'
 import type { Media } from '@/payload-types'
 
@@ -33,7 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CelebrityPage({ params }: Props) {
   const { slug } = await params
   const celebrity = await getCelebrityBySlug(slug)
-  if (!celebrity) notFound()
+  if (!celebrity) {
+    const moved = await resolveRedirect(`/celebrities/${slug}`)
+    if (moved) permanentRedirect(moved)
+    notFound()
+  }
 
   const [looks, articles] = await Promise.all([
     getLooks({ celebrityId: celebrity.id }),

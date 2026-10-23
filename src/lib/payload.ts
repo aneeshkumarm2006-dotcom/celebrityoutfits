@@ -25,6 +25,11 @@ export const getFooter = async () => {
   return payload.findGlobal({ slug: 'footer', depth: 0 })
 }
 
+export const getPageSeo = async () => {
+  const payload = await getPayloadClient()
+  return payload.findGlobal({ slug: 'pageSeo', depth: 1 })
+}
+
 export const getHomepage = async () => {
   const payload = await getPayloadClient()
   return payload.findGlobal({ slug: 'homepage', depth: 2 })
@@ -170,4 +175,38 @@ export const getArticlesByBrand = async (brandId: string | number, limit = 12) =
     where: { relatedBrand: { equals: brandId }, _status: { equals: 'published' } },
   })
   return docs
+}
+
+/**
+ * Where an old URL now lives, from the Redirects collection in the admin, or
+ * null. Pages call this before giving up with a 404: when two records for the
+ * same person are merged the spare one is unpublished, and every link already
+ * pointing at it should land on the page that survived rather than on nothing.
+ */
+export const resolveRedirect = async (from: string): Promise<string | null> => {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({
+    collection: 'redirects',
+    limit: 1,
+    depth: 2,
+    where: { from: { equals: from } },
+  })
+  const to = docs[0]?.to
+  if (!to) return null
+  if (to.type === 'custom') return to.url || null
+
+  const ref = to.reference
+  if (!ref || typeof ref.value !== 'object') return null
+  switch (ref.relationTo) {
+    case 'celebrities':
+      return `/celebrities/${ref.value.slug}`
+    case 'brands':
+      return `/brands/${ref.value.slug}`
+    case 'articles':
+      return `/journal/${ref.value.slug}`
+    case 'looks': {
+      const celeb = ref.value.celebrity
+      return typeof celeb === 'object' && celeb ? `/celebrities/${celeb.slug}/${ref.value.slug}` : null
+    }
+  }
 }

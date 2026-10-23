@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/access'
-import { rankingFields, slugField, versionsConfig } from '@/fields/slug'
+import { rankingFields, slugField, uniqueNameValidate, versionsConfig } from '@/fields/slug'
 import { revalidate } from '@/hooks/revalidate'
 
 export const Celebrities: CollectionConfig = {
@@ -18,7 +18,13 @@ export const Celebrities: CollectionConfig = {
     afterChange: [revalidate(({ doc }) => ['/celebrities', `/celebrities/${doc.slug}`])],
   },
   fields: [
-    { name: 'name', type: 'text', required: true },
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      admin: { components: { Cell: { path: '@/components/admin/ThumbCell#ThumbCell', clientProps: { imageField: 'portraitImage' } } } },
+      validate: uniqueNameValidate('celebrities', 'To add an outfit, create a Look and choose them as the celebrity.'),
+    },
     slugField('name'),
     {
       name: 'category',

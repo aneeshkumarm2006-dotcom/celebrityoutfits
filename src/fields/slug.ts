@@ -1,4 +1,4 @@
-import type { CollectionConfig, Field } from 'payload'
+import type { CollectionConfig, Field, TextFieldSingleValidation } from 'payload'
 
 export const slugify = (value: string): string =>
   value
@@ -88,3 +88,33 @@ export const versionsConfig: CollectionConfig['versions'] = {
   },
   maxPerDoc: 20,
 }
+
+/**
+ * Refuses a second celebrity or brand with the same name. Compared trimmed,
+ * case-folded and without accents, so "Khloé Kardashian" and "khloe kardashian "
+ * collide. The archive grew fifteen duplicate profiles before this existed,
+ * nearly all of them an outfit saved as a new person instead of as a look.
+ */
+export const uniqueNameValidate =
+  (collection: 'celebrities' | 'brands', hint: string): TextFieldSingleValidation =>
+  async (value, { req, id }) => {
+    if (typeof value !== 'string' || !value.trim()) return 'Please enter a name.'
+    const fold = (s: string) =>
+      s
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .trim()
+        .toLowerCase()
+    // Every name, not a `like` query: the database cannot fold accents, and
+    // the archive is a few hundred rows at most.
+    const { docs } = await req.payload.find({
+      collection,
+      pagination: false,
+      depth: 0,
+      req,
+      select: { name: true, slug: true, _status: true },
+      where: id ? { id: { not_equals: id } } : {},
+    })
+    const clash = docs.find((doc) => fold(doc.name) === fold(value) && doc._status === 'published')
+    return clash ? `"${clash.name.trim()}" already exists (/${clash.slug}). ${hint}` : true
+  }

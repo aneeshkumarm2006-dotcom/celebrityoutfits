@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { admins, publishedOrAdmin } from '@/access'
-import { rankingFields, slugField, versionsConfig } from '@/fields/slug'
+import { rankingFields, slugField, uniqueNameValidate, versionsConfig } from '@/fields/slug'
 import { revalidate } from '@/hooks/revalidate'
 
 export const Brands: CollectionConfig = {
@@ -18,7 +18,13 @@ export const Brands: CollectionConfig = {
     afterChange: [revalidate(({ doc }) => [`/brands`, `/brands/${doc.slug}`])],
   },
   fields: [
-    { name: 'name', type: 'text', required: true },
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      admin: { components: { Cell: { path: '@/components/admin/ThumbCell#ThumbCell', clientProps: { imageField: 'logo', fit: 'contain' } } } },
+      validate: uniqueNameValidate('brands', 'Pick the existing brand on the product instead.'),
+    },
     slugField('name'),
     { name: 'logo', type: 'upload', relationTo: 'media' },
     {
