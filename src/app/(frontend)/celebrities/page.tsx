@@ -3,14 +3,17 @@ import type { Metadata } from 'next'
 import { CelebrityCard } from '@/components/site/cards'
 import { Container } from '@/components/site/primitives'
 import { getCelebrities } from '@/lib/payload'
+import { buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Celebrities',
-  description:
-    'Every person we track has a permanent page that grows with each new photograph.',
-}
+export const generateMetadata = (): Promise<Metadata> =>
+  buildPageMetadata('celebrities', {
+    title: 'Celebrities',
+    description:
+      'Every person we track has a permanent page that grows with each new photograph.',
+    path: '/celebrities',
+  })
 
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 

@@ -1,11 +1,20 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { ArticleCard, CelebrityCard, LookCard } from '@/components/site/cards'
 import { Container, Frame, SectionHead } from '@/components/site/primitives'
 import { getArticles, getCelebrities, getHomepage, getLooks } from '@/lib/payload'
+import { buildPageMetadata } from '@/lib/seo'
 import type { Media } from '@/payload-types'
 
 export const revalidate = 3600
+
+export const generateMetadata = (): Promise<Metadata> =>
+  buildPageMetadata('home', {
+    description:
+      'A shoppable archive of what celebrities actually wear, identified item by item and updated as new photographs are published.',
+    path: '/',
+  })
 
 /**
  * The homepage is assembled from the `homepage` global, so the team can

@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 
 import { themeScript } from '@/components/site/ThemeToggle'
 import { DisclosureBar, SiteBottomNav, SiteFooter, SiteHeader } from '@/components/site/chrome'
+import { getPageSeo } from '@/lib/payload'
 
 import { bodoni, hanken } from './fonts'
 import './globals.css'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: 'Celebrity Spotted Outfits: What celebrities actually wear',
@@ -21,11 +22,19 @@ export const metadata: Metadata = {
     siteName: 'Celebrity Spotted Outfits',
     url: siteUrl,
   },
-  robots: {
-    // Flipped to index once there is real content to index.
-    index: false,
-    follow: false,
-  },
+}
+
+/**
+ * Indexing is a switch in Settings → Page SEO rather than a code change, so it
+ * can be turned on the day the archive is ready without a deploy. Off by
+ * default: every page asks search engines not to list it.
+ */
+export const generateMetadata = async (): Promise<Metadata> => {
+  const seo = await getPageSeo()
+  return {
+    ...baseMetadata,
+    robots: seo?.allowIndexing ? { index: true, follow: true } : { index: false, follow: false },
+  }
 }
 
 export default function FrontendLayout({

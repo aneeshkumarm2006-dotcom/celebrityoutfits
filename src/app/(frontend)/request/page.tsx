@@ -1,16 +1,17 @@
 import type { Metadata } from 'next'
 
 import { Container } from '@/components/site/primitives'
-import { buildMetadata } from '@/lib/seo'
+import { buildPageMetadata } from '@/lib/seo'
 
 import { RequestForm } from './RequestForm'
 
-export const metadata: Metadata = buildMetadata({
-  fallbackTitle: 'Ask us to identify an outfit',
-  fallbackDescription:
-    'Send us a photo of an outfit you cannot place and we will identify it: the brand, the piece, and where to buy it or the closest thing to it.',
-  path: '/request',
-})
+export const generateMetadata = (): Promise<Metadata> =>
+  buildPageMetadata('request', {
+    title: 'Ask us to identify an outfit',
+    description:
+      'Send us a photo of an outfit you cannot place and we will identify it: the brand, the piece, and where to buy it or the closest thing to it.',
+    path: '/request',
+  })
 
 /**
  * Static: the form posts to a Server Action, so nothing on this page needs

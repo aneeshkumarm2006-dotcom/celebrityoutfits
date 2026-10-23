@@ -3,13 +3,17 @@ import type { Metadata } from 'next'
 import { ArticleCard } from '@/components/site/cards'
 import { Container } from '@/components/site/primitives'
 import { getArticles } from '@/lib/payload'
+import { buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Journal',
-  description: 'Style analysis, buying guides and brand files from the Celebrity Spotted Outfits desk.',
-}
+export const generateMetadata = (): Promise<Metadata> =>
+  buildPageMetadata('journal', {
+    title: 'Journal',
+    description:
+      'Style analysis, buying guides and brand files from the Celebrity Spotted Outfits desk.',
+    path: '/journal',
+  })
 
 export default async function JournalPage() {
   const articles = await getArticles({ limit: 48 })

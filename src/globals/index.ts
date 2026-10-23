@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload'
+import type { Field, GlobalConfig } from 'payload'
 
 import { admins, anyone } from '@/access'
 import { revalidateGlobal } from '@/hooks/revalidate-global'
@@ -212,4 +212,59 @@ export const Homepage: GlobalConfig = {
   ],
 }
 
-export const globals = [SiteSettings, Navigation, Footer, Homepage]
+/**
+ * Search titles and descriptions for the pages that have no document of their
+ * own to carry an SEO tab: the homepage and the index pages. A blank field
+ * falls back to the copy in the code, so nothing goes out empty.
+ */
+const pageSeoGroup = (name: string, label: string, path: string): Field => ({
+  name,
+  label,
+  type: 'group',
+  admin: { description: `Shown in Google and when ${path} is shared.` },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      admin: { description: 'Aim for 50 to 60 characters.' },
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      admin: { description: 'Aim for 150 to 160 characters.' },
+    },
+    {
+      name: 'keywords',
+      type: 'text',
+      admin: { description: 'Comma separated, e.g. celebrity outfits, red carpet looks.' },
+    },
+    { name: 'image', type: 'upload', relationTo: 'media', admin: { description: 'Share image, 1200x630.' } },
+  ],
+})
+
+export const PageSeo: GlobalConfig = {
+  slug: 'pageSeo',
+  label: 'Page SEO',
+  admin: { group: 'Settings' },
+  access: { read: anyone, update: admins },
+  hooks: { afterChange: [revalidateGlobal] },
+  fields: [
+    {
+      name: 'allowIndexing',
+      label: 'Allow search engines to index the site',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description:
+          'Off means every page tells Google not to list it. Turn on once the archive is ready to be found.',
+      },
+    },
+    pageSeoGroup('home', 'Homepage', '/'),
+    pageSeoGroup('celebrities', 'Celebrities index', '/celebrities'),
+    pageSeoGroup('brands', 'Brands index', '/brands'),
+    pageSeoGroup('journal', 'Journal index', '/journal'),
+    pageSeoGroup('request', 'Find my outfit', '/request'),
+  ],
+}
+
+export const globals = [SiteSettings, Navigation, Footer, Homepage, PageSeo]
