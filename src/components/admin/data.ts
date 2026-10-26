@@ -1,16 +1,11 @@
 import type { Payload } from 'payload'
 
+import { foldName } from '@/fields/slug'
+
 /**
  * The numbers the editor desk is built around, in one place so the sidebar
  * badges and the dashboard tiles can never disagree.
  */
-
-const fold = (name: string) =>
-  name
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .trim()
-    .toLowerCase()
 
 /**
  * Published celebrities sharing a name once case, accents and stray spaces are
@@ -27,9 +22,9 @@ export const findDuplicateCelebrities = async (payload: Payload) => {
   })
   const groups = new Map<string, { name: string; ids: (string | number)[] }>()
   for (const doc of docs) {
-    const key = fold(doc.name ?? '')
+    const key = foldName(doc.name)
     if (!key) continue
-    const group = groups.get(key) ?? { name: doc.name.trim(), ids: [] }
+    const group = groups.get(key) ?? { name: (doc.name ?? '').trim(), ids: [] }
     group.ids.push(doc.id)
     groups.set(key, group)
   }

@@ -95,26 +95,37 @@ export const versionsConfig: CollectionConfig['versions'] = {
  * collide. The archive grew fifteen duplicate profiles before this existed,
  * nearly all of them an outfit saved as a new person instead of as a look.
  */
+/**
+ * A name reduced to what makes it the same person: accents, case, spacing and
+ * punctuation dropped, so "Zoë Kravitz", "zoe-kravitz" and "Zoe Kravitz " all
+ * compare equal. Null-safe, because a celebrity that has only ever been saved
+ * as a draft has no name on its main row until it is first published.
+ */
+export const foldName = (name?: string | null): string =>
+  (name ?? '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+
 export const uniqueNameValidate =
   (collection: 'celebrities' | 'brands', hint: string): TextFieldSingleValidation =>
   async (value, { req, id }) => {
     if (typeof value !== 'string' || !value.trim()) return 'Please enter a name.'
-    const fold = (s: string) =>
-      s
-        .normalize('NFD')
-        .replace(/[̀-ͯ]/g, '')
-        .trim()
-        .toLowerCase()
-    // Every name, not a `like` query: the database cannot fold accents, and
-    // the archive is a few hundred rows at most.
+    // Every published name, not a `like` query: the database cannot fold
+    // accents, and the archive is a few hundred rows at most.
     const { docs } = await req.payload.find({
       collection,
       pagination: false,
       depth: 0,
       req,
-      select: { name: true, slug: true, _status: true },
-      where: id ? { id: { not_equals: id } } : {},
+      select: { name: true, slug: true },
+      where: {
+        _status: { equals: 'published' },
+        ...(id ? { id: { not_equals: id } } : {}),
+      },
     })
-    const clash = docs.find((doc) => fold(doc.name) === fold(value) && doc._status === 'published')
-    return clash ? `"${clash.name.trim()}" already exists (/${clash.slug}). ${hint}` : true
+    const clash = docs.find((doc) => foldName(doc.name) === foldName(value))
+    return clash ? `"${clash.name?.trim()}" already exists (/${clash.slug}). ${hint}` : true
   }

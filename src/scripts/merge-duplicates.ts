@@ -1,7 +1,7 @@
 import config from '@payload-config'
 import { getPayload, type Payload } from 'payload'
 
-import { slugify } from '@/fields/slug'
+import { foldName, slugify } from '@/fields/slug'
 
 /**
  * Folds duplicate celebrities and brands into one record each, without
@@ -30,19 +30,12 @@ import { slugify } from '@/fields/slug'
 
 const apply = process.argv.includes('--apply')
 
-const normalise = (name: string) =>
-  name
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .trim()
-    .toLowerCase()
-
 type Record = { id: number; name: string; slug: string; _status?: string | null; count: number }
 
 const groupDuplicates = (records: Record[]) => {
   const groups = new Map<string, Record[]>()
   for (const record of records) {
-    const key = normalise(record.name ?? '')
+    const key = foldName(record.name)
     if (!key) continue
     groups.set(key, [...(groups.get(key) ?? []), record])
   }
