@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 
 import { themeScript } from '@/components/site/ThemeToggle'
 import { DisclosureBar, SiteBottomNav, SiteFooter, SiteHeader } from '@/components/site/chrome'
@@ -17,6 +18,8 @@ const baseMetadata: Metadata = {
   },
   description:
     'A shoppable archive of what celebrities actually wear, identified item by item and updated as new photographs are published.',
+  // Google Search Console ownership check.
+  verification: { google: 'YfA9yJ1zTPLr7_-FdHy_Hkb0fjUH3mQ349UmwFnk1i4' },
   openGraph: {
     type: 'website',
     siteName: 'Celebrity Spotted Outfits',
@@ -62,6 +65,18 @@ export default function FrontendLayout({
         */}
         <div aria-hidden="true" className="h-[4.25rem] lg:hidden" />
         <SiteBottomNav />
+        {/*
+          Microsoft Clarity (session recordings and heatmaps), public site only:
+          this layout does not wrap the admin. Loaded after the page is
+          interactive so it never delays the first paint.
+        */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "zawpme4atw");`}
+        </Script>
       </body>
     </html>
   )
