@@ -11,6 +11,9 @@ export const Celebrities: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'category', 'featured', '_status', 'updatedAt'],
     group: 'Archive',
+    components: {
+      edit: { beforeDocumentControls: ['@/components/admin/AddLookButton#AddLookButton'] },
+    },
   },
   access: { read: publishedOrAdmin, create: admins, update: admins, delete: admins },
   versions: versionsConfig,
@@ -22,7 +25,13 @@ export const Celebrities: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
-      admin: { components: { Cell: { path: '@/components/admin/ThumbCell#ThumbCell', clientProps: { imageField: 'portraitImage' } } } },
+      admin: {
+        components: {
+          Cell: { path: '@/components/admin/ThumbCell#ThumbCell', clientProps: { imageField: 'portraitImage' } },
+          // Lists matching people already in the archive as you type.
+          Field: '@/components/admin/CelebrityNameField#CelebrityNameField',
+        },
+      },
       validate: uniqueNameValidate('celebrities', 'To add an outfit, create a Look and choose them as the celebrity.'),
     },
     slugField('name'),

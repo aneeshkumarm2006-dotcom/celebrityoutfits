@@ -44,10 +44,23 @@ export const Looks: CollectionConfig = {
   fields: [
     {
       name: 'celebrity',
+      label: 'Who is wearing it?',
       type: 'relationship',
       relationTo: 'celebrities',
       required: true,
-      admin: { position: 'sidebar' },
+      /**
+       * "Add a look" links to /looks/create?celebrity=<id>. Set here, on the
+       * server, so the person is already in the first autosave of the new look.
+       */
+      defaultValue: ({ req }) => {
+        const preset = Number((req?.query as { celebrity?: string } | undefined)?.celebrity)
+        return Number.isInteger(preset) && preset > 0 ? preset : undefined
+      },
+      // First in the form rather than the sidebar: a look is always someone's,
+      // and choosing the person is where adding an outfit should start.
+      admin: {
+        description: 'Search for them. Not in the archive yet? Use + to add a new celebrity here.',
+      },
     },
     {
       name: 'title',

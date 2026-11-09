@@ -335,6 +335,9 @@ export interface Media {
  */
 export interface Look {
   id: number;
+  /**
+   * Search for them. Not in the archive yet? Use + to add a new celebrity here.
+   */
   celebrity: number | Celebrity;
   /**
    * Write a thesis, not a label. "The knit polo has quietly replaced the shirt".

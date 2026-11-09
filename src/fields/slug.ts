@@ -111,8 +111,11 @@ export const foldName = (name?: string | null): string =>
 
 export const uniqueNameValidate =
   (collection: 'celebrities' | 'brands', hint: string): TextFieldSingleValidation =>
-  async (value, { req, id }) => {
+  async (value, { req, id, data }) => {
     if (typeof value !== 'string' || !value.trim()) return 'Please enter a name.'
+    // Only a publish can put a second copy of someone on the site. Saving a
+    // draft, or unpublishing a spare, must never be blocked by its name.
+    if ((data as { _status?: string } | undefined)?._status !== 'published') return true
     // Every published name, not a `like` query: the database cannot fold
     // accents, and the archive is a few hundred rows at most.
     const { docs } = await req.payload.find({
@@ -126,6 +129,17 @@ export const uniqueNameValidate =
         ...(id ? { id: { not_equals: id } } : {}),
       },
     })
-    const clash = docs.find((doc) => foldName(doc.name) === foldName(value))
-    return clash ? `"${clash.name?.trim()}" already exists (/${clash.slug}). ${hint}` : true
+    const typed = foldName(value)
+    const clash = docs.find((doc) => foldName(doc.name) === typed)
+    if (clash) return `"${clash.name?.trim()}" already exists (/${clash.slug}). ${hint}`
+
+    // A known name followed by more words is an outfit headline pasted in as a
+    // person: "Selena Gomez's in Ugg Elea Slippers", "Blake Lively's".
+    const prefix = docs.find((doc) => {
+      const known = foldName(doc.name)
+      return known.includes(' ') && typed.startsWith(`${known} `)
+    })
+    return prefix
+      ? `This starts with "${prefix.name?.trim()}", who is already in the archive (/${prefix.slug}). ${hint}`
+      : true
   }
